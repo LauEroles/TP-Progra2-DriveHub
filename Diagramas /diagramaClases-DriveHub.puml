@@ -53,6 +53,7 @@ class Reserva{
     -vehiculo:Vehiculo
     -cliente:Cliente
     -fechaInicio:number
+    -fechaFin:number
 
 }
 

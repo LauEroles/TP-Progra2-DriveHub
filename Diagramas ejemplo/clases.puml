@@ -1,0 +1,103 @@
+@startuml DriveHub
+
+title TP - Programacion 2 - DriveHub
+
+
+abstract class Vehiculo{
+    
+    -tarifaBase:number
+    'Podria haber una clase cargo que nos permita manejar de manera
+    'abstracta los cargos y luego en vehiculo tener una lista de cargos
+    'que pueden ser variables o fijos y el dia de mañana 
+    'para flexibilizar mas la solucion si se agregan nuevos vehiculos??
+    -cargoVariable:number
+    -cargoFijo:number
+    -km:number
+    -matricula:string
+    -estado:Estado
+    -mantenimiento:MantenimientoVehiculo
+    +abstract calcularTarifa()
+
+}
+
+enum Estado{
+
+    DISPONIBLE
+    EN_ALQUILER
+    EN_MANTENIMIENTO
+    NECESITA_LIMPIEZA
+
+}
+
+class Compacto {
+    'podemos usar constante en kmMax para aplicar cargo?
+    calcularTarifa()
+
+}
+
+class Sedan{
+    calcularTarifa()
+
+}
+
+class Suv{
+
+ 'o la otra opcion es colocar el cargo fijo (del seguro por aqui)
+    calcularTarifa()
+
+}
+
+class Reserva{
+
+    '-kmFinal:number??
+    -vehiculo:Vehiculo
+    -cliente:Cliente
+    -fechaInicio:number
+
+}
+
+class Cliente{
+
+    -nombreCompleto:string
+    -id:number
+    'El cliente puede instanciarse sin reserva por parametro, 
+    'podemos setearla luego cuando se le asigna la reserva
+    -reserva:Reserva
+    +crearReserva()
+
+
+}
+
+class Gestor{
+
+    'gestor puede ser interfaz y ser implementada en Kilometraje(otraclase), cliente, reserva?
+    'O Hacer todo dentro de la clase gestor? diferentes metodos para gestionar diferentes cosas
+
+    '-kmFinal:number--> cuando hagamos la gestion de kilometraje
+    'Tenemos que pasar el kmInicial (lo obtenemos del vehiculo)
+    'y el kmFinal
+
+}
+
+class MantenimientoVehiculo{
+    -costoMantenimiento:number
+    'usar libreria moment (refactor)
+    -fecha:number
+}
+
+
+'Relaciones:
+Vehiculo<|--Sedan
+Vehiculo<|--Suv
+Vehiculo<|--Compacto
+
+Reserva--*Cliente
+Reserva--*Vehiculo
+
+Vehiculo-l->MantenimientoVehiculo
+
+'Como es la orientacion de la flechita en este caso?
+'Es de composicion o de asociacion esta relación?
+Vehiculo-u->Estado
+
+@enduml

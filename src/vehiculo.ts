@@ -1,6 +1,6 @@
 
 
-abstract class Vehiculo{
+export default  abstract class Vehiculo{
 
     private tarifaBase: number;
     private cargoVariable: number;

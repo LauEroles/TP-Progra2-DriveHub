@@ -13,7 +13,7 @@ export default class Suv extends Vehiculo{
     calcularTarifa():number{
 
         let calculoCargoVariable:number = 0;
-        let diferencia:number=this.getKmInicial()- this.getKmRecorrido();
+        let diferencia:number=this.getKmRecorrido() - this.getKmInicial();
 
         if ( diferencia > 500) {
             calculoCargoVariable = diferencia * 0.25;

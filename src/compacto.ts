@@ -4,17 +4,16 @@ export default class Compacto extends Vehiculo {
         super();
         this.tarifaBase = 30;
         this.cargoVariable = 0.15;
-        this.km = 100;
+        this.kmMax = 100;
     }
 
     calcularTarifa(): number {
         //ajustar segun arreglos kilometraje?
         let total: number = this.tarifaBase;
         let kms: number = this.kilometraje.kmFinal - this.kilometraje.kmInicial;
-        if (kms > this.km) {
-            for (let i = 0; i < kms; i++) {
-                total += this.cargoVariable;
-            }
+        if (kms > this.kmMax) {
+            let excedente: number = kms - this.kmMax;
+            total += excedente * this.cargoVariable;
         } 
         return total;
     }

@@ -10,13 +10,16 @@ export default class Suv extends Vehiculo{
         super(km, matricula);
     }
 
-    calcularTarifa():number{
+    calcularTarifa(reserva):number{
+
+       
+
 
         let calculoCargoVariable:number = 0;
-        let diferencia:number=this.getKmRecorrido() - this.getKmInicial();
+        let kmRecorrido: number=reserva.getKmfinal() - this.getKmInicial();
 
-        if ( diferencia > 500) {
-            calculoCargoVariable = diferencia * 0.25;
+        if ( kmRecorrido > 500) {
+            calculoCargoVariable = kmRecorrido * 0.25;
         }
 
         let sumatoriaTotal:number = this.getTarifaBase() + this.getCargoFijo() + calculoCargoVariable;

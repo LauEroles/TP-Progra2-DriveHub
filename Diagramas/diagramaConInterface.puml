@@ -1,0 +1,108 @@
+@startuml DriveHub
+
+title TP - Programacion 2 - DriveHub
+
+'NO USAR, LA ULTIMA VERSION ES LA OTRA DIAGRAMACLASES
+
+abstract class Vehiculo{
+    -tarifaBase:number
+    -cargoVariable:number
+    -cargoFijo:number
+    -km:number
+    -matricula:string
+    -estado:Estado
+    -mantenimiento:MantenimientoVehiculo
+    +abstract calcularTarifa(reserva:Reserva)
+
+}
+
+enum Estado{
+    DISPONIBLE
+    EN_ALQUILER
+    EN_MANTENIMIENTO
+    NECESITA_LIMPIEZA
+
+}
+
+class Compacto {
+    +calcularTarifa(reserva:Reserva)
+
+}
+
+class Sedan{
+    +calcularTarifa(reserva:Reserva)
+
+}
+
+class Suv{
+    +calcularTarifa(reserva:Reserva)
+
+}
+
+class Reserva{
+    -kmFinal:number
+    -vehiculo:Vehiculo
+    -cliente:Cliente
+    -fechaInicio:number
+    -fechaFin:number
+
+}
+
+class Kilometraje{
+    -auto:Auto
+    -reserva:Reserva
+
+}
+
+class Cliente{
+
+    -nombreCompleto:string
+    -id:number
+    -reserva:Reserva
+    +crearReserva()
+
+
+}
+
+class EmpresaAlquiler{
+    -clientes:Cliente
+    -reservas:Reserva
+    -kilometros:Kilometraje
+    +gestionar(objeto<T>)
+
+}
+
+interface Gestion{
+    +gestionar(objeto:<T>)
+
+}
+
+class MantenimientoVehiculo{
+    -costoMantenimiento:number
+    'usar libreria moment (refactor)
+    -fecha:number
+}
+
+
+'Relaciones:
+Vehiculo<|--Sedan
+Vehiculo<|--Suv
+Vehiculo<|--Compacto
+
+Reserva*-r-Cliente
+Reserva*-l-Vehiculo
+
+Vehiculo-d->MantenimientoVehiculo
+
+Vehiculo-l->Estado
+Vehiculo-u->Kilometraje
+
+EmpresaAlquiler-->Cliente
+EmpresaAlquiler-->Reserva
+EmpresaAlquiler-->Vehiculo
+Gestion<|..EmpresaAlquiler
+
+
+
+
+@enduml

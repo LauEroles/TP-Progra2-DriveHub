@@ -1,4 +1,5 @@
 
+import Reserva from "./reserva"
 
 export default  abstract class Vehiculo{
 
@@ -73,7 +74,7 @@ export default  abstract class Vehiculo{
         this.matricula = matricula;
     }
 
-    abstract calcularTarifa():number;
+    abstract calcularTarifa(reserva:Reserva):number;
 
 
 

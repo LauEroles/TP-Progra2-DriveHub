@@ -2,7 +2,36 @@
 
 title TP - Programacion 2 - DriveHub
 
+'Composicion
 
+
+class SistemaEmpresa{
+    -vehiculos: Vehiculo[]
+    -reservas: Reserva[]
+    +validarDisponibilidad
+}
+
+
+class Reserva{
+    -kmFinal:number
+    -vehiculo:Vehiculo
+    -cliente:Cliente
+    -fechaInicio:number
+    -fechaFin:number
+}
+
+class Cliente{
+
+    -nombreCompleto:string
+    -id:number
+    'El cliente puede instanciarse sin reserva por parametro, 
+    'podemos setearla luego cuando se le asigna la reserva
+    -reserva:Reserva
+    + solicitarReserva(r: Reserva, s: Sistema): void  
+
+}
+
+'Herencia Vehiculo a sus clases hijas
 abstract class Vehiculo{
     
     -tarifaBase:number
@@ -16,12 +45,30 @@ abstract class Vehiculo{
     -matricula:string
     -estado:Estado
     -mantenimiento:MantenimientoVehiculo
-    +abstract calcularTarifa()
+    +abstract calcularTarifa(reserva:Reserva)
 
 }
 
-enum Estado{
+class Compacto {
+    'podemos usar constante en kmMax para aplicar cargo?
+    calcularTarifa(reserva:Reserva)
 
+}
+
+class Sedan{
+    calcularTarifa(reserva:Reserva)
+
+}
+
+class Suv{
+
+ 'o la otra opcion es colocar el cargo fijo (del seguro por aqui)
+    calcularTarifa(reserva:Reserva)
+
+}
+
+'Atributo de vehiculo
+enum Estado{
     DISPONIBLE
     EN_ALQUILER
     EN_MANTENIMIENTO
@@ -29,57 +76,7 @@ enum Estado{
 
 }
 
-class Compacto {
-    'podemos usar constante en kmMax para aplicar cargo?
-    calcularTarifa()
-
-}
-
-class Sedan{
-    calcularTarifa()
-
-}
-
-class Suv{
-
- 'o la otra opcion es colocar el cargo fijo (del seguro por aqui)
-    calcularTarifa()
-
-}
-
-class Reserva{
-
-    '-kmFinal:number??
-    -vehiculo:Vehiculo
-    -cliente:Cliente
-    -fechaInicio:number
-    -fechaFin:number
-
-}
-
-class Cliente{
-
-    -nombreCompleto:string
-    -id:number
-    'El cliente puede instanciarse sin reserva por parametro, 
-    'podemos setearla luego cuando se le asigna la reserva
-    -reserva:Reserva
-    +crearReserva()
-
-
-}
-
-class Gestor{
-
-    'gestor puede ser interfaz y ser implementada en Kilometraje(otraclase), cliente, reserva?
-    'O Hacer todo dentro de la clase gestor? diferentes metodos para gestionar diferentes cosas
-
-    '-kmFinal:number--> cuando hagamos la gestion de kilometraje
-    'Tenemos que pasar el kmInicial (lo obtenemos del vehiculo)
-    'y el kmFinal
-
-}
-
+'Atributo del vehiculo
 class MantenimientoVehiculo{
     -costoMantenimiento:number
     'usar libreria moment (refactor)
@@ -87,18 +84,75 @@ class MantenimientoVehiculo{
 }
 
 
+'Interfaces
+
+interface GestionVehiculos {
+    + agregarVehiculo(): void  
+    ' Agrega un vehiculo a la lista
+    + eliminarVehiculo(): void  
+    ' Elimina un vehiculo de la lista
+    + cambiarEstado(v: Vehiculo, e: Estado): void  
+    ' Le cambia el Estado (enum) a un vehiculo (a traves de su setter)
+}
+
+
+interface GestionReserva {
+    + validarDisponibilidad(r: Reserva): boolean  
+    ' Valida la disponibilidad del vehículo para las fechas solicitadas
+    + agregarReserva(r: Reserva): void  
+    ' Agrega una reserva a la lista
+    + eliminarReserva(r: Reserva): void  
+    ' Elimina una reserva de la lista
+    + calcularTotal(r: Reserva): number  
+    ' Podriamos calcular el total usando calcularCostoVariable() del vehiculo y sumar la tarifa base 
+    ' (y costo fijo) aca, para que el vehiculo solo calcule su costo variable y no el total de la reserva
+}
+
+
+
+interface GestionKilometraje {
+    + calcularKmsRecorridos()
+    ' Esto lo sacaría tal vez y haría que Reserva tenga un método kmsRecorridos() que los calcule
+    ' ya que ella misma posee kmInicial y kmFinal (seteado despues), y que calcularTotal() en GestionReserva llame a ese método
+}
+
+
+interface GestionMantenimiento {
+    + registrarMantenimiento(v: Vehiculo, m: Mantenimiento): void  
+    ' Si mas adelante nos solicita podemos ver si el auto requiere o no mantenimiento
+    ' Le agrega un mantenimiento a un vehiculo
+    ' Vehiculo podría tener un array de mantenimentos (tipo Mantenimiento) para tener registrados todos los que se le hacen
+    ' Objeto mantenimento tiene fecha y costo (simil estructura de datos)
+}
+
+
+
+
 'Relaciones:
+
+'Herencia
 Vehiculo<|--Sedan
 Vehiculo<|--Suv
 Vehiculo<|--Compacto
 
-Reserva--*Cliente
-Reserva--*Vehiculo
-
+'Atributos de vehiculo
 Vehiculo-l->MantenimientoVehiculo
-
-'Como es la orientacion de la flechita en este caso?
-'Es de composicion o de asociacion esta relación?
 Vehiculo-u->Estado
+
+'Composición
+Reserva*-r- Cliente
+Reserva*-l- Vehiculo
+SistemaEmpresa*-- Vehiculo
+SistemaEmpresa*-- Reserva
+
+
+'Implementacion interfaces:
+GestionVehiculos<|..SistemaEmpresa
+GestionReserva<|..SistemaEmpresa
+GestionKilometraje<|..SistemaEmpresa
+GestionMantenimiento<|..SistemaEmpresa
+
+
+
 
 @enduml

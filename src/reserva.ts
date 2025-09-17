@@ -1,3 +1,5 @@
+// Agregar KMFinal
+
 import Vehiculo from "./vehiculo";
 import Cliente from "./cliente";
 
@@ -8,6 +10,7 @@ export default class Reserva{
     public cliente: Cliente;
     public fechaInicio: number;
     public fechaFin: number;
+    public kmFinal: number;
 
     constructor(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: number, fechaFin: number){
 
@@ -19,6 +22,7 @@ export default class Reserva{
         this.cliente = cliente;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.kmFinal = 0;
     }
 
 

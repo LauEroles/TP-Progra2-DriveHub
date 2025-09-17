@@ -15,11 +15,7 @@ export default class Cliente{
 
     }
 
-    public getReserva(): Reserva | undefined{
-
-        return this.reserva;
-
-    }
+    public crearReserva(){} //Validar disponibilidad
 
 
 }

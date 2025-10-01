@@ -8,7 +8,6 @@ title TP - Programacion 2 - DriveHub
 class SistemaEmpresa{
     -vehiculos: Vehiculo[]
     -reservas: Reserva[]
-    +validarDisponibilidad
 }
 
 
@@ -111,7 +110,8 @@ interface GestionReserva {
 
 
 interface GestionKilometraje {
-    + calcularKmsRecorridos()
+    + calcularKmsRecorridos(reserva:Reserva): number  
+    ' Calcula los kms recorridos en una reserva (kmFinal - kmInicial)
     ' Esto lo sacaría tal vez y haría que Reserva tenga un método kmsRecorridos() que los calcule
     ' ya que ella misma posee kmInicial y kmFinal (seteado despues), y que calcularTotal() en GestionReserva llame a ese método
 }

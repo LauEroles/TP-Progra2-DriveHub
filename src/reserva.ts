@@ -48,4 +48,10 @@ export default class Reserva{
         return this.kmFinal;
     }
 
+    public setKmFinal(kmFinal:number){
+        if (kmFinal < this.vehiculo.getKm()){
+            throw new Error(`El kilometraje final no puede ser menor que el inicial`);
+        }
+        this.kmFinal = kmFinal;
+    }
 }

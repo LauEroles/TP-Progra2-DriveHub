@@ -1,7 +1,7 @@
 
 import Reserva from "./reserva";
 import Vehiculo from "./vehiculo";
-import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO } from "./constantes";
+import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO,CARGO_VARIABLE_COMPACTO } from "./constantes";
 
 
 export default class Compacto extends Vehiculo {
@@ -10,7 +10,7 @@ export default class Compacto extends Vehiculo {
     constructor(km: number, matricula: string) {
         super(km, matricula);
         this.tarifaBase = TARIFA_BASE_COMPACTO;
-        this.cargoVariable = 0.15;
+        this.cargoVariable = CARGO_VARIABLE_COMPACTO;
 
     }
 

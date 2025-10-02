@@ -3,19 +3,22 @@ import Reserva from "./reserva";
 
 export default class Cliente{
 
-    protected nombreCompleto: string;
-    protected  id: number;
-    public  reserva:Reserva | undefined;
+    private nombreCompleto: string;
+    private  id: number;
+    
+    // en un futuro podriamos hacer una mejora y tener un historial de reservas de cada cliente que sea una coleccion
+    private  reserva:Reserva;
 
-    constructor(nombreCompleto: string, id: number, reserva?:Reserva){
+    constructor(nombreCompleto: string, id: number, reserva:Reserva){
 
         this.nombreCompleto = nombreCompleto;
         this.id = id;
-        this.reserva = reserva ?? undefined;
+        this.reserva = reserva;
 
     }
 
-    public crearReserva(){} //Validar disponibilidad
+    public solicitarReserva(reserva:Reserva,s:SistemaEmpresa){} //Validar disponibilidad
+
 
 
 }

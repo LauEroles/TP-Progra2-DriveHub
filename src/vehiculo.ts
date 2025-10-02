@@ -3,12 +3,12 @@ import Reserva from "./reserva"
 
 export default  abstract class Vehiculo{
 
-    private tarifaBase: number;
-    private cargoVariable: number;
-    private cargoFijo: number;
-    private kmInicial: number;
-    private kmRecorrido:number
-    private matricula: string;
+    protected tarifaBase: number;
+    protected cargoVariable: number;
+    protected cargoFijo: number;
+    protected kmInicial: number;
+    protected kmRecorrido:number
+    protected matricula: string;
     //estos dos atributos les doy de alta cuando los compis creen esas clase y enum
     // estado:Estado;
     // mantenimiento:MantenimientoVehiculo;

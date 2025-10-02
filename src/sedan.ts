@@ -13,6 +13,8 @@ export default class Sedan extends Vehiculo{
     }
 
     calcularTarifa(): number {
+        // Implementar las constantes aqui tambien
+        // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
         let kmsRecorridos: number = this.kmFinal - this.kmInicial;
         let total: number =this.tarifaBase + kmsRecorridos * this.cargoFijo;
 

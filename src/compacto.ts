@@ -17,7 +17,8 @@ export default class Compacto extends Vehiculo {
     calcularTarifa(reserva: Reserva): number {
         //ajustar segun arreglos kilometraje?
         let total: number = this.tarifaBase;
-        let kmsRecorridos: number = reserva.getKmFinal() - this.km;
+        // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
+        let kmsRecorridos: number = reserva.getKmFinal() - this.km; 
         if (kmsRecorridos > KM_MAX_COMPACTO) {
             let excedente: number = kmsRecorridos - KM_MAX_COMPACTO;
             total += excedente * this.cargoVariable;

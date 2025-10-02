@@ -6,8 +6,7 @@ export default  abstract class Vehiculo{
     protected tarifaBase: number;
     protected cargoVariable: number;
     protected cargoFijo: number;
-    protected kmInicial: number;
-    protected kmRecorrido:number
+    protected km: number;
     protected matricula: string;
     //estos dos atributos les doy de alta cuando los compis creen esas clase y enum
     // estado:Estado;
@@ -17,8 +16,7 @@ export default  abstract class Vehiculo{
         this.tarifaBase=0;
         this.cargoVariable=0;
         this.cargoFijo=0;
-        this.kmInicial=km;
-        this.kmRecorrido=0;
+        this.km=km;
         this.matricula=matricula;
        // this.estado=estado; //es un enum esperar a que se cree
        // this.mantenimiento=newantenimientoVehiculo() // esperar a que se cree

@@ -48,20 +48,12 @@ export default  abstract class Vehiculo{
         this.cargoFijo = cargoFijo;
     }
 
-    public getKmInicial(): number {
-        return this.kmInicial;
+    public getKm(): number {
+        return this.km;
     }
 
     public setKm(km: number): void {
-        this.kmInicial = km;
-    }
-
-    public getKmRecorrido(): number {
-    return this.kmRecorrido;
-    }
-
-    public setKmRecorrido(kmRecorrido: number) {
-        this.kmRecorrido = kmRecorrido;
+        this.km = km;
     }
 
     public getMatricula(): string {

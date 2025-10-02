@@ -1,5 +1,6 @@
 
 import Reserva from "./reserva"
+import { Estado } from "./estado";
 
 export default  abstract class Vehiculo{
 
@@ -8,6 +9,7 @@ export default  abstract class Vehiculo{
     protected cargoFijo: number;
     protected km: number;
     protected matricula: string;
+    protected estado:Estado;
     //estos dos atributos les doy de alta cuando los compis creen esas clase y enum
     // estado:Estado;
     // mantenimiento:MantenimientoVehiculo;
@@ -18,6 +20,7 @@ export default  abstract class Vehiculo{
         this.cargoFijo=0;
         this.km=km;
         this.matricula=matricula;
+        this.estado=Estado.DISPONIBLE;
        // this.estado=estado; //es un enum esperar a que se cree
        // this.mantenimiento=newantenimientoVehiculo() // esperar a que se cree
 

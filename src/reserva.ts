@@ -44,4 +44,8 @@ export default class Reserva{
         return this.fechaFin;
     }
 
+    public getKmFinal(){
+        return this.kmFinal;
+    }
+
 }

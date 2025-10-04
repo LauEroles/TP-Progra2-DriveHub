@@ -6,54 +6,56 @@ title TP - Programacion 2 - DriveHub
 class SistemaEmpresa {
     - vehiculos: Vehiculo[]
     - reservas: Reserva[]
+    - gestorReserva: GestorReserva
+    - gestorVehiculos: GestorVehiculos
+    - gestorMantenimiento: GestorMantenimiento
+    - gestorKilometraje: GestorKilometraje
 }
 
 class Reserva {
-    - kmFinal:number
-    - vehiculo:Vehiculo
-    - cliente:Cliente
-    - fechaInicio:number
-    - fechaFin:number
+    - kmFinal: number
+    - vehiculo: Vehiculo
+    - cliente: Cliente
+    - fechaInicio: number
+    - fechaFin: number
 }
 
 class Cliente {
-    - nombreCompleto:string
-    - id:number
+    - nombreCompleto: string
+    - id: number
     'El cliente puede instanciarse sin reserva por parametro, 
     'podemos setearla luego cuando se le asigna la reserva
-    - reserva:Reserva
+    - reserva: Reserva
     + solicitarReserva(r: Reserva, s: Sistema): void  
 
 }
 
 'Herencia Vehiculo a sus clases hijas
 abstract class Vehiculo {
-    - tarifaBase:number
+    - tarifaBase: number
     'Podria haber una clase cargo que nos permita manejar de manera
     'abstracta los cargos y luego en vehiculo tener una lista de cargos
     'que pueden ser variables o fijos y el dia de mañana 
     'para flexibilizar mas la solucion si se agregan nuevos vehiculos??
-    - cargoVariable:number
-    - cargoFijo:number
-    - km:number
-    - matricula:string
-    - estado:Estado
-    - mantenimiento:MantenimientoVehiculo
-    + abstract calcularTarifa(reserva:Reserva)
-
+    - cargoVariable: number
+    - cargoFijo: number
+    - kilometraje: number
+    - matricula: string
+    - estado: Estado
+    - mantenimientos: MantenimientoVehiculo[]
+    + abstract calcularTarifa(reserva:Reserva): number
 }
 
 class Compacto {
-    + calcularTarifa(reserva:Reserva)
-
+    + calcularTarifa(reserva:Reserva): number
 }
 
 class Sedan {
-    + calcularTarifa(reserva:Reserva)
+    + calcularTarifa(reserva:Reserva): number
 }
 
 class Suv {
-    + calcularTarifa(reserva:Reserva)
+    + calcularTarifa(reserva:Reserva): number
 }
 
 'Atributo de vehiculo
@@ -66,19 +68,19 @@ enum Estado {
 
 'Atributo del vehiculo
 class MantenimientoVehiculo {
-    - costoMantenimiento:number
+    - costoMantenimiento: number
     'usar libreria moment (refactor)
-    - fecha:number
+    - fecha: Date
 }
 
 
-class GestionVehiculos {
+class GestorVehiculos {
     + cambiarEstado(v: Vehiculo, e: Estado): void  
     ' Le cambia el Estado (enum) a un vehiculo (a traves de su setter)
 }
 
 
-class GestionReserva {
+class GestorReserva {
     + validarDisponibilidad(r: Reserva): boolean  
     ' Valida la disponibilidad del vehículo para las fechas solicitadas
     + calcularTotal(r: Reserva): number  
@@ -87,8 +89,7 @@ class GestionReserva {
 }
 
 
-
-class GestionKilometraje {
+class GestorKilometraje {
     + calcularKmsRecorridos(reserva:Reserva): number  
     ' Calcula los kms recorridos en una reserva (kmFinal - kmInicial)
     ' Esto lo sacaría tal vez y haría que Reserva tenga un método kmsRecorridos() que los calcule
@@ -96,7 +97,7 @@ class GestionKilometraje {
 }
 
 
-class GestionMantenimiento {
+class GestorMantenimiento {
     + registrarMantenimiento(v: Vehiculo, m: Mantenimiento): void  
     ' Si mas adelante nos solicita podemos ver si el auto requiere o no mantenimiento
     ' Le agrega un mantenimiento a un vehiculo
@@ -119,19 +120,24 @@ Vehiculo<|--Suv
 Vehiculo<|--Compacto
 
 'Atributos de vehiculo
-Vehiculo-l->MantenimientoVehiculo
-Vehiculo-u->Estado
+Vehiculo --> MantenimientoVehiculo
+Vehiculo --> Estado
 
 'Composición
-Reserva*-r- Cliente
-Reserva*-l- Vehiculo
-SistemaEmpresa*-- Vehiculo
-SistemaEmpresa*-- Reserva
+Reserva *-- Cliente
+Reserva *-- Vehiculo
+SistemaEmpresa *-- Vehiculo
+SistemaEmpresa *-- Reserva
+
+SistemaEmpresa *-- GestorReserva
+SistemaEmpresa *-- GestorKilometraje
+SistemaEmpresa *-- GestorMantenimiento
+SistemaEmpresa *-- GestorVehiculos
 
 
 'Implementacion interfaces:
-AMB <|.. GestionReserva
-AMB <|.. GestionVehiculos
+ABM <|.u. GestorReserva
+ABM <|.u. GestorVehiculos
 
 
 @enduml

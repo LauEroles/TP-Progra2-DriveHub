@@ -1,6 +1,6 @@
 import ABM from "./abm";
 
-export default class GestionReserva implements ABM {
+export default class GestorReserva implements ABM {
 
     agregar<Reserva>(reserva: Reserva, reservas: Array<Reserva>): void {
         reservas.push(reserva);

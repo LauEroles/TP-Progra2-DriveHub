@@ -3,20 +3,21 @@ Sedán: Tarifa base de $50 por día. Aplica un cargo de $0.20 por cada kilómetr
 recorrido, sin límite diario.
 */
 import Vehiculo from "./vehiculo"
-
+import {  TARIFA_BASE_SEDAN,CARGO_VARIABLE_SEDAN } from "./constantes";
+import Reserva from "./reserva";
 export default class Sedan extends Vehiculo{
 
-    constructor(){
-        super()
-        this.tarifaBase=50;
-        this.cargoFijo=0.20
+    constructor(km: number, matricula: string){
+        super(km, matricula);
+        this.tarifaBase=TARIFA_BASE_SEDAN;
+        this.cargoVariable=CARGO_VARIABLE_SEDAN;
     }
 
-    calcularTarifa(): number {
+    calcularTarifa(reserva:Reserva): number {
         // Implementar las constantes aqui tambien
         // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
-        let kmsRecorridos: number = this.kmFinal - this.kmInicial;
-        let total: number =this.tarifaBase + kmsRecorridos * this.cargoFijo;
+        let kmsRecorridos: number = reserva.kmFinal - this.getKm();
+        let total: number =this.tarifaBase + kmsRecorridos * this.cargoVariable;
 
         return total;
     }

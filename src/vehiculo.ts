@@ -2,6 +2,8 @@
 import Reserva from "./reserva"
 import { Estado } from "./estado";
 import MantenimientoVehiculo from "./mantenimientoVehiculo";
+import { CARGO_FIJO_ADICIONAL_SUV, TARIFA_BASE_SUV} from "./constantes";
+
 
 export default  abstract class Vehiculo{
 
@@ -27,8 +29,8 @@ export default  abstract class Vehiculo{
         return this.tarifaBase;
     }
 
-    public setTarifaBase(tarifaBase: number): void {
-        this.tarifaBase = tarifaBase;
+    public setTarifaBase(TARIFA_BASE_SUV : number): void {
+        this.tarifaBase = TARIFA_BASE_SUV;
     }
 
     public getCargoVariable(): number {
@@ -43,8 +45,8 @@ export default  abstract class Vehiculo{
         return this.cargoFijo;
     }
 
-    public setCargoFijo(cargoFijo: number): void {
-        this.cargoFijo = cargoFijo;
+    public setCargoFijo(CARGO_FIJO_ADICIONAL_SUV: number): void {
+        this.cargoFijo = CARGO_FIJO_ADICIONAL_SUV;
     }
 
     public getKm(): number {

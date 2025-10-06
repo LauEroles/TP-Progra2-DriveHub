@@ -1,14 +1,15 @@
 
 import Reserva from "./reserva"
+import { Estado } from "./estado";
 
 export default  abstract class Vehiculo{
 
-    private tarifaBase: number;
-    private cargoVariable: number;
-    private cargoFijo: number;
-    private kmInicial: number;
-    private kmRecorrido:number
-    private matricula: string;
+    protected tarifaBase: number;
+    protected cargoVariable: number;
+    protected cargoFijo: number;
+    protected kilometraje: number;
+    protected matricula: string;
+    protected estado: Estado;
     //estos dos atributos les doy de alta cuando los compis creen esas clase y enum
     // estado:Estado;
     // mantenimiento:MantenimientoVehiculo;
@@ -17,9 +18,9 @@ export default  abstract class Vehiculo{
         this.tarifaBase=0;
         this.cargoVariable=0;
         this.cargoFijo=0;
-        this.kmInicial=km;
-        this.kmRecorrido=0;
+        this.kilometraje=km;
         this.matricula=matricula;
+        this.estado=Estado.DISPONIBLE;
        // this.estado=estado; //es un enum esperar a que se cree
        // this.mantenimiento=newantenimientoVehiculo() // esperar a que se cree
 
@@ -50,20 +51,12 @@ export default  abstract class Vehiculo{
         this.cargoFijo = cargoFijo;
     }
 
-    public getKmInicial(): number {
-        return this.kmInicial;
+    public getKm(): number {
+        return this.kilometraje;
     }
 
     public setKm(km: number): void {
-        this.kmInicial = km;
-    }
-
-    public getKmRecorrido(): number {
-    return this.kmRecorrido;
-    }
-
-    public setKmRecorrido(kmRecorrido: number) {
-        this.kmRecorrido = kmRecorrido;
+        this.kilometraje = km;
     }
 
     public getMatricula(): string {
@@ -75,7 +68,4 @@ export default  abstract class Vehiculo{
     }
 
     abstract calcularTarifa(reserva:Reserva):number;
-
-
-
 }

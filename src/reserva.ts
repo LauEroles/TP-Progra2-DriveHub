@@ -5,14 +5,13 @@ import Cliente from "./cliente";
 
 export default class Reserva{
 
-
     public vehiculo: Vehiculo;
     public cliente: Cliente;
-    public fechaInicio: number;
-    public fechaFin: number;
+    public fechaInicio: Date;
+    public fechaFin: Date;
     public kmFinal: number;
 
-    constructor(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: number, fechaFin: number){
+    constructor(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: Date, fechaFin: Date){
 
         if (fechaFin < fechaInicio){
             throw new Error(`La fecha final no puede ser menor que la fecha inicial`);
@@ -27,9 +26,7 @@ export default class Reserva{
 
 
     public getVehiculo(){
-
         return this.vehiculo;
-
     }
 
     public getCliente(){

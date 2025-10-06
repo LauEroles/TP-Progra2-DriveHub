@@ -79,7 +79,7 @@ class GestorVehiculo {
 
 
 class GestorReserva {
-    + validarDisponibilidad(r: Reserva): boolean  
+    + hayDisponibilidad(r: Reserva): boolean  
     ' Valida la disponibilidad del vehículo para las fechas solicitadas
     + calcularTotal(r: Reserva): number  
     ' Podriamos calcular el total usando calcularCostoVariable() del vehiculo y sumar la tarifa base 

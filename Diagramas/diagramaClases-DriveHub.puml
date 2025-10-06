@@ -119,7 +119,7 @@ Vehiculo <|-- Compacto
 
 'Atributos de vehiculo
 Vehiculo --> MantenimientoVehiculo
-Vehiculo --> Estado
+Vehiculo -r-> Estado
 
 'Composición
 Reserva *-- Cliente
@@ -129,8 +129,8 @@ SistemaEmpresa *-- Reserva
 
 SistemaEmpresa *-- GestorReserva
 SistemaEmpresa *-- GestorKilometraje
-SistemaEmpresa *-- GestorMantenimiento
-SistemaEmpresa *-- GestorVehiculo
+SistemaEmpresa *-r- GestorMantenimiento
+SistemaEmpresa *-l- GestorVehiculo
 
 
 'Implementacion interfaces:

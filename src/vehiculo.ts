@@ -1,6 +1,7 @@
 
 import Reserva from "./reserva"
 import { Estado } from "./estado";
+import MantenimientoVehiculo from "./mantenimientoVehiculo";
 
 export default  abstract class Vehiculo{
 
@@ -10,19 +11,14 @@ export default  abstract class Vehiculo{
     protected kilometraje: number;
     protected matricula: string;
     protected estado: Estado;
-    //estos dos atributos les doy de alta cuando los compis creen esas clase y enum
-    // estado:Estado;
-    // mantenimiento:MantenimientoVehiculo;
 
-    constructor(km:number, matricula:string){
+    constructor(km:number, matricula:string, protected mantenimientos : MantenimientoVehiculo[]=[]){
         this.tarifaBase=0;
         this.cargoVariable=0;
         this.cargoFijo=0;
         this.kilometraje=km;
         this.matricula=matricula;
         this.estado=Estado.DISPONIBLE;
-       // this.estado=estado; //es un enum esperar a que se cree
-       // this.mantenimiento=newantenimientoVehiculo() // esperar a que se cree
 
     }
 
@@ -65,6 +61,14 @@ export default  abstract class Vehiculo{
 
     public setMatricula(matricula: string): void {
         this.matricula = matricula;
+    }
+
+
+    public agregarManteniminentoVehiculo(mantenimiento: MantenimientoVehiculo): void {
+        if (!this.mantenimientos) {
+            this.mantenimientos = [];
+        }
+        this.mantenimientos.push(mantenimiento);
     }
 
     abstract calcularTarifa(reserva:Reserva):number;

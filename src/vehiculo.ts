@@ -5,7 +5,7 @@ import MantenimientoVehiculo from "./mantenimientoVehiculo";
 import { CARGO_FIJO_ADICIONAL_SUV, TARIFA_BASE_SUV} from "./constantes";
 
 
-export default  abstract class Vehiculo{
+export default abstract class Vehiculo{
 
     protected tarifaBase: number;
     protected cargoVariable: number;

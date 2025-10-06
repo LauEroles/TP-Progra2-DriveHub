@@ -3,7 +3,7 @@ concepto de seguro y un cargo de $0.25 por cada kilómetro recorrido si se super
 los 500km en total durante el período de alquiler. */
 import Reserva from "./reserva";
 import Vehiculo from "./vehiculo"
-
+import { TARIFA_BASE_SUV, CARGO_FIJO_ADICIONAL_SUV,CARGO_VARIABLE_MAY_500KM} from "./constantes";
 export default class Suv extends Vehiculo{
 
     constructor(km:number, matricula:string){

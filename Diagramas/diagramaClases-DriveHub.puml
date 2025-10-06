@@ -122,14 +122,14 @@ Vehiculo --> MantenimientoVehiculo
 Vehiculo -r-> Estado
 
 'Composición
-Reserva *-- Cliente
+Reserva *-r- Cliente
 Reserva *-- Vehiculo
 SistemaEmpresa *-- Vehiculo
 SistemaEmpresa *-- Reserva
 
 SistemaEmpresa *-- GestorReserva
-SistemaEmpresa *-- GestorKilometraje
-SistemaEmpresa *-r- GestorMantenimiento
+SistemaEmpresa *-r- GestorKilometraje
+SistemaEmpresa *-u- GestorMantenimiento
 SistemaEmpresa *-l- GestorVehiculo
 
 

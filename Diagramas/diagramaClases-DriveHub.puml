@@ -7,7 +7,7 @@ class SistemaEmpresa {
     - vehiculos: Vehiculo[]
     - reservas: Reserva[]
     - gestorReserva: GestorReserva
-    - gestorVehiculos: GestorVehiculos
+    - gestorVehiculo: GestorVehiculo
     - gestorMantenimiento: GestorMantenimiento
     - gestorKilometraje: GestorKilometraje
 }
@@ -16,8 +16,8 @@ class Reserva {
     - kmFinal: number
     - vehiculo: Vehiculo
     - cliente: Cliente
-    - fechaInicio: number
-    - fechaFin: number
+    - fechaInicio: Date
+    - fechaFin: Date
 }
 
 class Cliente {
@@ -27,7 +27,6 @@ class Cliente {
     'podemos setearla luego cuando se le asigna la reserva
     - reserva: Reserva
     + solicitarReserva(r: Reserva, s: Sistema): void  
-
 }
 
 'Herencia Vehiculo a sus clases hijas
@@ -69,19 +68,18 @@ enum Estado {
 'Atributo del vehiculo
 class MantenimientoVehiculo {
     - costoMantenimiento: number
-    'usar libreria moment (refactor)
     - fecha: Date
 }
 
 
-class GestorVehiculos {
+class GestorVehiculo {
     + cambiarEstado(v: Vehiculo, e: Estado): void  
     ' Le cambia el Estado (enum) a un vehiculo (a traves de su setter)
 }
 
 
 class GestorReserva {
-    + validarDisponibilidad(r: Reserva): boolean  
+    + hayDisponibilidad(r: Reserva): boolean  
     ' Valida la disponibilidad del vehículo para las fechas solicitadas
     + calcularTotal(r: Reserva): number  
     ' Podriamos calcular el total usando calcularCostoVariable() del vehiculo y sumar la tarifa base 
@@ -115,9 +113,9 @@ interface ABM {
 'Relaciones:
 
 'Herencia
-Vehiculo<|--Sedan
-Vehiculo<|--Suv
-Vehiculo<|--Compacto
+Vehiculo <|-- Sedan
+Vehiculo <|-- Suv
+Vehiculo <|-- Compacto
 
 'Atributos de vehiculo
 Vehiculo --> MantenimientoVehiculo
@@ -132,12 +130,12 @@ SistemaEmpresa *-- Reserva
 SistemaEmpresa *-- GestorReserva
 SistemaEmpresa *-- GestorKilometraje
 SistemaEmpresa *-- GestorMantenimiento
-SistemaEmpresa *-- GestorVehiculos
+SistemaEmpresa *-- GestorVehiculo
 
 
 'Implementacion interfaces:
 ABM <|.u. GestorReserva
-ABM <|.u. GestorVehiculos
+ABM <|.u. GestorVehiculo
 
 
 @enduml

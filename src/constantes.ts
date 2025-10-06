@@ -11,3 +11,4 @@ export const CARGO_VARIABLE_SEDAN=0.20;
 export const TARIFA_BASE_SUV=80;
 export const CARGO_FIJO_ADICIONAL_SUV=15;
 export const CARGO_VARIABLE_MAY_500KM=0.25;
+export const QUINIENTOS_KM=500;

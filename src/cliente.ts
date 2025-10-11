@@ -1,5 +1,5 @@
 import Reserva from "./reserva";
-
+import SistemaEmpresa from "./sistemaReserva";
 
 export default class Cliente{
 
@@ -17,7 +17,11 @@ export default class Cliente{
 
     }
 
-    public solicitarReserva(reserva:Reserva,s:SistemaEmpresa){} //Validar disponibilidad
+    public solicitarReserva(reserva:Reserva,sistema:SistemaEmpresa){
+
+        sistema.realizarReserva(reserva);
+
+    } 
 
 
 

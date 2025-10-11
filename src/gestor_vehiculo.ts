@@ -1,8 +1,10 @@
 import ABM from "./abm";
 import Vehiculo from "./vehiculo"
+import { Estado } from "./estado"
 
 export class GestorVehiculo implements ABM{
 
+    private gestorReserva:GestorReserva;
 
     private vehiculoBuscado(vehiculo:Vehiculo, vehiculos: Array<Vehiculo>): Vehiculo | undefined {
         const vehiculoBuscado: Vehiculo | undefined = vehiculos.find(v => v.getMatricula() === vehiculo.getMatricula());
@@ -41,5 +43,19 @@ export class GestorVehiculo implements ABM{
 
     }
 
-    
+    public cambiarEstado(v:Vehiculo, e: Estado):void{
+
+        const estaDisponible=this.gestorReserva.hayDisponibilidad(reservaSolicitada, reservas);
+
+        
+
+
+    }
+
+    /*
+     DISPONIBLE,
+    EN_ALQUILER,
+    EN_MANTENIMIENTO,
+    NECESITA_LIMPIEZA
+    */
 }

@@ -10,11 +10,6 @@ export default class Reserva {
     public kmFinal: number;
 
     constructor(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: Date, fechaFin: Date) {
-
-        if (fechaFin < fechaInicio) {
-            throw new Error(`La fecha final no puede ser menor que la fecha inicial`);
-        }
-
         this.vehiculo = vehiculo;
         this.cliente = cliente;
         this.fechaInicio = fechaInicio;
@@ -22,6 +17,13 @@ export default class Reserva {
         this.kmFinal = 0;
     }
 
+    public validarFecha(): boolean {
+        let fechaValida: boolean = true;
+        if (this.getFechaFin() < this.getFechaInicio()) {
+            fechaValida = false;
+        }
+        return fechaValida;
+    }
 
     public getVehiculo() {
         return this.vehiculo;

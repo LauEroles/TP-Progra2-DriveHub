@@ -2,7 +2,7 @@ import Reserva from "./reserva";
 import Vehiculo from "./vehiculo";
 import Cliente from "./cliente";
 import GestorReserva from "./gestor_reserva";
-import GestorVehiculo from "./gestorVehiculo";
+import GestorVehiculo from "./gestor_vehiculo";
 import GestorMantenimiento from "./gestorMantenimiento";
 import GestorKilometraje from "./gestorKilometraje";
 

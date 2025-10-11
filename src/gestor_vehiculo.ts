@@ -3,21 +3,43 @@ import Vehiculo from "./vehiculo"
 
 export class GestorVehiculo implements ABM{
 
-    agregar<Vehiculo>(vehiculo: Vehiculo, vehiculos: Array<Vehiculo>): void{
-        //preguntar a Ale porque cuando trabajo con un Generics, cuando quiero implementar
-        // la interfaz AMB en la clase Vehiculo( que es abstracta) no me permite recorrer los elementos
-        //para compararlos por matricula con un getMatricula() ?
-       let existe= vehiculos.some(v => v.getMatricula() === vehiculo.getMatricula());
-       if(existe){
-        throw new Error("Ya existe un vehiculo con esa matricula");
-       }
-       vehiculos.push(vehiculo);
+
+    private vehiculoBuscado(vehiculo:Vehiculo, vehiculos: Array<Vehiculo>): Vehiculo | undefined {
+        const vehiculoBuscado: Vehiculo | undefined = vehiculos.find(v => v.getMatricula() === vehiculo.getMatricula());
+        return vehiculoBuscado;
+    }
+
+
+    public agregar<T>(item: T, lista: Array<T>): void{
+        const vehiculoEncontrado= this.vehiculoBuscado(item as Vehiculo, lista as Array<Vehiculo>);
+       
+        if(vehiculoEncontrado){
+            throw new Error("El vehiculo que quiere agregar ya existe en el sistema");
+        
+        }else{
+            lista.push(item);
+        }
+
 
     }
 
 
-    eliminar<Vehiculo>(vehiculo: Vehiculo, vehiculos: Array<Vehiculo>): void{
+    public eliminar<T>(item: T, lista: Array<T>): void{
+        const vehiculoAEliminar= this.vehiculoBuscado(item as Vehiculo, lista as Array<Vehiculo>);
+
+        if(!vehiculoAEliminar){
+            throw new Error("No puede eliminar un vehiculo que no se encuentra en la lista de vehiculos de la empresa");
+    
+        }else{
+            const vehiculoItem=item as Vehiculo;
+            const indice=(lista as Array<Vehiculo>).findIndex(v => v.getMatricula()=== vehiculoItem.getMatricula());
+            if(indice>-1){
+                lista.splice(indice,1);
+            }
+        }
+        
 
     }
 
+    
 }

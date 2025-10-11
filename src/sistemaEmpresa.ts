@@ -42,4 +42,29 @@ export default class SistemaEmpresa {
 
   }
 
+  public kmAlFinalizaReserva(reserva: Reserva): number{
+  const vehiculoReserva = reserva.getVehiculo();
+
+  const vehiculoSistema = this.vehiculos.find(
+    (v) => v.getMatricula() === vehiculoReserva.getMatricula()
+  );
+
+  if (!vehiculoSistema) {
+    throw new Error(
+      `El vehículo ${vehiculoReserva.getMatricula()} no está registrado en el sistema.`
+    );
+  }
+
+  // Esto lo generé para encontrar el vehículo y poder actualizar el KM.
+
+    const kmRecorrido = this.gestorKilometraje.calcularKmsRecorridos(reserva)
+
+    const nuevoKM = reserva.getVehiculo().getKm() + kmRecorrido;
+
+    vehiculoSistema.setKm(nuevoKM);
+
+    return kmRecorrido;
+
+  }
+
 }

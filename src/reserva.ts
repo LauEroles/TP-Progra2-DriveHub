@@ -17,13 +17,13 @@ export default class Reserva {
         this.kmFinal = 0;
     }
 
-    // public validarFecha(): boolean {
-    //     let fechaValida: boolean = true;
-    //     if (this.getFechaFin() < this.getFechaInicio()) {
-    //         fechaValida = false;
-    //     }
-    //     return fechaValida;
-    // }
+    public validarFecha(): boolean {
+        let fechaValida: boolean = true;
+        if (this.getFechaFin() < this.getFechaInicio()) {
+            fechaValida = false;
+        }
+        return fechaValida;
+    }
 
     public getVehiculo() {
         return this.vehiculo;

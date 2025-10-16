@@ -12,11 +12,11 @@ export default class GestorReserva implements ABM {
         reservas.splice(index, 1);
     }
     
-    // public hayDisponibilidad(reservaSolicitada: Reserva, reservas: Array<Reserva>): boolean {        
-    //     return reservaSolicitada.validarFecha() && !reservas.some(reserva => {
-    //         let mismoVehiculo: boolean = reserva.getVehiculo().getMatricula() === reservaSolicitada.getVehiculo().getMatricula();
-    //         let fechasSolapadas: boolean = reservaSolicitada.getFechaInicio() <= reserva.getFechaFin() && reservaSolicitada.getFechaFin() >= reserva.getFechaInicio();
-    //         return mismoVehiculo && fechasSolapadas;
-    //     })
-    // }
+    public hayDisponibilidad(reservaSolicitada: Reserva, reservas: Array<Reserva>): boolean {        
+        return !reservas.some(reserva => {
+            let mismoVehiculo: boolean = reserva.getVehiculo().getMatricula() === reservaSolicitada.getVehiculo().getMatricula();
+            let fechasSolapadas: boolean = reservaSolicitada.getFechaInicio() <= reserva.getFechaFin() && reservaSolicitada.getFechaFin() >= reserva.getFechaInicio();
+            return mismoVehiculo && fechasSolapadas;
+        })
+    }
 }

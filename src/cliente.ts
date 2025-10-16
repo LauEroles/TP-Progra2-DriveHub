@@ -14,7 +14,7 @@ export default class Cliente {
         this.reserva = undefined as unknown as Reserva;
     }
 
-    //public solicitarReserva(reserva: Reserva,s: SistemaEmpresa) {} //Validar disponibilidad
+    public solicitarReserva(reserva: Reserva,s: SistemaEmpresa) {} //Validar disponibilidad
 
 
 

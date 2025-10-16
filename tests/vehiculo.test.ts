@@ -19,7 +19,7 @@ describe("Test de la clase Vehiculo", () => {
 
     afterEach (()=>{});
 
-    it("Verifica el metodo agregar mantenimiento vehiculo"),() =>{
+    it("Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo"),() =>{
 
         const testMantenimiento=instance.agregarManteniminentoVehiculo(mantenimiento);
 

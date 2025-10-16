@@ -1,26 +1,22 @@
 import GestorReserva from "../src/gestor_reserva";
 import Reserva from "../src/reserva";
 import Cliente from "../src/cliente";
-import Vehiculo from "../src/vehiculo";
 import Suv from "../src/suv";
 import Sedan from "../src/sedan";
 import Compacto from "../src/compacto";
 
 jest.mock("../src/reserva");
 jest.mock("../src/cliente");
-jest.mock("../src/vehiculo");
+jest.mock("../src/suv");
 
-const MockReserva = Reserva as jest.MockedClass<typeof Reserva>;
-const MockCliente = Cliente as jest.MockedClass<typeof Cliente>;
-const MockSuv = Vehiculo as jest.MockedClass<typeof Suv>;
 
 describe("GestorReserva.hayDisponibilidad", () => {
     const gestor = new GestorReserva();
 
     test("devuelve true cuando no hay reservas existentes", () => {
-        const cliente = new MockCliente("Pepe", 1);
-        const suv = new MockSuv(100, "AAA");
-        const solicitada = new MockReserva(suv, cliente, new Date(2025, 5, 10), new Date(2025, 5, 12));
+        const cliente = new Cliente("Pepe", 1);
+        const suv = new Suv(100, "AAA");
+        const solicitada = new Reserva(suv, cliente, new Date(2025, 5, 10), new Date(2025, 5, 12));
         const reservas: Reserva[] = [];
 
         expect(gestor.hayDisponibilidad(solicitada, reservas)).toBe(true);

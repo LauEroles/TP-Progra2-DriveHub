@@ -1,44 +1,31 @@
 
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo";
 
-// Mock de la clase
-jest.mock("../src/mantenimientoVehiculo");
+describe("MantenimientoVehiculo", () => {
 
-describe("MantenimientoVehiculo ", () => {
-  const MockMantenimiento = MantenimientoVehiculo as jest.MockedClass<typeof MantenimientoVehiculo>;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  test("se instancia la clase mock", () => {
+  test("instancia correctamente y getters/setters funcionan", () => {
     const fecha = new Date("2025-10-12");
-    const mantenimientoMock = new MockMantenimiento(1000, fecha);
+    const m = new MantenimientoVehiculo(2000, fecha);
 
-    expect(mantenimientoMock).toBeDefined();
-    
-    expect(MockMantenimiento).toHaveBeenCalledWith(1000, fecha);
+    // Verificamos getters
+    expect(m.getCostoMantenimiento()).toBe(2000);
+    expect(m.getFecha()).toBe(fecha);
+
+    // Verificamos setters
+    m.setCostoMantenimiento(2500);
+    expect(m.getCostoMantenimiento()).toBe(2500);
+
+    const nuevaFecha = new Date("2025-10-15");
+    m.setFecha(nuevaFecha);
+    expect(m.getFecha()).toBe(nuevaFecha);
+
+    // Verificamos mostrarDetalle
+    expect(m.mostrarDetalle()).toBe(`Mantenimiento realizado el ${nuevaFecha} con costo $2500`);
   });
 
-  test("se llama a los métodos get y set usando mocks", () => {
-    const fecha = new Date("2025-10-12");
-    const mantenimientoMock = new MockMantenimiento(1200, fecha);
-
-    // Mockeamos los métodos
-    mantenimientoMock.getCostoMantenimiento = jest.fn(() => 1200);
-    mantenimientoMock.setCostoMantenimiento = jest.fn();
-    mantenimientoMock.getFecha = jest.fn(() => fecha);
-    mantenimientoMock.setFecha = jest.fn();
-    mantenimientoMock.mostrarDetalle = jest.fn(() => `Mantenimiento realizado el ${fecha} con costo $1200`);
-
-    
-    expect(mantenimientoMock.getCostoMantenimiento()).toBe(1200);
-    mantenimientoMock.setCostoMantenimiento(1500);
-    expect(mantenimientoMock.setCostoMantenimiento).toBeDefined();
-    expect(mantenimientoMock.getFecha()).toBe(fecha);
-
-    // Probamos mostrarDetalle
-    expect(mantenimientoMock.mostrarDetalle()).toBe(`Mantenimiento realizado el ${fecha} con costo $1200`);
-    expect(mantenimientoMock.mostrarDetalle).toBeDefined();
+  test("lanza error si el costo es menor o igual a 0", () => {
+    expect(() => new MantenimientoVehiculo(0, new Date())).toThrow("El costo de mantenimiento debe ser mayor a 0");
+    expect(() => new MantenimientoVehiculo(-10, new Date())).toThrow();
   });
+
 });

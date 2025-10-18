@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="5" failures="0" errors="0" time="25.147">
-  <testsuite name="Clase Suv con mock de Reserva" errors="0" failures="0" skipped="0" timestamp="2025-10-18T18:50:41" time="22.477" tests="2">
-    <testcase classname="Clase Suv con mock de Reserva calcula correctamente la tarifa sin superar 500 km calcula correctamente la tarifa sin superar 500 km" name="Clase Suv con mock de Reserva calcula correctamente la tarifa sin superar 500 km calcula correctamente la tarifa sin superar 500 km" time="0.024">
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="25.9">
+  <testsuite name="Clase Sedan con mock de Reserva" errors="0" failures="0" skipped="0" timestamp="2025-10-18T19:16:05" time="22.59" tests="1">
+    <testcase classname="Clase Sedan con mock de Reserva calcula correctamente la tarifa para Sedan calcula correctamente la tarifa para Sedan" name="Clase Sedan con mock de Reserva calcula correctamente la tarifa para Sedan calcula correctamente la tarifa para Sedan" time="0.023">
+    </testcase>
+  </testsuite>
+  <testsuite name="MantenimientoVehiculo " errors="0" failures="0" skipped="0" timestamp="2025-10-18T19:16:27" time="0.696" tests="2">
+    <testcase classname="MantenimientoVehiculo  se instancia la clase mock se instancia la clase mock" name="MantenimientoVehiculo  se instancia la clase mock se instancia la clase mock" time="0.018">
+    </testcase>
+    <testcase classname="MantenimientoVehiculo  se llama a los métodos get y set usando mocks se llama a los métodos get y set usando mocks" name="MantenimientoVehiculo  se llama a los métodos get y set usando mocks se llama a los métodos get y set usando mocks" time="0.019">
+    </testcase>
+  </testsuite>
+  <testsuite name="Clase Suv con mock de Reserva" errors="0" failures="0" skipped="0" timestamp="2025-10-18T19:16:28" time="0.695" tests="2">
+    <testcase classname="Clase Suv con mock de Reserva calcula correctamente la tarifa sin superar 500 km calcula correctamente la tarifa sin superar 500 km" name="Clase Suv con mock de Reserva calcula correctamente la tarifa sin superar 500 km calcula correctamente la tarifa sin superar 500 km" time="0.012">
     </testcase>
     <testcase classname="Clase Suv con mock de Reserva calcula correctamente la tarifa superando 500 km calcula correctamente la tarifa superando 500 km" name="Clase Suv con mock de Reserva calcula correctamente la tarifa superando 500 km calcula correctamente la tarifa superando 500 km" time="0.009">
     </testcase>
   </testsuite>
-  <testsuite name="MantenimientoVehiculo " errors="0" failures="0" skipped="0" timestamp="2025-10-18T18:51:04" time="0.646" tests="2">
-    <testcase classname="MantenimientoVehiculo  se instancia la clase mock se instancia la clase mock" name="MantenimientoVehiculo  se instancia la clase mock se instancia la clase mock" time="0.017">
-    </testcase>
-    <testcase classname="MantenimientoVehiculo  se llama a los métodos get y set usando mocks se llama a los métodos get y set usando mocks" name="MantenimientoVehiculo  se llama a los métodos get y set usando mocks se llama a los métodos get y set usando mocks" time="0.017">
-    </testcase>
-  </testsuite>
-  <testsuite name="GestorMantenimiento " errors="0" failures="0" skipped="0" timestamp="2025-10-18T18:51:05" time="0.645" tests="1">
+  <testsuite name="GestorMantenimiento " errors="0" failures="0" skipped="0" timestamp="2025-10-18T19:16:29" time="0.672" tests="1">
     <testcase classname="GestorMantenimiento  se llama al método agregarManteniminentoVehiculo usando mock se llama al método agregarManteniminentoVehiculo usando mock" name="GestorMantenimiento  se llama al método agregarManteniminentoVehiculo usando mock se llama al método agregarManteniminentoVehiculo usando mock" time="0.013">
     </testcase>
   </testsuite>

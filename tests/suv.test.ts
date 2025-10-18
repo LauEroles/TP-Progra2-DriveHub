@@ -4,7 +4,7 @@ import sedan from "../src/sedan"
 import compacto from "../src/compacto"
 import Reserva from "../src/reserva"
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo"
-
+import {mockDeep, MockProxy} from "jest-mock-extended"
 
 describe("Test de la clase Suv", () => {
 
@@ -20,8 +20,8 @@ describe("Test de la clase Suv", () => {
         mockReserva={
             getKmFinal: jest.fn().mockReturnValue(800),
             getVehiculo: jest.fn().mockReturnValue(instance),
-            getFechaInicio: jest.fn().mockeReturnValue(new Date('2025-10-16')),
-            getFechaFin: jest.fn().mockeReturnValue(new Date ('2025-10-17'))
+            getFechaInicio: jest.fn().mockReturnValue(new Date('2025-10-16')),
+            getFechaFin: jest.fn().mockReturnValue(new Date ('2025-10-17'))
         }as jest.Mocked<Partial<Reserva>>;
 
 

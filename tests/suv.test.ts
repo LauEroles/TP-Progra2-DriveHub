@@ -4,35 +4,48 @@ import sedan from "../src/sedan"
 import compacto from "../src/compacto"
 import Reserva from "../src/reserva"
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo"
+import Cliente from "../src/cliente"
 import {mockDeep, MockProxy} from "jest-mock-extended"
 
 describe("Test de la clase Suv", () => {
 
     let instance: Suv;
-    let mockReserva: jest.Mocked<Partial<Reserva>>;
+    let mockReserva: MockProxy<Reserva>;
+    let mockCliente: MockProxy<Cliente>;
     let mantenimientoVehiculo:MantenimientoVehiculo;
 
     beforeEach (()=>{
         instance= new Suv(200,"LM234");
-        //esto esta cochino asi, esta generando acople lo see, tengo que refactorizar luego
         mantenimientoVehiculo= new MantenimientoVehiculo(12000,new Date('2025-10-15'));
 
-        mockReserva={
-            getKmFinal: jest.fn().mockReturnValue(800),
-            getVehiculo: jest.fn().mockReturnValue(instance),
-            getFechaInicio: jest.fn().mockReturnValue(new Date('2025-10-16')),
-            getFechaFin: jest.fn().mockReturnValue(new Date ('2025-10-17'))
-        }as jest.Mocked<Partial<Reserva>>;
-
+        mockReserva = mockDeep <Reserva>();
+        mockCliente = mockDeep <Cliente>();
+        
+        mockReserva.getKmFinal.mockReturnValue(800);
+        mockReserva.getVehiculo.mockReturnValue(instance);
+        mockReserva.getFechaInicio.mockReturnValue(new Date('2025-20-26'));
+        mockReserva.getFechaFin.mockReturnValue(new Date('2025-10-17'));
+        mockReserva.getCliente.mockReturnValue(mockCliente);
 
     });
 
-    afterEach (()=>{});
+    afterEach (()=>{
+        jest.clearAllMocks();
+    });
 
-    it("Verifica el metodo calcularTarifa"),() =>{
+    it("Verifica el metodo calcularTarifa con mas de 500km"),() =>{
+        const tarifa= instance.calcularTarifa(mockReserva);
 
-        const testMantenimiento=instance.agregarManteniminentoVehiculo(mantenimientoVehiculo);
-
+        expect(mockReserva.getKmFinal).toHaveBeenCalled();
+        expect(tarifa).toBeGreaterThan(0);
     }
+
+    it("Verifica el método calcularTarifa con menos de 500km", () =>{
+
+        mockReserva.getKmFinal.mockReturnValue(600);
+
+        const tarifa = instance.calcularTarifa(mockReserva);
+        expect(tarifa).toBeGreaterThan(0);
+    });
 
 });

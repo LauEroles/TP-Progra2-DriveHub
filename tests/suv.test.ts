@@ -1,7 +1,5 @@
 
 import Suv from "../src/suv"
-import sedan from "../src/sedan"
-import compacto from "../src/compacto"
 import Reserva from "../src/reserva"
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo"
 import Cliente from "../src/cliente"

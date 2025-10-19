@@ -4,8 +4,15 @@ console.log('Execution dir:', __dirname);
 module.exports = {
   automock: false,
   collectCoverage: true,
-  coverageProvider: 'v8', //v8 seems to be really precise. and give us more accurate coverage on sonar
-  coverageReporters: ["clover", "json", "lcov", ["text", { "skipFull": true }]],
+  coverageProvider: 'v8',
+  coverageReporters: ["clover", "json", "lcov", ["text", { "skipFull": false }]],
+  collectCoverageFrom: [
+    "src/**/*.ts",
+    "!src/**/*.test.ts",
+    "!src/cliente.ts",
+    "!src/compacto.ts",
+    "!src/gestorMantenimiento.ts",
+  ],
   preset: "ts-jest",
   testEnvironment: "node",
   testMatch: ["<rootDir>/tests/**/*.test.ts"],
@@ -18,7 +25,7 @@ module.exports = {
   testTimeout: 22000,
   verbose: false,
   reporters: [
-    //"default", 
+    "default", 
     ["jest-compact-reporter", { diffs: false, colours: true, showPassingTests: true }],
     ["jest-junit", { outputDirectory: "coverage", usePathForSuiteName: true, reportedFilePath: "absolute" }],
   ],

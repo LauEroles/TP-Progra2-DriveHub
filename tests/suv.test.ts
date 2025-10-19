@@ -24,7 +24,7 @@ describe("Test de la clase Suv", () => {
         mockReserva.getKmFinal.mockReturnValue(800);
         mockReserva.getVehiculo.mockReturnValue(instance);
         mockReserva.getFechaInicio.mockReturnValue(new Date('2025-10-26'));
-        mockReserva.getFechaFin.mockReturnValue(new Date('2025-10-17'));
+        mockReserva.getFechaFin.mockReturnValue(new Date('2025-10-27'));
         mockReserva.getCliente.mockReturnValue(mockCliente);
 
     });
@@ -33,7 +33,7 @@ describe("Test de la clase Suv", () => {
         jest.clearAllMocks();
     });
 
-    it("Verifica el metodo calcularTarifa con mas de 500km",() =>{
+    it("Verifica el metodo calcularTarifa con mas de 500km", () => {
       
         instance.setTarifaBase(80);
         instance.setCargoFijo(15);

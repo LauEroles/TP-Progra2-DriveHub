@@ -81,9 +81,9 @@ describe("Test de la clase Vehiculo", () => {
 
 
 
-    it("Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo",() =>{
+    it("Verifica el metodo agregar mantenimiento vehiculo de la clase Vehiculo", () => {
 
-        const testMantenimiento=vehiculo.agregarManteniminentoVehiculo(mantenimiento);
+        vehiculo.agregarManteniminentoVehiculo(mantenimiento);
 
         expect(vehiculo['mantenimientos']).toHaveLength(1);
         expect(vehiculo['mantenimientos'][0]).toBe(mantenimiento);

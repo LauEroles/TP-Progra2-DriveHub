@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="0" failures="0" errors="0" time="2.099">
+<testsuites name="jest tests" tests="10" failures="0" errors="0" time="1.615">
+  <testsuite name="Test de la clase Suv" errors="0" failures="0" skipped="0" timestamp="2025-10-19T00:44:05" time="1.298" tests="2">
+    <testcase classname="Test de la clase Suv Verifica el metodo calcularTarifa con mas de 500km Verifica el metodo calcularTarifa con mas de 500km" name="Test de la clase Suv Verifica el metodo calcularTarifa con mas de 500km Verifica el metodo calcularTarifa con mas de 500km" time="0.004">
+    </testcase>
+    <testcase classname="Test de la clase Suv Verifica el método calcularTarifa con menos de 500km Verifica el método calcularTarifa con menos de 500km" name="Test de la clase Suv Verifica el método calcularTarifa con menos de 500km Verifica el método calcularTarifa con menos de 500km" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test de la clase Vehiculo" errors="0" failures="0" skipped="0" timestamp="2025-10-19T00:44:06" time="0.082" tests="8">
+    <testcase classname="Test de la clase Vehiculo Deberia obtener y estabelcer una matricula Deberia obtener y estabelcer una matricula" name="Test de la clase Vehiculo Deberia obtener y estabelcer una matricula Deberia obtener y estabelcer una matricula" time="0.001">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Deberia obtener y establecer kilometraje Deberia obtener y establecer kilometraje" name="Test de la clase Vehiculo Deberia obtener y establecer kilometraje Deberia obtener y establecer kilometraje" time="0.001">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Deberia obtener y establecer tarifa base Deberia obtener y establecer tarifa base" name="Test de la clase Vehiculo Deberia obtener y establecer tarifa base Deberia obtener y establecer tarifa base" time="0.001">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Deberia obtener y establecer cargo variable Deberia obtener y establecer cargo variable" name="Test de la clase Vehiculo Deberia obtener y establecer cargo variable Deberia obtener y establecer cargo variable" time="0">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Deberia obtener y establecer cargo fijo Deberia obtener y establecer cargo fijo" name="Test de la clase Vehiculo Deberia obtener y establecer cargo fijo Deberia obtener y establecer cargo fijo" time="0.001">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Deberia inicializarse con estado DISPONIBLE Deberia inicializarse con estado DISPONIBLE" name="Test de la clase Vehiculo Deberia inicializarse con estado DISPONIBLE Deberia inicializarse con estado DISPONIBLE" time="0.001">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Deberia obtener y establecer el estado Deberia obtener y establecer el estado" name="Test de la clase Vehiculo Deberia obtener y establecer el estado Deberia obtener y establecer el estado" time="0.003">
+    </testcase>
+    <testcase classname="Test de la clase Vehiculo Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo" name="Test de la clase Vehiculo Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo" time="0.001">
+    </testcase>
+  </testsuite>
 </testsuites>

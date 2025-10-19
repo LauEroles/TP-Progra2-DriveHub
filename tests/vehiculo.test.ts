@@ -28,7 +28,7 @@ describe("Test de la clase Vehiculo", () => {
     });
     
     it("Deberia obtener y estabelcer una matricula", () => {
-        expect(vehiculo.getMatricula()).toBe("ABC123");
+        expect(vehiculo.getMatricula()).toBe("LM234");
         
         vehiculo.setMatricula("DEF456");
         expect(vehiculo.getMatricula()).toBe("DEF456");
@@ -81,13 +81,13 @@ describe("Test de la clase Vehiculo", () => {
 
 
 
-    it("Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo"),() =>{
+    it("Verifica el metodo agregar mantenimiento vehiculo de la clas Vehiculo",() =>{
 
         const testMantenimiento=vehiculo.agregarManteniminentoVehiculo(mantenimiento);
 
         expect(vehiculo['mantenimientos']).toHaveLength(1);
         expect(vehiculo['mantenimientos'][0]).toBe(mantenimiento);
 
-    }
+    });
 
 });

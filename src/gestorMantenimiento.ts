@@ -1,4 +1,4 @@
-import MantenimientoVehiculo from "./manteniientoVehiculo";
+import MantenimientoVehiculo from "./mantenimientoVehiculo";
 import Vehiculo from "./vehiculo";
 
 export default class GestorMantenimiento {

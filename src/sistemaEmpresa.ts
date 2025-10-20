@@ -42,8 +42,10 @@ export default class SistemaEmpresa {
 
   }
 
-  public kmAlFinalizaReserva(reserva: Reserva): number{
+  public actualizarKmVehiculo(reserva: Reserva): void{
   const vehiculoReserva = reserva.getVehiculo();
+
+    // Esto lo generé para encontrar el vehículo y poder actualizar el KM.
 
   const vehiculoSistema = this.vehiculos.find(
     (v) => v.getMatricula() === vehiculoReserva.getMatricula()
@@ -55,15 +57,9 @@ export default class SistemaEmpresa {
     );
   }
 
-  // Esto lo generé para encontrar el vehículo y poder actualizar el KM.
+  const nuevoKM = reserva.getVehiculo().getKm() + reserva.kmRecorrido;
 
-    const kmRecorrido = this.gestorKilometraje.calcularKmsRecorridos(reserva)
-
-    const nuevoKM = reserva.getVehiculo().getKm() + kmRecorrido;
-
-    vehiculoSistema.setKm(nuevoKM);
-
-    return kmRecorrido;
+  vehiculoSistema.setKm(nuevoKM);
 
   }
 

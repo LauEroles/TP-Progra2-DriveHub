@@ -4,7 +4,7 @@ import { Estado } from "./estado"
 import Reserva from "./reserva"
 import GestorReserva from "./gestor_reserva"
 
-export class GestorVehiculo implements ABM{
+export default class GestorVehiculo implements ABM{
 
 
 

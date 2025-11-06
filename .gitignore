@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Coverage
+coverage/
+*.lcov
+
+# Test results
+.jest/
+
+# System files
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+dist/

@@ -82,4 +82,6 @@ export default abstract class Vehiculo{
     }
 
     abstract calcularTarifa(reserva:Reserva):number;
+
+ 
 }

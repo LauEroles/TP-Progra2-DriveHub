@@ -1,9 +1,7 @@
-// Agregar KMFinal
-
 import Vehiculo from "./vehiculo";
 import Cliente from "./cliente";
 
-export default class Reserva{
+export default class Reserva {
 
     public vehiculo: Vehiculo;
     public cliente: Cliente;
@@ -11,12 +9,7 @@ export default class Reserva{
     public fechaFin: Date;
     public kmFinal: number;
 
-    constructor(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: Date, fechaFin: Date){
-
-        if (fechaFin < fechaInicio){
-            throw new Error(`La fecha final no puede ser menor que la fecha inicial`);
-        }
-
+    constructor(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: Date, fechaFin: Date) {
         this.vehiculo = vehiculo;
         this.cliente = cliente;
         this.fechaInicio = fechaInicio;
@@ -24,29 +17,36 @@ export default class Reserva{
         this.kmFinal = 0;
     }
 
+    public validarFecha(): boolean {
+        let fechaValida: boolean = true;
+        if (this.getFechaFin() < this.getFechaInicio()) {
+            fechaValida = false;
+        }
+        return fechaValida;
+    }
 
-    public getVehiculo(){
+    public getVehiculo() {
         return this.vehiculo;
     }
 
-    public getCliente(){
+    public getCliente() {
         return this.cliente;
     }
     
-    public getFechaInicio(){
+    public getFechaInicio() {
         return this.fechaInicio;
     }
 
-    public getFechaFin(){
+    public getFechaFin() {
         return this.fechaFin;
     }
 
-    public getKmFinal(){
+    public getKmFinal() {
         return this.kmFinal;
     }
 
-    public setKmFinal(kmFinal:number){
-        if (kmFinal < this.vehiculo.getKm()){
+    public setKmFinal(kmFinal: number) {
+        if (kmFinal < this.vehiculo.getKm()) {
             throw new Error(`El kilometraje final no puede ser menor que el inicial`);
         }
         this.kmFinal = kmFinal;

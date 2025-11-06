@@ -1,5 +1,5 @@
 import ABM from "./abm";
-import Vehiculo from "./vehiculo"
+import Vehiculo from "./vehiculo";
 
 export class GestorVehiculo implements ABM{
 

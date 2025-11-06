@@ -1,7 +1,8 @@
 import Reserva from "./reserva";
+import SistemaEmpresa from "./sistemaReserva";
 
 
-export default class Cliente {
+export default class Cliente{
 
     private nombreCompleto: string;
     private id: number;
@@ -14,7 +15,11 @@ export default class Cliente {
         this.reserva = undefined as unknown as Reserva;
     }
 
-    //public solicitarReserva(reserva: Reserva,s: SistemaEmpresa) {} //Validar disponibilidad
+    public solicitarReserva(reserva:Reserva,sistema:SistemaEmpresa){
+
+        sistema.realizarReserva(reserva);
+
+    } 
 
 
 

@@ -15,6 +15,8 @@ module.exports = {
   ],
   preset: "ts-jest",
   testEnvironment: "node",
+  moduleFileExtensions: ["ts", "js"],
+
   testMatch: ["<rootDir>/tests/**/*.test.ts"],
   testPathIgnorePatterns: [
     "node_modules",
@@ -30,6 +32,8 @@ module.exports = {
     ["jest-junit", { outputDirectory: "coverage", usePathForSuiteName: true, reportedFilePath: "absolute" }],
   ],
   transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: './tsconfig.json' }],
+    "^.+\\.ts$": "ts-jest",
   },
 };
+
+//    '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: './tsconfig.json' }],

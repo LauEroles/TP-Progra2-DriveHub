@@ -1,18 +1,18 @@
 import { mockDeep, MockProxy} from 'jest-mock-extended'
 import GestorVehiculo from "../src/gestor_vehiculo"
 import GestorReserva from "../src/gestor_reserva"
-import Vechiculo from "../src/vehiculo"
+import Vehiculo from "../src/vehiculo"
 
 
 describe("Test clase gestor_vehiculo", () => {
     let gestorVehiculo: GestorVehiculo;
     let mockGestorReserva: MockProxy<GestorReserva>;
-    let mockVehiculo: MockProxy<Vechiculo>;
+    let mockVehiculo: MockProxy<Vehiculo>;
 
     beforeEach(()=>{
         gestorVehiculo= new GestorVehiculo();
         mockGestorReserva= mockDeep<GestorReserva>();
-        mockVehiculo= mockDeep<Vechiculo>();
+        mockVehiculo= mockDeep<Vehiculo>();
     });
 
     afterEach(()=>{
@@ -20,7 +20,7 @@ describe("Test clase gestor_vehiculo", () => {
     });
 
     it("Verifica el metodo buscarVehiculo", ()=>{
-        const listaVehiculos: Array<Vechiculo>=[mockVehiculo];
+        const listaVehiculos: Array<Vehiculo>=[mockVehiculo];
         mockVehiculo.getMatricula.mockReturnValue("ABC123");
         const vehiculoEncontrado= (gestorVehiculo as any).buscarVehiculo(mockVehiculo, listaVehiculos);
 
@@ -28,22 +28,22 @@ describe("Test clase gestor_vehiculo", () => {
     });
 
     it("Verifica el método agregar", ()=>{
-        const listaVehiculos: Array<Vechiculo>=[];
-        gestorVehiculo.agregar<Vechiculo>(mockVehiculo, listaVehiculos);
+        const listaVehiculos: Array<Vehiculo>=[];
+        gestorVehiculo.agregar<Vehiculo>(mockVehiculo, listaVehiculos);
 
         expect(listaVehiculos).toHaveLength(1);
         expect(listaVehiculos[0]).toBe(mockVehiculo);
     });
 
     it("Verifica el método eliminar", ()=>{
-        const listaVehiculos: Array<Vechiculo>=[mockVehiculo];
-        gestorVehiculo.eliminar<Vechiculo>(mockVehiculo, listaVehiculos);
+        const listaVehiculos: Array<Vehiculo>=[mockVehiculo];
+        gestorVehiculo.eliminar<Vehiculo>(mockVehiculo, listaVehiculos);
 
         expect(listaVehiculos).toHaveLength(0);
     });
 
     it("Verifica el método cambiarEstado", ()=>{
-        const listaVehiculos: Array<Vechiculo>=[mockVehiculo];
+        const listaVehiculos: Array<Vehiculo>=[mockVehiculo];
         const reservaMock= jest.fn();
         const reservasMock: Array<any>=[];
 

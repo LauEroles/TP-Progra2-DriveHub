@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "es6",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist",
@@ -11,6 +11,7 @@
     "strict": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": false,
     "experimentalDecorators": true,
     "types": [

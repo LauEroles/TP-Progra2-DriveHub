@@ -14,7 +14,7 @@ export default class Suv extends Vehiculo{
     }
 
     calcularTarifa(reserva: Reserva): number{
-
+        const dias: number = reserva.getDias();
         let calculoCargoVariable: number = 0;
 
         // Implementar las constantes aqui tambien
@@ -22,10 +22,10 @@ export default class Suv extends Vehiculo{
         let kmRecorrido: number = reserva.getKmsRecorridos();
 
         if ( kmRecorrido > 500) {
-            calculoCargoVariable = kmRecorrido * 0.25;
+            calculoCargoVariable = kmRecorrido * this.cargoVariable;
         }
 
-        let sumatoriaTotal: number = this.getTarifaBase() + this.getCargoFijo() + calculoCargoVariable;
+        let sumatoriaTotal: number =( this.getTarifaBase() + this.getCargoFijo())* dias+ calculoCargoVariable;
         
         return sumatoriaTotal;
     }

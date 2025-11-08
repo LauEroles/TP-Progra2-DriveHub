@@ -1,5 +1,9 @@
 import Vehiculo from "./vehiculo";
 import Cliente from "./cliente";
+import Temporada from "./temporada";
+import TempAlta from "./tempAlta";
+import TempBaja from "./tempBaja";
+import TempMedia from "./tempMedia";
 
 export default class Reserva {
     public vehiculo: Vehiculo;
@@ -34,8 +38,8 @@ export default class Reserva {
     }
 
     public calcularTotal(): number {
-        let base: number = this.temporada.calcTarifaBase(this.vehiculo.getTarifaBase());
-        let total: number = base * this.diasReserva() + this.vehiculo.getCargoFijo() + this.vehiculo.calcCargoVariable(this.getKmsRecorridos());
+        let total: number = this.temporada.calcTarifaBase(this.vehiculo.getTarifaBase());
+        total = total * this.diasReserva() + this.vehiculo.getCargoFijo() + this.vehiculo.calcCargoVariable(this.getKmsRecorridos());
         return total;
     }
 

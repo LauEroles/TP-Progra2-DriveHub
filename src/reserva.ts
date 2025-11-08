@@ -39,7 +39,7 @@ export default class Reserva {
 
     public calcularTotal(): number {
         let total: number = this.temporada.calcTarifaBase(this.vehiculo.getTarifaBase());
-        total = total * this.diasReserva() + this.vehiculo.getCargoFijo() + this.vehiculo.calcCargoVariable(this.getKmsRecorridos());
+        //total = total * this.diasReserva() + this.vehiculo.getCargoFijo() + this.vehiculo.calcCargoVariable(this.getKmsRecorridos());
         return total;
     }
 

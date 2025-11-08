@@ -19,7 +19,7 @@ export default class Suv extends Vehiculo{
 
         // Implementar las constantes aqui tambien
         // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
-        let kmRecorrido: number=reserva.getKmFinal() - this.getKm();
+        let kmRecorrido: number=reserva.getkmsRecorridos();
 
         if ( kmRecorrido > 500) {
             calculoCargoVariable = kmRecorrido * 0.25;

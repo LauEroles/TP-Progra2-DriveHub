@@ -19,13 +19,13 @@ describe("Clase Suv con mock de Reserva", () => {
   });
 
   test("calcula correctamente la tarifa sin superar 500 km", () => {
-    reservaMock.getKmFinal.mockReturnValue(1400);
+    reservaMock.getKmsRecorridos.mockReturnValue(400);
     const total = suv.calcularTarifa(reservaMock);
     expect(total).toBe(95); // 80 + 15
   });
 
   test("calcula correctamente la tarifa superando 500 km", () => {
-    reservaMock.getKmFinal.mockReturnValue(1600);
+    reservaMock.getKmsRecorridos.mockReturnValue(600);
     const total = suv.calcularTarifa(reservaMock);
     expect(total).toBe(245); // 80 + 15 + (600 * 0.25)
   });

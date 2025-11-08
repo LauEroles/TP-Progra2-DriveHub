@@ -41,7 +41,7 @@ export default class Reserva {
         return this.fechaFin;
     }
 
-    public getkmsRecorridos() {
+    public getKmsRecorridos() {
         return this.kmsRecorridos;
     }
 

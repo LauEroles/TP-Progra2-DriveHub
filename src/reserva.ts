@@ -51,4 +51,10 @@ export default class Reserva {
         }
         this.kmsRecorridos = kmRecorrido;
     }
+        public getDias(): number {
+        const unDiaMs = 1000 * 60 * 60 * 24; // milisegundos en un día
+        const diferenciaMs = this.fechaFin.getTime() - this.fechaInicio.getTime();
+        const dias = Math.floor(diferenciaMs / unDiaMs);
+        return dias + 1; // incluye el día inicial
+    }
 }

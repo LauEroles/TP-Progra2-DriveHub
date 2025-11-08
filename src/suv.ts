@@ -3,15 +3,17 @@ concepto de seguro y un cargo de $0.25 por cada kilómetro recorrido si se super
 los 500km en total durante el período de alquiler. */
 import Reserva from "./reserva";
 import Vehiculo from "./vehiculo"
-import { TARIFA_BASE_SUV, CARGO_FIJO_ADICIONAL_SUV,CARGO_VARIABLE_MAY_500KM, QUINIENTOS_KM} from "./constantes";
+import { TARIFA_BASE_SUV, CARGO_FIJO_ADICIONAL_SUV,CARGO_VARIABLE_MAY_500KM} from "./constantes";
 export default class Suv extends Vehiculo{
 
     constructor(km:number, matricula:string){
         super(km, matricula);
+        this.tarifaBase=TARIFA_BASE_SUV;
+        this.cargoFijo=CARGO_FIJO_ADICIONAL_SUV;
+        this.cargoVariable=CARGO_VARIABLE_MAY_500KM;
     }
 
     calcularTarifa(reserva:Reserva):number{
-
 
         let calculoCargoVariable:number = 0;
 
@@ -19,8 +21,8 @@ export default class Suv extends Vehiculo{
         // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
         let kmRecorrido: number=reserva.getkmsRecorridos();
 
-        if ( kmRecorrido > QUINIENTOS_KM) {
-            calculoCargoVariable = kmRecorrido * CARGO_VARIABLE_MAY_500KM;
+        if ( kmRecorrido > 500) {
+            calculoCargoVariable = kmRecorrido * 0.25;
         }
 
         let sumatoriaTotal:number = this.getTarifaBase() + this.getCargoFijo() + calculoCargoVariable;

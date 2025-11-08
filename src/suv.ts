@@ -6,26 +6,26 @@ import Vehiculo from "./vehiculo"
 import { TARIFA_BASE_SUV, CARGO_FIJO_ADICIONAL_SUV,CARGO_VARIABLE_MAY_500KM} from "./constantes";
 export default class Suv extends Vehiculo{
 
-    constructor(km:number, matricula:string){
+    constructor(km: number, matricula: string){
         super(km, matricula);
         this.tarifaBase=TARIFA_BASE_SUV;
         this.cargoFijo=CARGO_FIJO_ADICIONAL_SUV;
         this.cargoVariable=CARGO_VARIABLE_MAY_500KM;
     }
 
-    calcularTarifa(reserva:Reserva):number{
+    calcularTarifa(reserva: Reserva): number{
 
-        let calculoCargoVariable:number = 0;
+        let calculoCargoVariable: number = 0;
 
         // Implementar las constantes aqui tambien
         // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
-        let kmRecorrido: number=reserva.getkmsRecorridos();
+        let kmRecorrido: number = reserva.getKmsRecorridos();
 
         if ( kmRecorrido > 500) {
             calculoCargoVariable = kmRecorrido * 0.25;
         }
 
-        let sumatoriaTotal:number = this.getTarifaBase() + this.getCargoFijo() + calculoCargoVariable;
+        let sumatoriaTotal: number = this.getTarifaBase() + this.getCargoFijo() + calculoCargoVariable;
         
         return sumatoriaTotal;
     }

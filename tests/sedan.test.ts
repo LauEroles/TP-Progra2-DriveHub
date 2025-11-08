@@ -11,9 +11,8 @@ describe("Clase Sedan con mock de Reserva", () => {
     jest.clearAllMocks();
     sedan = new Sedan(5000, "XYZ789");
     
-    // Creamos el mock con la propiedad kmFinal (no el método)
     reservaMock = {
-      kmFinal: 5500,
+      getKmsRecorridos: jest.fn(),
       getFechaInicio: jest.fn(),
       getFechaFin: jest.fn(),
       getCliente: jest.fn(),
@@ -21,6 +20,7 @@ describe("Clase Sedan con mock de Reserva", () => {
   });
 
   test("calcula correctamente la tarifa para Sedan", () => {
+    reservaMock.getKmsRecorridos.mockReturnValue(500);
     const total = sedan.calcularTarifa(reservaMock);
     expect(total).toBe(150);   
   });

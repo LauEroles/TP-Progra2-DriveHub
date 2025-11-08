@@ -11,7 +11,7 @@ describe("Clase Suv con mock de Reserva", () => {
     jest.clearAllMocks(); 
     suv = new Suv(1000, "ABC123");
     reservaMock = {
-      getKmFinal: jest.fn(),
+      getKmsRecorridos: jest.fn(),
       getFechaInicio: jest.fn(),
       getFechaFin: jest.fn(),
       getCliente: jest.fn(),

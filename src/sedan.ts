@@ -16,8 +16,9 @@ export default class Sedan extends Vehiculo{
     calcularTarifa(reserva:Reserva): number {
         // Implementar las constantes aqui tambien
         // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
+        const dias = reserva.getDias();
         let kmsRecorridos: number = reserva.getKmsRecorridos();
-        let total: number = this.tarifaBase + kmsRecorridos * this.cargoVariable;
+        let total: number = (this.tarifaBase * dias)+ kmsRecorridos * this.cargoVariable;
 
         return total;
     }

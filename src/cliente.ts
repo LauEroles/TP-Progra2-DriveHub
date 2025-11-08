@@ -1,5 +1,5 @@
 import Reserva from "./reserva";
-import SistemaEmpresa from "./sistemaReserva";
+import SistemaEmpresa from "./sistemaEmpresa";
 
 
 export default class Cliente{

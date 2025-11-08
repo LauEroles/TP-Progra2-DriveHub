@@ -65,6 +65,14 @@ export default abstract class Vehiculo{
         this.matricula = matricula;
     }
 
+    public setEstado(estado:Estado):void{
+        this.estado=estado;
+    }
+
+    public getEstado():Estado{
+        return this.estado;
+    }
+
 
     public agregarManteniminentoVehiculo(mantenimiento: MantenimientoVehiculo): void {
         if (!this.mantenimientos) {

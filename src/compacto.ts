@@ -13,7 +13,8 @@ export default class Compacto extends Vehiculo {
     }
 
     calcularTarifa(reserva: Reserva): number {
-        let total: number = this.tarifaBase;
+        const dias = reserva.getDias();
+        let total: number = this.tarifaBase* dias;
 
         let kmsRecorridos: number = reserva.getKmsRecorridos(); 
 

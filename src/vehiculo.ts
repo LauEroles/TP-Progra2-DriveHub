@@ -1,7 +1,6 @@
 
 import Reserva from "./reserva"
 import MantenimientoVehiculo from "./mantenimientoVehiculo";
-import { CARGO_FIJO_ADICIONAL_SUV, TARIFA_BASE_SUV} from "./constantes";
 import { Estado } from "./estados/estado";
 import { Disponible } from "./estados/disponible";
 import {EnAlquiler} from "./estados/enAlquiler";
@@ -12,6 +11,7 @@ import {NecesitaLimpieza} from "./estados/necesitaLimpieza";
 
 export default abstract class Vehiculo{
 
+export default abstract class Vehiculo {
     protected tarifaBase: number;
     protected cargoVariable: number;
     protected cargoFijo: number;
@@ -32,13 +32,12 @@ export default abstract class Vehiculo{
 
     }
 
-
     public getTarifaBase(): number {
         return this.tarifaBase;
     }
 
-    public setTarifaBase(TARIFA_BASE_SUV : number): void {
-        this.tarifaBase = TARIFA_BASE_SUV;
+    public setTarifaBase(tarifaBase: number): void {
+        this.tarifaBase = tarifaBase;
     }
 
     public getCargoVariable(): number {
@@ -53,8 +52,8 @@ export default abstract class Vehiculo{
         return this.cargoFijo;
     }
 
-    public setCargoFijo(CARGO_FIJO_ADICIONAL_SUV: number): void {
-        this.cargoFijo = CARGO_FIJO_ADICIONAL_SUV;
+    public setCargoFijo(cargoFijo: number): void {
+        this.cargoFijo = cargoFijo;
     }
 
     public getKm(): number {
@@ -73,23 +72,19 @@ export default abstract class Vehiculo{
         this.matricula = matricula;
     }
 
-    public setEstado(estado:Estado):void{
-        this.estado=estado;
+    public setEstado(estado: Estado):void{
+        this.estado = estado;
     }
 
     public getEstado():Estado{
         return this.estado;
     }
 
-
-    public agregarManteniminentoVehiculo(mantenimiento: MantenimientoVehiculo): void {
-        if (!this.mantenimientos) {
-            this.mantenimientos = [];
-        }
+    public agregarMantenimientoVehiculo(mantenimiento: MantenimientoVehiculo): void {
         this.mantenimientos.push(mantenimiento);
     }
 
-    abstract calcularTarifa(reserva:Reserva):number;
+    abstract calcCargoVariable(kmsRecorridos: number): number;
 
     
 

@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-dist/
 
 # Coverage
 coverage/
@@ -17,3 +16,4 @@ coverage/
 .vscode/
 .idea/
 
+dist/

@@ -15,7 +15,7 @@ describe("Compacto.calcularTarifa", () => {
         const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
         const reserva = new Reserva(compacto, cliente, new Date(2025, 5, 12), new Date(2025, 5, 13)) as jest.Mocked<Reserva>;
 
-        reserva.getKmFinal.mockReturnValue(1100);
+        reserva.getKmsRecorridos.mockReturnValue(100);
 
         let tarifa: number = compacto.calcularTarifa(reserva);
 
@@ -27,7 +27,7 @@ describe("Compacto.calcularTarifa", () => {
         const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
         const reserva = new Reserva(compacto, cliente, new Date(2025, 5, 12), new Date(2025, 5, 13)) as jest.Mocked<Reserva>;
 
-        reserva.getKmFinal.mockReturnValue(1200);
+        reserva.getKmsRecorridos.mockReturnValue(200);
 
         let tarifa: number = compacto.calcularTarifa(reserva);
 

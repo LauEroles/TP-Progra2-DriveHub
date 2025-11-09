@@ -10,7 +10,7 @@ export default abstract class Vehiculo {
     protected kilometraje: number;
     protected matricula: string;
     protected estado: Estado;
-    protected mantenimientos: MantenimientoVehiculo[] = [];
+    protected mantenimientos: MantenimientoVehiculo[];
 
     constructor(km: number, matricula: string) {
         this.tarifaBase = 0;
@@ -19,6 +19,7 @@ export default abstract class Vehiculo {
         this.kilometraje = km;
         this.matricula = matricula;
         this.estado = Estado.DISPONIBLE;
+        this.mantenimientos = [];
     }
 
     public getTarifaBase(): number {
@@ -73,6 +74,6 @@ export default abstract class Vehiculo {
         this.mantenimientos.push(mantenimiento);
     }
 
-    abstract calcularTarifa(reserva: Reserva): number;
+    abstract calcCargoVariable(kmsRecorridos: number): number;
 
 }

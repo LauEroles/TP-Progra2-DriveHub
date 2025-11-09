@@ -190,7 +190,7 @@ Vehiculo <|-- Compacto
 
 'Atributos de vehiculo
 Vehiculo --> MantenimientoVehiculo
-Vehiculo -r-> Estado
+Vehiculo *-r- Estado
 
 'Composición
 Reserva *-r- Cliente

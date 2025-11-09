@@ -8,9 +8,6 @@ import {EnMantenimiento} from "./estados/enMantenimiento";
 import {NecesitaLimpieza} from "./estados/necesitaLimpieza";    
 
 
-
-export default abstract class Vehiculo{
-
 export default abstract class Vehiculo {
     protected tarifaBase: number;
     protected cargoVariable: number;

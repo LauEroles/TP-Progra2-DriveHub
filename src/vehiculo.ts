@@ -1,7 +1,15 @@
 
 import Reserva from "./reserva"
-import { Estado } from "./estado";
 import MantenimientoVehiculo from "./mantenimientoVehiculo";
+import { Estado } from "./estados/estado";
+import { Disponible } from "./estados/disponible";
+import {EnAlquiler} from "./estados/enAlquiler";
+import {EnMantenimiento} from "./estados/enMantenimiento";
+import {NecesitaLimpieza} from "./estados/necesitaLimpieza";    
+
+
+
+export default abstract class Vehiculo{
 
 export default abstract class Vehiculo {
     protected tarifaBase: number;
@@ -12,14 +20,16 @@ export default abstract class Vehiculo {
     protected estado: Estado;
     protected mantenimientos: MantenimientoVehiculo[];
 
-    constructor(km: number, matricula: string) {
-        this.tarifaBase = 0;
-        this.cargoVariable = 0;
-        this.cargoFijo = 0;
-        this.kilometraje = km;
-        this.matricula = matricula;
-        this.estado = Estado.DISPONIBLE;
+
+    constructor(km:number, matricula:string,estadoInicial:Estado) {
+        this.tarifaBase=0;
+        this.cargoVariable=0;
+        this.cargoFijo=0;
+        this.kilometraje=km;
+        this.matricula=matricula;
+        this.estado=estadoInicial;
         this.mantenimientos = [];
+
     }
 
     public getTarifaBase(): number {
@@ -76,4 +86,27 @@ export default abstract class Vehiculo {
 
     abstract calcCargoVariable(kmsRecorridos: number): number;
 
+    
+
+    public alquilar():void{
+        this.estado.alquilar(this);
+    }
+    
+    public devolver():void{
+        this.estado.devolver(this);
+    }
+
+    public enviarMantenimiento():void{
+        this.estado.enviarMantenimiento(this);
+    }
+    
+    public finalizarMantenimiento():void{    
+        this.estado.finalizarMantenimiento(this);   
+    }
+
+    public limpiar():void{
+        this.estado.limpiar(this);
+    }
+
+ 
 }

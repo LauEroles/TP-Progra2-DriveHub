@@ -45,7 +45,16 @@ abstract class Vehiculo {
     - matricula: string
     - estado: Estado
     - mantenimientos: MantenimientoVehiculo[]
+    + agregarManteniminentoVehiculo(mantenimiento: MantenimientoVehiculo): void
     + abstract calcularTarifa(reserva:Reserva): number
+    + Vehiculo(estadoInicial: Estado): void
+    + cambiarEstado(nuevoEstado: Estado): void
+    + alquilar (): void
+    + devolver(): void
+    + enviarAMantenimiento(): void
+    + finalizarMantenimiento(): void
+    + enviarAlimpiar(): void
+    + finalizarLimpieza(): void
 }
 
 class Compacto {
@@ -60,14 +69,6 @@ class Suv {
     + calcularTarifa(reserva:Reserva): number
 }
 
-'Atributo de vehiculo
-enum Estado {
-    DISPONIBLE
-    EN_ALQUILER
-    EN_MANTENIMIENTO
-    NECESITA_LIMPIEZA
-}
-
 'Atributo del vehiculo
 class MantenimientoVehiculo {
     - costoMantenimiento: number
@@ -75,8 +76,68 @@ class MantenimientoVehiculo {
 }
 
 class GestorVehiculo {
-    + cambiarEstado(v: Vehiculo, e: Estado): void  
-    ' Le cambia el Estado (enum) a un vehiculo (a traves de su setter)
+    + buscarVehiculo(matricula: string, lista: Vehiculo[]): Vehiculo
+    + agregar<T>(item: T, lista: Array<T>): void
+    + eliminar<T>(item: T, lista: Array<T>): void
+}
+
+'Implementacion del patro state para el estado del vehiculo
+interface Estado{
+    + alquilar (): void
+    + devolver(): void
+    + enviarAMantenimiento(): void
+    + finalizarMantenimiento(): void
+    + enviarAlimpiar(): void
+    + finalizarLimpieza(): void
+   
+}
+
+class Disponible {
+    - vehiculo: Vehiculo
+    + setVehiculo(vehiculo: Vehiculo):void
+    + alquilar (): void
+    + devolver(): void
+    + enviarAMantenimiento(): void
+    + finalizarMantenimiento(): void
+    + enviarAlimpiar(): void
+    + finalizarLimpieza(): void
+    
+}
+
+class EnAlquiler {   
+    - vehiculo: Vehiculo
+    + setVehiculo(vehiculo: Vehiculo):void
+    + alquilar (): void
+    + devolver(): void
+    + enviarAMantenimiento(): void
+    + finalizarMantenimiento(): void
+    + enviarAlimpiar(): void
+    + finalizarLimpieza(): void
+    
+}
+
+class EnMantenimiento {
+    - vehiculo: Vehiculo
+    + setVehiculo(vehiculo: Vehiculo):void
+    + alquilar (): void
+    + devolver(): void
+    + enviarAMantenimiento(): void
+    + finalizarMantenimiento(): void
+    + enviarAlimpiar(): void
+    + finalizarLimpieza(): void
+    
+}
+
+class NecesitaLimpieza {
+    - vehiculo: Vehiculo
+    + setVehiculo(vehiculo: Vehiculo):void
+    + alquilar (): void
+    + devolver(): void
+    + enviarAMantenimiento(): void
+    + finalizarMantenimiento(): void
+    + enviarAlimpiar(): void
+    + finalizarLimpieza(): void
+    
 }
 
 class GestorReserva {
@@ -148,6 +209,12 @@ ABM <|.u. GestorVehiculo
 Temporada <|.. TempAlta
 Temporada <|.. TempMedia
 Temporada <|.. TempBaja
+
+
+Disponible .d.|> Estado
+EnAlquiler ..|> Estado
+EnMantenimiento .l.|> Estado
+NecesitaLimpieza .u.|> Estado
 
 
 @enduml

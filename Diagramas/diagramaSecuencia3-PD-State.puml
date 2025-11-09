@@ -1,0 +1,82 @@
+@startuml Diagrama de Secuencia - Patrón State
+
+title Patrón State - Gestión de Estados de Vehículos
+
+actor Cliente
+participant "gestor:GestorReserva" as GestorReserva
+participant "vehiculo:Vehiculo" as Vehiculo
+participant ":Disponible" as EstadoDisponible
+participant ":EnAlquiler" as EstadoAlquilado
+
+== Caso 1: Alquilar un vehículo disponible (Operación exitosa) ==
+
+Cliente -> GestorReserva: hayDisponibilidad(reserva)
+activate GestorReserva
+
+GestorReserva -> Vehiculo: alquilar()
+activate Vehiculo
+note right of Vehiculo: El vehículo delega\nal estado actual
+
+Vehiculo -> EstadoDisponible: alquilar(vehiculo)
+activate EstadoDisponible
+
+EstadoDisponible -> EstadoDisponible: Validar operación
+note right: Disponible SÍ permite\nla operación de alquilar
+
+EstadoDisponible -> Vehiculo: setEstado(new EnAlquiler())
+note right of Vehiculo: Cambia el estado interno\ndel vehículo
+
+EstadoDisponible --> Vehiculo: OK
+deactivate EstadoDisponible
+
+Vehiculo --> GestorReserva: OK
+deactivate Vehiculo
+
+GestorReserva --> Usuario: true (hay disponibilidad)
+deactivate GestorReserva
+
+== Caso 2: Intentar alquilar un vehículo ya alquilado (Operación inválida) ==
+
+Usuario -> GestorReserva: hayDisponibilidad(reserva)
+activate GestorReserva
+
+GestorReserva -> Vehiculo: alquilar()
+activate Vehiculo
+note right of Vehiculo: El vehículo delega\nal estado actual
+
+Vehiculo -> EstadoAlquilado: alquilar(vehiculo)
+activate EstadoAlquilado
+
+EstadoAlquilado -> EstadoAlquilado: Validar operación
+note right: EnAlquiler NO permite\nla operación de alquilar
+
+EstadoAlquilado --> Vehiculo: throw Error("El vehículo ya está alquilado")
+deactivate EstadoAlquilado
+
+Vehiculo --> GestorReserva: Error
+deactivate Vehiculo
+
+GestorReserva --> Usuario: Error: Operación no permitida
+deactivate GestorReserva
+
+== Caso 3: Devolver un vehículo alquilado ==
+
+Usuario -> Vehiculo: devolver()
+activate Vehiculo
+
+Vehiculo -> EstadoAlquilado: devolver(vehiculo)
+activate EstadoAlquilado
+
+EstadoAlquilado -> EstadoAlquilado: Validar operación
+note right: EnAlquiler SÍ permite\nla devolución
+
+EstadoAlquilado -> Vehiculo: setEstado(new NecesitaLimpieza())
+note right of Vehiculo: Cambia a estado\nNecesitaLimpieza
+
+EstadoAlquilado --> Vehiculo: OK
+deactivate EstadoAlquilado
+
+Vehiculo --> Usuario: OK
+deactivate Vehiculo
+
+@enduml

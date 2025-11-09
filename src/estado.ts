@@ -1,6 +1,11 @@
-export enum Estado {
-    DISPONIBLE,
-    EN_ALQUILER,
-    EN_MANTENIMIENTO,
-    NECESITA_LIMPIEZA
+import  Vehiculo  from "./vehiculo.js";
+
+export interface Estado {
+
+    alquilar(vehiculo: Vehiculo): void;
+    devolver(vehiculo: Vehiculo): void;
+    enviarMantenimiento(vehiculo: Vehiculo): void;
+    finalizarMantenimiento(vehiculo: Vehiculo): void;
+    limpiar(vehiculo: Vehiculo): void;
+    
 }

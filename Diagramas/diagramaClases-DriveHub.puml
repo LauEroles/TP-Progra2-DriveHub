@@ -42,6 +42,7 @@ abstract class Vehiculo {
     - matricula: string
     - estado: Estado
     - mantenimientos: MantenimientoVehiculo[]
+    + agregarManteniminentoVehiculo(mantenimiento: MantenimientoVehiculo): void
     + abstract calcularTarifa(reserva:Reserva): number
     + Vehiculo(estadoInicial: Estado): void
     + cambiarEstado(nuevoEstado: Estado): void
@@ -196,6 +197,12 @@ SistemaEmpresa *-l- GestorVehiculo
 'Implementacion interfaces:
 ABM <|.u. GestorReserva
 ABM <|.u. GestorVehiculo
+
+
+Disponible .d.|> Estado
+EnAlquiler ..|> Estado
+EnMantenimiento .l.|> Estado
+NecesitaLimpieza .u.|> Estado
 
 
 @enduml

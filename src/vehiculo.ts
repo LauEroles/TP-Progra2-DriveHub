@@ -18,14 +18,17 @@ export default abstract class Vehiculo{
     protected kilometraje: number;
     protected matricula: string;
     protected estado: Estado;
+    protected mantenimientos: MantenimientoVehiculo[];
 
-    constructor(km:number, matricula:string, protected mantenimientos : MantenimientoVehiculo[]=[]){
+
+    constructor(km:number, matricula:string,estadoInicial:Estado) {
         this.tarifaBase=0;
         this.cargoVariable=0;
         this.cargoFijo=0;
         this.kilometraje=km;
         this.matricula=matricula;
-        this.estado=new Disponible(this);
+        this.estado=estadoInicial;
+        this.mantenimientos = [];
 
     }
 

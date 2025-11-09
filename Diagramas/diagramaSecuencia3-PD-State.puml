@@ -32,12 +32,12 @@ deactivate EstadoDisponible
 Vehiculo --> GestorReserva: OK
 deactivate Vehiculo
 
-GestorReserva --> Usuario: true (hay disponibilidad)
+GestorReserva --> Cliente: true (hay disponibilidad)
 deactivate GestorReserva
 
 == Caso 2: Intentar alquilar un vehículo ya alquilado (Operación inválida) ==
 
-Usuario -> GestorReserva: hayDisponibilidad(reserva)
+Cliente -> GestorReserva: hayDisponibilidad(reserva)
 activate GestorReserva
 
 GestorReserva -> Vehiculo: alquilar()
@@ -56,12 +56,12 @@ deactivate EstadoAlquilado
 Vehiculo --> GestorReserva: Error
 deactivate Vehiculo
 
-GestorReserva --> Usuario: Error: Operación no permitida
+GestorReserva --> Cliente: Error: Operación no permitida
 deactivate GestorReserva
 
 == Caso 3: Devolver un vehículo alquilado ==
 
-Usuario -> Vehiculo: devolver()
+Cliente -> Vehiculo: devolver()
 activate Vehiculo
 
 Vehiculo -> EstadoAlquilado: devolver(vehiculo)
@@ -76,7 +76,7 @@ note right of Vehiculo: Cambia a estado\nNecesitaLimpieza
 EstadoAlquilado --> Vehiculo: OK
 deactivate EstadoAlquilado
 
-Vehiculo --> Usuario: OK
+Vehiculo --> Cliente: OK
 deactivate Vehiculo
 
 @enduml

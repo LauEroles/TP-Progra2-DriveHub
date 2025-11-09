@@ -1,4 +1,4 @@
-import  Vehiculo  from "./vehiculo.js";
+import  Vehiculo  from "../vehiculo.js";
 
 export interface Estado {
 

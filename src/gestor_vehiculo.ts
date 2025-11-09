@@ -1,6 +1,6 @@
 import ABM from "./abm";
 import Vehiculo from "./vehiculo"
-import { Estado } from "./estado"
+import { Estado } from "./estados/estado"
 import Reserva from "./reserva"
 import GestorReserva from "./gestor_reserva"
 

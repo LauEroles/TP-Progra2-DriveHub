@@ -13,23 +13,23 @@ export class NecesitaLimpieza implements Estado {
         this.vehiculo = vehiculo;
     }
 
-    public alquilar(): void {
+    public alquilar(vehiculo:Vehiculo): void {
         this.vehiculo.setEstado(new EnAlquiler(this.vehiculo));
     }
 
-    public devolver(): void {
+    public devolver(vehiculo:Vehiculo): void {
         throw new Error("El vehiculo ya se encuentra disponible");
     }
 
-    public enviarMantenimiento(): void {
+    public enviarMantenimiento(vehiculo:Vehiculo): void {
         this.vehiculo.setEstado(new EnMantenimiento(this.vehiculo));
     }
 
-    public finalizarMantenimiento(): void {
+    public finalizarMantenimiento(vehiculo:Vehiculo): void {
         throw new Error("El vehiculo no se encuentra en mantenimiento");
     }
 
-    public limpiar(): void {
+    public limpiar(vehiculo:Vehiculo): void {
         this.vehiculo.setEstado(new NecesitaLimpieza(this.vehiculo));
     }
 }

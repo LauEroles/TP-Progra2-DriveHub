@@ -13,11 +13,14 @@ class SistemaEmpresa {
 }
 
 class Reserva {
-    - kmFinal: number
+    - kmsRecorridos: number
     - vehiculo: Vehiculo
     - cliente: Cliente
     - fechaInicio: Date
     - fechaFin: Date
+    - temporada: Temporada
+    + calcularTotal(): number
+    + validarFecha(): boolean
 }
 
 class Cliente {
@@ -71,7 +74,6 @@ class MantenimientoVehiculo {
     - costoMantenimiento: number
     - fecha: Date
 }
-
 
 class GestorVehiculo {
     + buscarVehiculo(matricula: string, lista: Vehiculo[]): Vehiculo
@@ -138,7 +140,6 @@ class NecesitaLimpieza {
     
 }
 
-
 class GestorReserva {
     + hayDisponibilidad(r: Reserva): boolean  
     ' Valida la disponibilidad del vehículo para las fechas solicitadas
@@ -147,14 +148,12 @@ class GestorReserva {
     ' (y costo fijo) aca, para que el vehiculo solo calcule su costo variable y no el total de la reserva
 }
 
-
 class GestorKilometraje {
     + calcularKmsRecorridos(reserva:Reserva): number  
     ' Calcula los kms recorridos en una reserva (kmFinal - kmInicial)
     ' Esto lo sacaría tal vez y haría que Reserva tenga un método kmsRecorridos() que los calcule
     ' ya que ella misma posee kmInicial y kmFinal (seteado despues), y que calcularTotal() en GestionReserva llame a ese método
 }
-
 
 class GestorMantenimiento {
     + registrarMantenimiento(v: Vehiculo, m: Mantenimiento): void  
@@ -169,7 +168,18 @@ interface ABM {
     eliminar<T>(item: T, lista: Array<T>): void;
 }
 
+interface Temporada {
+    calcTarifaBase(tarifa: number): number
+}
 
+class TempAlta {
+}
+
+class TempMedia {
+}
+
+class TempBaja {  
+}
 
 'Relaciones:
 
@@ -185,18 +195,20 @@ Vehiculo -r-> Estado
 'Composición
 Reserva *-r- Cliente
 Reserva *-- Vehiculo
+Reserva *-- Temporada
 SistemaEmpresa *-- Vehiculo
 SistemaEmpresa *-- Reserva
-
 SistemaEmpresa *-- GestorReserva
 SistemaEmpresa *-r- GestorKilometraje
 SistemaEmpresa *-u- GestorMantenimiento
 SistemaEmpresa *-l- GestorVehiculo
 
-
 'Implementacion interfaces:
 ABM <|.u. GestorReserva
 ABM <|.u. GestorVehiculo
+Temporada <|.. TempAlta
+Temporada <|.. TempMedia
+Temporada <|.. TempBaja
 
 
 Disponible .d.|> Estado

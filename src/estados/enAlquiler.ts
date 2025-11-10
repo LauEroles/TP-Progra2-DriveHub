@@ -6,29 +6,23 @@ import { NecesitaLimpieza } from "./necesitaLimpieza";
 
 export class EnAlquiler implements Estado {
 
-    private vehiculo: Vehiculo;
-
-    constructor(vehiculo: Vehiculo) {
-        this.vehiculo = vehiculo;
+     public alquilar(vehiculo:Vehiculo): void {
+        throw new Error("El vehiculo ya se encuentra en alquiler");
     }
 
-    public alquilar(): void {
-        this.vehiculo.setEstado(new EnAlquiler(this.vehiculo));
+    public devolver(vehiculo:Vehiculo): void {
+       vehiculo.setEstado(new NecesitaLimpieza());
     }
 
-    public devolver(): void {
-        throw new Error("El vehiculo ya se encuentra disponible");
-    }
+    public enviarMantenimiento(vehiculo:Vehiculo): void {
+        throw new Error("No se puede enviar a mantenimiento: el vehículo está en uso");
+    } 
 
-   /*  public enviarMantenimiento(): void {
-        this.vehiculo.setEstado(new EnMantenimiento(this.vehiculo));
-    } */
-
-    public finalizarMantenimiento(): void {
+    public finalizarMantenimiento(vehiculo:Vehiculo): void {
         throw new Error("El vehiculo no se encuentra en mantenimiento");
     }
 
-    public limpiar(): void {
-        this.vehiculo.setEstado(new NecesitaLimpieza(this.vehiculo));
+    public limpiar(vehiculo:Vehiculo): void {
+        throw new Error("No se puede limpiar: el vehículo está en uso");
     }
 }

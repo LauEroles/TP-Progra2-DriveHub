@@ -4,12 +4,9 @@ import MantenimientoVehiculo from "./mantenimientoVehiculo";
 import { Estado } from "./estados/estado";
 import { Disponible } from "./estados/disponible";
 import {EnAlquiler} from "./estados/enAlquiler";
-import {EnMantenimiento} from "./estados/enMantenimiento";
+import { EnMantenimiento} from "./estados/enMantenimiento";
 import {NecesitaLimpieza} from "./estados/necesitaLimpieza";    
 
-
-
-export default abstract class Vehiculo{
 
 export default abstract class Vehiculo {
     protected tarifaBase: number;
@@ -86,8 +83,6 @@ export default abstract class Vehiculo {
 
     abstract calcCargoVariable(kmsRecorridos: number): number;
 
-    
-
     public alquilar():void{
         this.estado.alquilar(this);
     }
@@ -108,5 +103,4 @@ export default abstract class Vehiculo {
         this.estado.limpiar(this);
     }
 
- 
 }

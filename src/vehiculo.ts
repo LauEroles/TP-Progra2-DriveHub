@@ -115,10 +115,8 @@ export default abstract class Vehiculo {
     const LIMITE_DIAS = 180;
     const LIMITE_ALQUILERES = 5;
 
-    const sinMantenimientos = this.mantenimientos.length === 0;
-
     // 🚗 Si nunca tuvo mantenimiento, solo se evalúan los límites de km y alquileres
-    if (sinMantenimientos) {
+    if (!this.mantenimientos.length) {
         const superaLimitesIniciales =
             this.kilometraje >= LIMITE_KM ||
             this.cantidadAlquileresDesdeMantenimiento >= LIMITE_ALQUILERES;

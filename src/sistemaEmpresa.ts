@@ -43,6 +43,8 @@ export default class SistemaEmpresa {
   }
 
   public actualizarKmVehiculo(reserva: Reserva): void{
+
+    
   const vehiculoReserva = reserva.getVehiculo();
 
     // Esto lo generé para encontrar el vehículo y poder actualizar el KM.
@@ -57,10 +59,12 @@ export default class SistemaEmpresa {
     );
   }
 
-  const nuevoKM = reserva.getVehiculo().getKm() + reserva.kmRecorrido;
+  const nuevoKM = vehiculoReserva.getKm() + reserva.kmsRecorridos;
 
   vehiculoSistema.setKm(nuevoKM);
 
   }
 
+
+  
 }

@@ -115,7 +115,7 @@ export default abstract class Vehiculo {
     const LIMITE_DIAS = 180;
     const LIMITE_ALQUILERES = 5;
 
-    // 🚗 Si nunca tuvo mantenimiento, solo se evalúan los límites de km y alquileres
+    //  Si nunca tuvo mantenimiento, solo se evalúan los límites de km y alquileres
     if (!this.mantenimientos.length) {
         const superaLimitesIniciales =
             this.kilometraje >= LIMITE_KM ||
@@ -123,7 +123,7 @@ export default abstract class Vehiculo {
         return superaLimitesIniciales;
     }
 
-    // 🧰 Si ya tuvo mantenimientos, se considera también el tiempo desde el último
+    //  Si ya tuvo mantenimientos, se considera también el tiempo desde el último
     const ultimo = this.mantenimientos[this.mantenimientos.length - 1];
     const fechaUltimo = ultimo.getFecha();
     const hoy = new Date();

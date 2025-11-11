@@ -2,11 +2,12 @@
 recorrido si se superan los 100 km por día de alquiler.*/
 import Vehiculo from "./vehiculo";
 import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO, CARGO_VARIABLE_COMPACTO } from "./constantes";
+import { Estado } from "./estados/estado";
 
 export default class Compacto extends Vehiculo {
     
-    constructor(km: number, matricula: string) {
-        super(km, matricula);
+    constructor(km: number, matricula: string, estadoInicial: Estado) {
+        super(km, matricula,estadoInicial);
         this.tarifaBase = TARIFA_BASE_COMPACTO;
         this.cargoVariable = CARGO_VARIABLE_COMPACTO;
     }

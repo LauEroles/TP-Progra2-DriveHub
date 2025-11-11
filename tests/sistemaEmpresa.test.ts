@@ -1,49 +1,59 @@
 import SistemaEmpresa from "../src/sistemaEmpresa";
-import GestorReserva from "../src/gestor_reserva";
-import GestorVehiculo from "../src/gestor_vehiculo";
-import GestorMantenimiento from "../src/gestorMantenimiento";
-import GestorKilometraje from "../src/gestorKilometraje";
-import Reserva from "../src/reserva";
 import Vehiculo from "../src/vehiculo";
 
-let sistema: SistemaEmpresa;
-let mockGestorReserva: jest.Mocked<GestorReserva>;
-let mockGestorVehiculo: jest.Mocked<GestorVehiculo>;
-let mockGestorMantenimiento: jest.Mocked<GestorMantenimiento>;
-let mockGestorKilometraje: jest.Mocked<GestorKilometraje>;
+describe("SistemaEmpresa", () => {
+  let sistema: SistemaEmpresa;
+  let mockGestorReserva: any;
+  let mockGestorVehiculo: any;
+  let mockGestorMantenimiento: any;
+  let mockGestorKilometraje: any;
 
+  beforeEach(() => {
+    mockGestorReserva = { hayDisponibilidad: jest.fn(), agregar: jest.fn() };
+    mockGestorVehiculo = {};
+    mockGestorMantenimiento = {};
+    mockGestorKilometraje = {};
 
-beforeEach(() => {
-  mockGestorReserva = new GestorReserva() as jest.Mocked<GestorReserva>;
-  mockGestorVehiculo = new GestorVehiculo() as jest.Mocked<GestorVehiculo>;
-  mockGestorMantenimiento = new GestorMantenimiento() as jest.Mocked<GestorMantenimiento>;
-  mockGestorKilometraje = new GestorKilometraje() as jest.Mocked<GestorKilometraje>;
+    sistema = new SistemaEmpresa(
+      mockGestorReserva,
+      mockGestorVehiculo,
+      mockGestorMantenimiento,
+      mockGestorKilometraje
+    );
+  });
 
-  sistema = new SistemaEmpresa(
-    mockGestorReserva,
-    mockGestorVehiculo,
-    mockGestorMantenimiento,
-    mockGestorKilometraje
-  );
-});
+  test("actualizarKmVehiculo debe actualizar el km del vehículo correctamente", () => {
+    const mockVehiculo = {
+      getMatricula: jest.fn().mockReturnValue("ABC123"),
+      getKm: jest.fn().mockReturnValue(1000),
+      setKm: jest.fn(),
+    } as unknown as Vehiculo;
 
-test("actualizarKmVehiculo debe actualizar el km del vehículo correctamente", () => {
-  const mockVehiculo = {
-    getMatricula: jest.fn().mockReturnValue("ABC123"),
-    getKm: jest.fn().mockReturnValue(1000),
-    setKm: jest.fn(),
-  } as unknown as Vehiculo;
+    const mockReserva: any = {
+      getVehiculo: jest.fn().mockReturnValue(mockVehiculo),
+      kmsRecorridos: 200,
+    };
 
-  const mockReserva: any = {
-    getVehiculo: jest.fn().mockReturnValue(mockVehiculo),
-    kmsRecorridos: 200,
-  };
+    (sistema as any).vehiculos.push(mockVehiculo);
 
+    sistema.actualizarKmVehiculo(mockReserva);
 
-  (sistema as any).vehiculos.push(mockVehiculo);
+    expect(mockVehiculo.setKm).toHaveBeenCalledWith(1200);
+  });
 
-  sistema.actualizarKmVehiculo(mockReserva);
+  // 🧩 Test: realizarReserva
+  test("realizarReserva debe agregar la reserva y devolver true cuando hay disponibilidad", () => {
+    const mockReserva: any = {
+      getVehiculo: jest.fn(),
+      getCliente: jest.fn(),
+    };
 
-  expect(mockVehiculo.setKm).toHaveBeenCalledWith(1200);
-});
+    mockGestorReserva.hayDisponibilidad.mockReturnValue(true);
+    const resultado = sistema.realizarReserva(mockReserva);
 
+    expect(mockGestorReserva.hayDisponibilidad).toHaveBeenCalledWith(mockReserva, []);
+    expect(mockGestorReserva.agregar).toHaveBeenCalledWith(mockReserva, []);
+    expect(resultado).toBe(true);
+
+  });
+})

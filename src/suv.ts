@@ -1,34 +1,25 @@
 /*SUV: Tarifa base de $80 por día. Aplica un cargo fijo adicional de $15 por día por
 concepto de seguro y un cargo de $0.25 por cada kilómetro recorrido si se superan
 los 500km en total durante el período de alquiler. */
-import Reserva from "./reserva";
 import Vehiculo from "./vehiculo"
-import { TARIFA_BASE_SUV, CARGO_FIJO_ADICIONAL_SUV,CARGO_VARIABLE_MAY_500KM} from "./constantes";
-export default class Suv extends Vehiculo{
+import { TARIFA_BASE_SUV, CARGO_FIJO_SUV, CARGO_VARIABLE_SUV, KM_MAX_SUV } from "./constantes";
 
-    constructor(km: number, matricula: string){
+export default class Suv extends Vehiculo {
+
+    constructor(km: number, matricula: string) {
         super(km, matricula);
-        this.tarifaBase=TARIFA_BASE_SUV;
-        this.cargoFijo=CARGO_FIJO_ADICIONAL_SUV;
-        this.cargoVariable=CARGO_VARIABLE_MAY_500KM;
+        this.tarifaBase = TARIFA_BASE_SUV;
+        this.cargoFijo = CARGO_FIJO_SUV;
+        this.cargoVariable = CARGO_VARIABLE_SUV;
     }
 
-    calcularTarifa(reserva: Reserva): number{
-        const dias: number = reserva.getDias();
-        let calculoCargoVariable: number = 0;
-
-        // Implementar las constantes aqui tambien
-        // cuando se haga en gestion Kilometraje el metodo calcularKmRecorridos
-        let kmRecorrido: number = reserva.getKmsRecorridos();
-
-        if ( kmRecorrido > 500) {
-            calculoCargoVariable = kmRecorrido * this.cargoVariable;
+    calcCargoVariable(kmsRecorridos: number): number {
+        let cargo: number = 0;
+        if (kmsRecorridos > KM_MAX_SUV) {
+            let excedente: number = kmsRecorridos - KM_MAX_SUV;
+            cargo += excedente * this.getCargoVariable();
         }
-
-        let sumatoriaTotal: number =( this.getTarifaBase() + this.getCargoFijo())* dias+ calculoCargoVariable;
-        
-        return sumatoriaTotal;
+        return cargo;
     }
-
 }
 

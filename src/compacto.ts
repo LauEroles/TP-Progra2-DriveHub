@@ -1,8 +1,7 @@
-
-import Reserva from "./reserva";
+/*Tarifa base de $30 por día. Aplica un cargo de $0.15 por cada kilómetro
+recorrido si se superan los 100 km por día de alquiler.*/
 import Vehiculo from "./vehiculo";
-import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO,CARGO_VARIABLE_COMPACTO } from "./constantes";
-
+import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO, CARGO_VARIABLE_COMPACTO } from "./constantes";
 
 export default class Compacto extends Vehiculo {
     
@@ -12,17 +11,12 @@ export default class Compacto extends Vehiculo {
         this.cargoVariable = CARGO_VARIABLE_COMPACTO;
     }
 
-    calcularTarifa(reserva: Reserva): number {
-        const dias = reserva.getDias();
-        let total: number = this.tarifaBase* dias;
-
-        let kmsRecorridos: number = reserva.getKmsRecorridos(); 
-
+    calcCargoVariable(kmsRecorridos: number): number {
+        let cargo: number = 0;
         if (kmsRecorridos > KM_MAX_COMPACTO) {
             let excedente: number = kmsRecorridos - KM_MAX_COMPACTO;
-            total += excedente * this.cargoVariable;
-        } 
-         
-        return total;
+            cargo += excedente * this.getCargoVariable();
+        }
+        return cargo;
     }
 }

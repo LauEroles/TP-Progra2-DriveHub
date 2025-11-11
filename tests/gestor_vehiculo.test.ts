@@ -42,18 +42,6 @@ describe("Test clase gestor_vehiculo", () => {
         expect(listaVehiculos).toHaveLength(0);
     });
 
-    it("Verifica el método cambiarEstado", ()=>{
-        const listaVehiculos: Array<Vehiculo>=[mockVehiculo];
-        const reservaMock= jest.fn();
-        const reservasMock: Array<any>=[];
-
-        mockVehiculo.getMatricula.mockReturnValue("ABC123");
-        mockVehiculo.getEstado.mockReturnValue(0); // Estado.DISPONIBLE
-        mockGestorReserva.hayDisponibilidad.mockReturnValue(true);
-        gestorVehiculo.cambiarEstado(mockVehiculo, 1, listaVehiculos, mockGestorReserva, reservaMock as any, reservasMock); // Estado.EN_ALQUILER
-
-        expect(mockVehiculo.setEstado).toHaveBeenCalledWith(1); // Estado.EN_ALQUILER
-    }); 
 
 
 

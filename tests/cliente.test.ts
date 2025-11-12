@@ -10,18 +10,17 @@ describe("Cliente", () => {
 
     beforeEach(() => {
 
-        // Mock de SistemaEmpresa con solo lo que necesita Cliente
+        // Mock de SistemaEmpresa
         mockSistema = {
             realizarReserva: jest.fn()
         } as unknown as jest.Mocked<SistemaEmpresa>;
 
-        // Mock de Reserva (no importa su contenido para este test)
+        // Mock de Reserva
         mockReserva = {} as unknown as jest.Mocked<Reserva>;
     });
 
-    // --------------------------
-    // CONSTRUCTOR
-    // --------------------------
+    
+    // constructor
     test("constructor debe asignar correctamente nombreCompleto e id", () => {
 
         const cliente = new Cliente("Juan Pérez", 101);
@@ -29,13 +28,13 @@ describe("Cliente", () => {
         expect(cliente).toBeInstanceOf(Cliente);
         expect((cliente as any).nombreCompleto).toBe("Juan Pérez");
         expect((cliente as any).id).toBe(101);
-        // reserva inicialmente queda undefined (como está en tu constructor)
+        
         expect((cliente as any).reserva).toBeUndefined();
     });
 
-    // --------------------------
+    
     // solicitarReserva
-    // --------------------------
+    
     test("solicitarReserva debe invocar sistema.realizarReserva con la reserva dada", () => {
 
         const cliente = new Cliente("Ana Gómez", 202);

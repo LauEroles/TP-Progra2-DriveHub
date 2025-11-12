@@ -42,6 +42,11 @@ export default class SistemaEmpresa {
 
   }
 
+  public alquiler(){
+    vehiculo.alquilar();
+
+  }
+
   public actualizarKmVehiculo(reserva: Reserva): void{
   const vehiculoReserva = reserva.getVehiculo();
 

@@ -18,7 +18,7 @@ describe("GestorReserva.hayDisponibilidad", () => {
 
 
     test("devuelve true cuando no hay reservas existentes", () => {
-        const suv = new Suv(100, "AAA") as jest.Mocked<Vehiculo>;
+        const suv = new Suv(100, "AAA",undefined as any) as jest.Mocked<Vehiculo>;
 
         const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
 
@@ -35,8 +35,8 @@ describe("GestorReserva.hayDisponibilidad", () => {
 
 
     test("devuelve true cuando hay solapamiento de fechas para distinto vehículo", () => {
-        const suv1 = new Suv(100, "AAA") as jest.Mocked<Vehiculo>;
-        const suv2 = new Suv(100, "BBB") as jest.Mocked<Vehiculo>;
+        const suv1 = new Suv(100, "AAA",undefined as any) as jest.Mocked<Vehiculo>;
+        const suv2 = new Suv(100, "BBB",undefined as any) as jest.Mocked<Vehiculo>;
 
         const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
 
@@ -59,7 +59,7 @@ describe("GestorReserva.hayDisponibilidad", () => {
 
 
     test("devuelve false cuando hay solapamiento de fechas para el mismo vehículo", () => {
-        const suv = new Suv(100, "AAA") as jest.Mocked<Vehiculo>;
+        const suv = new Suv(100, "AAA",undefined as any) as jest.Mocked<Vehiculo>;
 
         const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
 
@@ -81,7 +81,7 @@ describe("GestorReserva.hayDisponibilidad", () => {
 
 
     test("devuelve true cuando NO hay solapamiento de fechas para el mismo vehículo", () => {
-        const suv = new Suv(100, "AAA") as jest.Mocked<Vehiculo>;
+        const suv = new Suv(100, "AAA",undefined as any) as jest.Mocked<Vehiculo>;
 
         const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
 

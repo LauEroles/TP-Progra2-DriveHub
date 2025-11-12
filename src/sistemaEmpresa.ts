@@ -26,25 +26,35 @@ export default class SistemaEmpresa {
     this.gestorKilometraje = gestorKilometraje;
   }
 
-  public realizarReserva(reservaDeseada: Reserva): boolean{
+  //Falta refactorizar
 
-    const disponible=this.gestorReserva.hayDisponibilidad(reservaDeseada, this.reservas)
+  public realizarReserva(vehiculo:Vehiculo, cliente:Cliente, fechaInicio:Date, fechaFin:Date): Reserva{
+    
+    let resultado:Reserva|null;
+    let reservaTemporal=new Reserva(vehiculo,cliente,fechaInicio,fechaFin);
+    const disponible=this.gestorReserva.hayDisponibilidad(reservaTemporal, this.reservas)
 
     if(disponible){
-        this.gestorReserva.agregar(reservaDeseada, this.reservas);
+        this.gestorReserva.agregar(reservaTemporal, this.reservas);
         console.log("Reserva agregada con éxito")
-        return true;
+        resultado=reservaTemporal;
     }
     else {
         console.log("Rechazado por falta de disponibilidad")
-        return false;
     }
 
+    return resultado!;
   }
 
-  public alquiler(){
-    vehiculo.alquilar();
-
+  public alquilar(reservaRealizada: Reserva): void{
+    try{ 
+      let vehiculoAAlquilar= reservaRealizada.getVehiculo();
+      vehiculoAAlquilar.alquilar();
+      console.log(`Vehiculo, ${vehiculoAAlquilar.getMatricula()} alquilado con éxito`);
+    
+    }catch(error:any){
+        console.log(`Error: ${error.message}`);
+    }
   }
 
   public actualizarKmVehiculo(reserva: Reserva): void{

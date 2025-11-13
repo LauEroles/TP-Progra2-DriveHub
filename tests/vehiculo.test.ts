@@ -4,17 +4,22 @@ import Vehiculo from "../src/vehiculo"
 import sedan from "../src/sedan"
 import compacto from "../src/compacto"
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo"
-import { Estado } from "../src/estado"
+import { Estado } from "../src/estados/estado"
+import { EnAlquiler } from "../src/estados/enAlquiler"
+import { EnMantenimiento } from "../src/estados/enMantenimiento"
+import { NecesitaLimpieza } from "../src/estados/necesitaLimpieza"
+import { Disponible } from "../src/estados/disponible"
 import { mockDeep, MockProxy} from 'jest-mock-extended'
 
 
 describe("Test de la clase Vehiculo", () => {
-
+    let estado: Estado;
 	let vehiculo: Vehiculo;
     let mantenimiento: MockProxy<MantenimientoVehiculo>;
 
     beforeEach (()=>{
-        vehiculo= new Suv(200,"LM234");
+        estado= new Disponible();
+        vehiculo= new Suv(200,"LM234", estado);
 
         mantenimiento= mockDeep<MantenimientoVehiculo>();
 
@@ -54,13 +59,14 @@ describe("Test de la clase Vehiculo", () => {
         expect(vehiculo.getCargoFijo()).toBe(15);
     });
 
-    it("Deberia inicializarse con estado DISPONIBLE", ()=> {
-        expect(vehiculo.getEstado()).toBe(Estado.DISPONIBLE);
+    it("Deberia cambiar EnAlquiler al alquilar", ()=> {
+        estado.alquilar(vehiculo);
+        expect(vehiculo.getEstado()).toBeInstanceOf(EnAlquiler);
     });
 
-    it("Deberia obtener y establecer el estado", () => {
-        vehiculo.setEstado(Estado.EN_ALQUILER);
-        expect(vehiculo.getEstado()).toBe(Estado.EN_ALQUILER);
+    it("Deberia cambiar EnMantenimiento al enviar a Mantenimiento", () => {
+        vehiculo.enviarMantenimiento(vehiculo);
+        expect(vehiculo.getEstado()).toBeInstanceOf(EnMantenimiento);
     });
 
     it("Verifica el metodo agregar mantenimiento vehiculo de la clase Vehiculo", () => {

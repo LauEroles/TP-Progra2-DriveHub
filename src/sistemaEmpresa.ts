@@ -26,15 +26,14 @@ export default class SistemaEmpresa {
     this.gestorKilometraje = gestorKilometraje;
   }
 
-  //Falta refactorizar
-
+  
   public realizarReserva(vehiculo:Vehiculo, cliente:Cliente, fechaInicio:Date, fechaFin:Date): Reserva{
     
     let resultado:Reserva|null;
-    let reservaTemporal=new Reserva(vehiculo,cliente,fechaInicio,fechaFin);
-    const disponible=this.gestorReserva.hayDisponibilidad(reservaTemporal, this.reservas)
+    const disponible=this.gestorReserva.hayDisponibilidad(fechaInicio, fechaFin, vehiculo, this.reservas);
 
-    if(disponible){
+    if(disponible){          
+        let reservaTemporal=new Reserva(vehiculo,cliente,fechaInicio,fechaFin);
         this.gestorReserva.agregar(reservaTemporal, this.reservas);
         console.log("Reserva agregada con éxito")
         resultado=reservaTemporal;
@@ -46,9 +45,8 @@ export default class SistemaEmpresa {
     return resultado!;
   }
 
-  public alquilar(reservaRealizada: Reserva): void{
+  public alquilar(vehiculoAAlquilar: Vehiculo): void{
     try{ 
-      let vehiculoAAlquilar= reservaRealizada.getVehiculo();
       vehiculoAAlquilar.alquilar();
       console.log(`Vehiculo, ${vehiculoAAlquilar.getMatricula()} alquilado con éxito`);
     

@@ -4,17 +4,25 @@ import Vehiculo from "../src/vehiculo"
 import sedan from "../src/sedan"
 import compacto from "../src/compacto"
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo"
-import { Estado } from "../src/estado"
+import { Estado } from "../src/estados/estado"
+import { EnAlquiler } from "../src/estados/enAlquiler"
+import { EnMantenimiento } from "../src/estados/enMantenimiento"
+import { NecesitaLimpieza } from "../src/estados/necesitaLimpieza"
+import { Disponible } from "../src/estados/disponible"
 import { mockDeep, MockProxy} from 'jest-mock-extended'
 
 
 describe("Test de la clase Vehiculo", () => {
-
 	let vehiculo: Vehiculo;
     let mantenimiento: MockProxy<MantenimientoVehiculo>;
+    let estadoMock:MockProxy<Estado>;
 
     beforeEach (()=>{
-        vehiculo= new Suv(200,"LM234");
+        estadoMock= mockDeep<Estado>();
+        const estado=new Disponible();
+        vehiculo= new Suv(200,"LM234", estado);
+        vehiculo.setEstado(estadoMock);
+
 
         mantenimiento= mockDeep<MantenimientoVehiculo>();
 
@@ -54,20 +62,36 @@ describe("Test de la clase Vehiculo", () => {
         expect(vehiculo.getCargoFijo()).toBe(15);
     });
 
-    it("Deberia inicializarse con estado DISPONIBLE", ()=> {
-        expect(vehiculo.getEstado()).toBe(Estado.DISPONIBLE);
+
+
+    it("Deberia delegar alquilar() al estado", ()=> {
+        vehiculo.alquilar();
+        expect(estadoMock.alquilar).toHaveBeenCalledWith(vehiculo);
+        expect(estadoMock.alquilar).toHaveBeenCalledTimes(1);
     });
 
-    it("Deberia obtener y establecer el estado", () => {
-        vehiculo.setEstado(Estado.EN_ALQUILER);
-        expect(vehiculo.getEstado()).toBe(Estado.EN_ALQUILER);
+    it("Deberia delegar devolver() al estado", ()=> {
+        vehiculo.devolver();
+        expect(estadoMock.devolver).toHaveBeenCalledWith(vehiculo);
+        expect(estadoMock.devolver).toHaveBeenCalledTimes(1);
     });
 
-    it("Verifica el metodo agregar mantenimiento vehiculo de la clase Vehiculo", () => {
-        vehiculo.agregarMantenimientoVehiculo(mantenimiento);
+    it("Deberia delegar enviarAMantenimiento() al estado", ()=> {
+        vehiculo.enviarMantenimiento();
+        expect(estadoMock.enviarMantenimiento).toHaveBeenCalledWith(vehiculo);
+        expect(estadoMock.enviarMantenimiento).toHaveBeenCalledTimes(1);
+    });
+    
+    it("Deberia delegar finalizarMantenimiento() al estado", ()=> {
+        vehiculo.finalizarMantenimiento();
+        expect(estadoMock.finalizarMantenimiento).toHaveBeenCalledWith(vehiculo);
+        expect(estadoMock.finalizarMantenimiento).toHaveBeenCalledTimes(1);
+    }); 
 
-        expect(vehiculo['mantenimientos']).toHaveLength(1);
-        expect(vehiculo['mantenimientos'][0]).toBe(mantenimiento);
+    it("Deberia delegar limpiar() al estado", ()=> {
+        vehiculo.limpiar();
+        expect(estadoMock.limpiar).toHaveBeenCalledWith(vehiculo);
+        expect(estadoMock.limpiar).toHaveBeenCalledTimes(1);
     });
 
 });

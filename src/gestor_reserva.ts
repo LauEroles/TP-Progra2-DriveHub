@@ -1,5 +1,6 @@
 import ABM from "./abm";
 import Reserva from "./reserva";
+import Vehiculo from "./vehiculo";
 
 export default class GestorReserva implements ABM {
 
@@ -12,10 +13,11 @@ export default class GestorReserva implements ABM {
         reservas.splice(index, 1);
     }
     
-    public hayDisponibilidad(reservaSolicitada: Reserva, reservas: Array<Reserva>): boolean {        
+   
+    public hayDisponibilidad(fechaInicio: Date, fechaFin: Date, vehiculo: Vehiculo, reservas: Array<Reserva>): boolean {        
         return !reservas.some(reserva => {
-            let mismoVehiculo: boolean = reserva.getVehiculo().getMatricula() === reservaSolicitada.getVehiculo().getMatricula();
-            let fechasSolapadas: boolean = reservaSolicitada.getFechaInicio() <= reserva.getFechaFin() && reservaSolicitada.getFechaFin() >= reserva.getFechaInicio();
+            let mismoVehiculo: boolean = reserva.getVehiculo().getMatricula() === vehiculo.getMatricula();
+            let fechasSolapadas: boolean = fechaInicio <= reserva.getFechaFin() && fechaFin >= reserva.getFechaInicio();
             return mismoVehiculo && fechasSolapadas;
         })
     }

@@ -25,4 +25,5 @@ export class EnAlquiler implements Estado {
     public limpiar(vehiculo:Vehiculo): void {
         throw new Error("No se puede limpiar: el vehículo está en uso");
     }
+
 }

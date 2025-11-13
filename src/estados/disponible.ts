@@ -27,7 +27,4 @@ export class Disponible implements Estado {
         vehiculo.setEstado(new NecesitaLimpieza());
     }
 
-    public puedeReservar(): boolean {
-        return true;
-    }
 }

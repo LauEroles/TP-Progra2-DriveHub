@@ -3,17 +3,16 @@ Sedán: Tarifa base de $50 por día. Aplica un cargo de $0.20 por cada kilómetr
 recorrido, sin límite diario.
 */
 
-import Vehiculo from "./vehiculo"
-import Estado from "./estado";
+import Vehiculo from "./vehiculo";
+import {Estado} from "./estados/estado";
 import { TARIFA_BASE_SEDAN, CARGO_VARIABLE_SEDAN } from "./constantes";
 
 export default class Sedan extends Vehiculo{
 
     constructor(km: number, matricula: string,estado:Estado) {
-        super(km, matricula);
+        super(km, matricula, estado);
         this.tarifaBase = TARIFA_BASE_SEDAN;
         this.cargoVariable = CARGO_VARIABLE_SEDAN;
-        this.estado = estado;
     }
 
     calcCargoVariable(kmsRecorridos: number): number {

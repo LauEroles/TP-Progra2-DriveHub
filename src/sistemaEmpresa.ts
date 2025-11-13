@@ -71,7 +71,7 @@ export default class SistemaEmpresa {
     );
   }
 
-  const nuevoKM = reserva.getVehiculo().getKm() + reserva.kmRecorrido;
+  const nuevoKM = reserva.getVehiculo().getKm() + reserva.getKmsRecorridos();
 
   vehiculoSistema.setKm(nuevoKM);
 

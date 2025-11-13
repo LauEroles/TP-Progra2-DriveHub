@@ -65,7 +65,7 @@ describe("Test de la clase Vehiculo", () => {
     });
 
     it("Deberia cambiar EnMantenimiento al enviar a Mantenimiento", () => {
-        vehiculo.enviarMantenimiento(vehiculo);
+        estado.enviarMantenimiento(vehiculo);
         expect(vehiculo.getEstado()).toBeInstanceOf(EnMantenimiento);
     });
 

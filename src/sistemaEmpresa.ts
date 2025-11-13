@@ -26,8 +26,8 @@ export default class SistemaEmpresa {
     this.gestorKilometraje = gestorKilometraje;
   }
 
-  
-  public realizarReserva(vehiculo:Vehiculo, cliente:Cliente, fechaInicio:Date, fechaFin:Date): Reserva{
+
+  public realizarReserva(vehiculo:Vehiculo, cliente:Cliente, fechaInicio:Date, fechaFin:Date): Reserva|null{
     
     let resultado:Reserva|null;
     const disponible=this.gestorReserva.hayDisponibilidad(fechaInicio, fechaFin, vehiculo, this.reservas);
@@ -40,9 +40,10 @@ export default class SistemaEmpresa {
     }
     else {
         console.log("Rechazado por falta de disponibilidad")
+        resultado=null;
     }
 
-    return resultado!;
+    return resultado;
   }
 
   public alquilar(vehiculoAAlquilar: Vehiculo): void{

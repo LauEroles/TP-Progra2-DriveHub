@@ -103,4 +103,13 @@ export default abstract class Vehiculo {
         this.estado.limpiar(this);
     }
 
+    public getCostoTotalMantenimiento(): number {
+
+        if (!this.mantenimientos || this.mantenimientos.length === 0) {
+            return 0;
+        }
+    
+        return this.mantenimientos.reduce((sum, m) => sum + m.getCostoMantenimiento(), 0);
+    }
+
 }

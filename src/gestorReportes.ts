@@ -6,10 +6,13 @@ import MantenimientoVehiculo from "./mantenimientoVehiculo";
 export default class GestorEstadisticas {
 
     private static filtrarReservasPorFecha(reservas: Reserva[], fechaInicio: Date, fechaFin: Date): Reserva[] {
-        return reservas.filter(r => 
-            r.getFechaFin() >= fechaInicio && r.getFechaFin() <= fechaFin
-        );
-    }
+    return reservas.filter(r => {
+        const inicio = r.getFechaInicio();
+        const fin = r.getFechaFin();
+
+        return inicio <= fechaFin && fin >= fechaInicio;
+    });
+}
     public static getRankingAlquileres(historial: Reserva[], fechaInicio: Date, fechaFin: Date): void {
         const reservasPeriodo = this.filtrarReservasPorFecha(historial, fechaInicio, fechaFin);
         
@@ -43,12 +46,33 @@ export default class GestorEstadisticas {
             .reduce((sum, r) => sum + r.calcularTotal(), 0);
 
         const costosMantenimiento = vehiculo.getCostoTotalMantenimiento();
-
+        rentabilidades[matricula] = ingresos - costosMantenimiento;
     
     }
+
     const ranking = Object.entries(rentabilidades).sort((a, b) => b[1] - a[1]);
+
+    if (ranking.length === 0) {
+        console.log("No hay vehículos registrados para calcular rentabilidad.");
+        return;
+    }
+
     console.log("Reporte: Rentabilidad por Vehículo (Histórica)");
     console.log(`Mayor Rentabilidad: ${ranking[0][0]} ($${ranking[0][1]})`);
     console.log(`Menor Rentabilidad: ${ranking[ranking.length - 1][0]} ($${ranking[ranking.length - 1][1]})`);
 }
+
+    public static ocupacionFlota(vehiculos: Vehiculo[]): number {
+        const total = vehiculos.length;
+        if (total === 0) return 0;
+
+        const ocupados = vehiculos.filter(
+            v => v.getEstado().constructor.name === "EnAlquiler"
+        ).length;
+
+        return ((ocupados / total) * 100);
     }
+
+    }
+
+    

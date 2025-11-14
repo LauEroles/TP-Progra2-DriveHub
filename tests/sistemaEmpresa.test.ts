@@ -1,6 +1,7 @@
 import SistemaEmpresa from "../src/sistemaEmpresa";
 import Vehiculo from "../src/vehiculo";
 import Cliente from "../src/cliente";
+import Reserva from "../src/reserva";
 
 describe("SistemaEmpresa", () => {
   let sistema: SistemaEmpresa;
@@ -13,7 +14,7 @@ describe("SistemaEmpresa", () => {
     mockGestorReserva = { hayDisponibilidad: jest.fn(), agregar: jest.fn(), eliminar: jest.fn() };
     mockGestorVehiculo = {};
     mockGestorMantenimiento = {};
-    mockGestorKilometraje = {};
+    mockGestorKilometraje = { actualizarKmVehiculo: jest.fn() };
 
     sistema = new SistemaEmpresa(
       mockGestorReserva,
@@ -23,30 +24,19 @@ describe("SistemaEmpresa", () => {
     );
   });
 
-  // Test de actualizar KM
   
- test("actualizarKmVehiculo debe actualizar el km del vehículo correctamente", () => {
-  const mockVehiculo = {
-    getMatricula: jest.fn().mockReturnValue("ABC123"),
-    getKm: jest.fn().mockReturnValue(1000),
-    setKm: jest.fn(),
-  } as unknown as Vehiculo;
-
-  (sistema as any).vehiculos.push(mockVehiculo);
-
-  const mockReserva: any = {
-    getVehiculo: jest.fn().mockReturnValue(mockVehiculo), 
-    getKmsRecorridos: jest.fn().mockReturnValue(200),
-  };
+  // Test de actualizar KM
+ test("actualizarKmVehiculo llama al método de GestorKilometraje", () => {
+  const mockReserva: any = {};
 
   sistema.actualizarKmVehiculo(mockReserva);
 
-  expect(mockVehiculo.setKm).toHaveBeenCalledWith(1200);
+  expect(mockGestorKilometraje.actualizarKmVehiculo).toHaveBeenCalledTimes(1);
+  expect(mockGestorKilometraje.actualizarKmVehiculo).toHaveBeenCalledWith(mockReserva, sistema);
 });
 
 
   // Test de realizarReserva
-
   test("realizarReserva debe agregar la reserva y devolver la reserva cuando hay disponibilidad", () => {
     const mockVehiculo = {
       getMatricula: jest.fn().mockReturnValue("AA111AA"),

@@ -6,16 +6,16 @@ export default class gestorKilometraje{
 
     public calcularKmsRecorridos(reserva: Reserva): number{
 
-        const kmFinalRecorrido = reserva.kmFinal;
-        const kmInicialVehiculo = reserva.getVehiculo().getKm()
+        const kmFinalRecorrido = reserva.kmsRecorridos;
+        
 
-        if(kmFinalRecorrido < kmInicialVehiculo){
-            throw new Error("El kilometraje final no puede ser menor que el kilometraje inicial")
-        }
+        // if(kmFinalRecorrido < kmInicialVehiculo){
+        //     throw new Error("El kilometraje final no puede ser menor que el kilometraje inicial")
+        // }
 
-        const totalRecorrido = kmFinalRecorrido - kmInicialVehiculo;
+        // const totalRecorrido = kmFinalRecorrido - kmInicialVehiculo;
 
-        return totalRecorrido;
+        return kmFinalRecorrido;
     }
 
 }

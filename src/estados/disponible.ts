@@ -26,4 +26,5 @@ export class Disponible implements Estado {
     public limpiar(vehiculo:Vehiculo): void {
         vehiculo.setEstado(new NecesitaLimpieza());
     }
+
 }

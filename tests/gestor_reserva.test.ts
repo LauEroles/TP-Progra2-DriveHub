@@ -12,118 +12,49 @@ jest.mock("../src/reserva");
 jest.mock("../src/cliente");
 jest.mock("../src/vehiculo");
 jest.mock("../src/suv");
-
+jest.mock("../src/estados/estado")
+jest.mock("../src/estados/disponible")
 
 describe("GestorReserva.hayDisponibilidad", () => {
-    
+
     const gestor = new GestorReserva();
 
+    const estado: Estado = new Disponible() as jest.Mocked<Estado>;
+    const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
 
+    const suv = new Suv(100, "AAA", estado) as jest.Mocked<Vehiculo>;
+    suv.getMatricula.mockReturnValue("AAA");
+
+    const existente = new Reserva(suv, cliente, new Date(2025, 5, 10), new Date(2025, 5, 15)) as jest.Mocked<Reserva>;
+    existente.getVehiculo.mockReturnValue(suv);
+    existente.getFechaInicio.mockReturnValue(new Date(2025, 5, 10));
+    existente.getFechaFin.mockReturnValue(new Date(2025, 5, 15));
+
+    
     test("devuelve true cuando no hay reservas existentes", () => {
-        const estado:Estado= new Disponible();
-        const suv = new Suv(100, "AAA", estado) as jest.Mocked<Vehiculo>;
-
-        const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
-
-        const solicitada = new Reserva(suv, cliente, new Date(2025, 5, 12), new Date(2025, 5, 13)) as jest.Mocked<Reserva>;
-        
-        const reservas: Reserva[] = [];
-
-        solicitada.getVehiculo.mockReturnValue(suv);
-        solicitada.getFechaInicio.mockReturnValue(new Date(2025, 5, 12));
-        solicitada.getFechaFin.mockReturnValue(new Date(2025, 5, 13));
-
-        const fechaInicio = solicitada.getFechaInicio();
-        const fechaFin = solicitada.getFechaFin();
-        const vehiculo = solicitada.getVehiculo();  
-
-        expect(gestor.hayDisponibilidad(fechaInicio,fechaFin,vehiculo, reservas)).toBe(true);
+        const fechaInicio: Date = new Date(2025, 5, 12);
+        const fechaFin: Date = new Date(2025, 5, 13);
+        expect(gestor.hayDisponibilidad(fechaInicio, fechaFin, suv, [])).toBe(true);
     });
-
 
     test("devuelve true cuando hay solapamiento de fechas para distinto vehículo", () => {
-        const estado1:Estado= new Disponible();
-        const estado2:Estado= new Disponible();
-
-        const suv1 = new Suv(100, "AAA",estado1) as jest.Mocked<Vehiculo>;
-        const suv2 = new Suv(100, "BBB",estado2) as jest.Mocked<Vehiculo>;
-
-        const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
-
-        const existente = new Reserva(suv1, cliente, new Date(2025, 5, 10), new Date(2025, 5, 15)) as jest.Mocked<Reserva>;
-        const solicitada = new Reserva(suv2, cliente, new Date(2025, 5, 12), new Date(2025, 5, 13)) as jest.Mocked<Reserva>;
-
-        suv1.getMatricula.mockReturnValue("AAA");
+        const suv2 = new Suv(100, "BBB", estado) as jest.Mocked<Vehiculo>;
+        const fechaInicio: Date = new Date(2025, 5, 12);
+        const fechaFin: Date = new Date(2025, 5, 13);
         suv2.getMatricula.mockReturnValue("BBB");
-
-        existente.getVehiculo.mockReturnValue(suv1);
-        existente.getFechaInicio.mockReturnValue(new Date(2025, 5, 10));
-        existente.getFechaFin.mockReturnValue(new Date(2025, 5, 15));
-
-        solicitada.getVehiculo.mockReturnValue(suv2);
-        solicitada.getFechaInicio.mockReturnValue(new Date(2025, 5, 12));
-        solicitada.getFechaFin.mockReturnValue(new Date(2025, 5, 13));
-
-        const fechaInicio = solicitada.getFechaInicio();
-        const fechaFin = solicitada.getFechaFin();
-        const vehiculo = solicitada.getVehiculo();
-
-        expect(gestor.hayDisponibilidad(fechaInicio,fechaFin,vehiculo, [existente])).toBe(true);
+        expect(gestor.hayDisponibilidad(fechaInicio, fechaFin, suv2, [existente])).toBe(true);
     });
-
 
     test("devuelve false cuando hay solapamiento de fechas para el mismo vehículo", () => {
-
-        const estado3:Estado= new Disponible();
-        const suv = new Suv(100, "AAA",estado3) as jest.Mocked<Vehiculo>;
-
-        const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
-
-        const existente = new Reserva(suv, cliente, new Date(2025, 5, 10), new Date(2025, 5, 15)) as jest.Mocked<Reserva>;
-        const solicitada = new Reserva(suv, cliente, new Date(2025, 5, 12), new Date(2025, 5, 13)) as jest.Mocked<Reserva>;
-
-        suv.getMatricula.mockReturnValue("AAA");
-
-        existente.getVehiculo.mockReturnValue(suv);
-        existente.getFechaInicio.mockReturnValue(new Date(2025, 5, 10));
-        existente.getFechaFin.mockReturnValue(new Date(2025, 5, 15));
-
-        solicitada.getVehiculo.mockReturnValue(suv);
-        solicitada.getFechaInicio.mockReturnValue(new Date(2025, 5, 12));
-        solicitada.getFechaFin.mockReturnValue(new Date(2025, 5, 13));
-
-        const fechaInicio = solicitada.getFechaInicio();
-        const fechaFin = solicitada.getFechaFin();
-        const vehiculo = solicitada.getVehiculo();
-
-        expect(gestor.hayDisponibilidad(fechaInicio,fechaFin, vehiculo, [existente])).toBe(false);
+        const fechaInicio: Date = new Date(2025, 5, 12);
+        const fechaFin: Date = new Date(2025, 5, 13);
+        expect(gestor.hayDisponibilidad(fechaInicio, fechaFin, suv, [existente])).toBe(false);
     });
 
-
     test("devuelve true cuando NO hay solapamiento de fechas para el mismo vehículo", () => {
-        const estado4:Estado= new Disponible();
-        const suv = new Suv(100, "AAA",estado4) as jest.Mocked<Vehiculo>;
-
-        const cliente = new Cliente("Pepe", 1) as jest.Mocked<Cliente>;
-
-        const existente = new Reserva(suv, cliente, new Date(2025, 5, 10), new Date(2025, 5, 15)) as jest.Mocked<Reserva>;
-        const solicitada = new Reserva(suv, cliente, new Date(2025, 5, 16), new Date(2025, 5, 18)) as jest.Mocked<Reserva>;
-
-        suv.getMatricula.mockReturnValue("AAA");
-
-        existente.getVehiculo.mockReturnValue(suv);
-        existente.getFechaInicio.mockReturnValue(new Date(2025, 5, 10));
-        existente.getFechaFin.mockReturnValue(new Date(2025, 5, 15));
-
-        solicitada.getVehiculo.mockReturnValue(suv);
-        solicitada.getFechaInicio.mockReturnValue(new Date(2025, 5, 16));
-        solicitada.getFechaFin.mockReturnValue(new Date(2025, 5, 18));
-
-        const fechaInicio = solicitada.getFechaInicio();
-        const fechaFin = solicitada.getFechaFin();
-        const vehiculo = solicitada.getVehiculo();
-
-        expect(gestor.hayDisponibilidad(fechaInicio,fechaFin,vehiculo, [existente])).toBe(true);
+        const fechaInicio: Date = new Date(2025, 5, 16);
+        const fechaFin: Date = new Date(2025, 5, 18);
+        expect(gestor.hayDisponibilidad(fechaInicio, fechaFin, suv, [existente])).toBe(true);
     });
 
 });

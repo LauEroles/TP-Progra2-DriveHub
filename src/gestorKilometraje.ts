@@ -1,21 +1,27 @@
-
 import Reserva from "./reserva";
+import SistemaEmpresa from "./sistemaEmpresa";
 import Vehiculo from "./vehiculo";
 
 export default class gestorKilometraje{
 
-    public calcularKmsRecorridos(reserva: Reserva): number{
-
-        const kmFinalRecorrido = reserva.kmsRecorridos;
+    public actualizarKmVehiculo(reserva: Reserva, sistema: SistemaEmpresa): void{
+      
+        const vehiculoReserva = reserva.getVehiculo();
+    
+        const vehiculoSistema = sistema.getVehiculos().find(
+            (v) => v.getMatricula() === vehiculoReserva.getMatricula()
+        );
         
-
-        // if(kmFinalRecorrido < kmInicialVehiculo){
-        //     throw new Error("El kilometraje final no puede ser menor que el kilometraje inicial")
-        // }
-
-        // const totalRecorrido = kmFinalRecorrido - kmInicialVehiculo;
-
-        return kmFinalRecorrido;
-    }
+        if (!vehiculoSistema) {
+            throw new Error(
+            `El vehículo ${vehiculoReserva.getMatricula()} no está registrado en el sistema.`
+            );
+        }
+        
+        const nuevoKM = reserva.getVehiculo().getKm() + reserva.getKmsRecorridos();
+        
+        vehiculoSistema.setKm(nuevoKM);
+        
+      }
 
 }

@@ -111,38 +111,45 @@ export default abstract class Vehiculo {
     }
 
     public requiereMantenimiento(): boolean {
-    const LIMITE_KM = 10000;
-    const LIMITE_DIAS = 180;
-    const LIMITE_ALQUILERES = 5;
+        const LIMITE_KM = 10000;
+        const LIMITE_DIAS = 180;
+        const LIMITE_ALQUILERES = 5;
 
-    //  Si nunca tuvo mantenimiento, solo se evalúan los límites de km y alquileres
-    if (!this.mantenimientos.length) {
-        const superaLimitesIniciales =
-            this.kilometraje >= LIMITE_KM ||
+        //  Si nunca tuvo mantenimiento, solo se evalúan los límites de km y alquileres
+        if (!this.mantenimientos.length) {
+            const superaLimitesIniciales =
+                this.kilometraje >= LIMITE_KM ||
+                this.cantidadAlquileresDesdeMantenimiento >= LIMITE_ALQUILERES;
+            return superaLimitesIniciales;
+        }
+
+        //  Si ya tuvo mantenimientos, se considera también el tiempo desde el último
+        const ultimo = this.mantenimientos[this.mantenimientos.length - 1];
+        const fechaUltimo = ultimo.getFecha();
+        const hoy = new Date();
+
+        const diferenciaDias =
+            (hoy.getTime() - fechaUltimo.getTime()) / (1000 * 60 * 60 * 24);
+
+        const superaKm = this.kilometraje >= LIMITE_KM;
+        const superaTiempo = diferenciaDias >= LIMITE_DIAS;
+        const superaAlquileres =
             this.cantidadAlquileresDesdeMantenimiento >= LIMITE_ALQUILERES;
-        return superaLimitesIniciales;
+
+        //  Si se supera cualquiera de los límites, el vehículo requiere mantenimiento
+        const requiere = superaKm || superaTiempo || superaAlquileres;
+        return requiere;
     }
 
-    //  Si ya tuvo mantenimientos, se considera también el tiempo desde el último
-    const ultimo = this.mantenimientos[this.mantenimientos.length - 1];
-    const fechaUltimo = ultimo.getFecha();
-    const hoy = new Date();
+    public resetearKm(): void {
+        this.kilometraje = 0;
+    }
 
-    const diferenciaDias =
-        (hoy.getTime() - fechaUltimo.getTime()) / (1000 * 60 * 60 * 24);
-
-    const superaKm = this.kilometraje >= LIMITE_KM;
-    const superaTiempo = diferenciaDias >= LIMITE_DIAS;
-    const superaAlquileres =
-        this.cantidadAlquileresDesdeMantenimiento >= LIMITE_ALQUILERES;
-
-    //  Si se supera cualquiera de los límites, el vehículo requiere mantenimiento
-    const requiere = superaKm || superaTiempo || superaAlquileres;
-    return requiere;
-}
-
-public resetearKm(): void {
-    this.kilometraje = 0;
-}
+    public getCostoTotalMantenimiento(): number {
+        if (!this.mantenimientos || this.mantenimientos.length === 0) {
+            return 0;
+        }
+        return this.mantenimientos.reduce((sum, m) => sum + m.getCostoMantenimiento(), 0);
+    }
 
 }

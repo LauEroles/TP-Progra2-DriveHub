@@ -13,7 +13,7 @@ describe("Test de Estado NecesitaLimpieza con mock de Vehiculo", ()=>{
     let vehiculoMock:MockProxy<Vehiculo>;
 
     beforeEach(()=>{
-        estado=new EnMantenimiento();
+        estado=new NecesitaLimpieza();
         vehiculoMock=mockDeep <Vehiculo>();
     })
 
@@ -22,14 +22,13 @@ describe("Test de Estado NecesitaLimpieza con mock de Vehiculo", ()=>{
     })
 
     it("Debe lanzar error al momento de alquilar un vehiculo que necesita limpieza",()=>{
-        expect(() => estado.alquilar(vehiculoMock)).toThrow("o se puede alquilar: el vehículo necesita limpieza");
+        expect(() => estado.alquilar(vehiculoMock)).toThrow("No se puede alquilar: el vehículo necesita limpieza");
         expect(vehiculoMock.setEstado).not.toHaveBeenCalled();
     })
 
-    it("Debe cambiar de NecesitaLimpieza a EnMantenimiento al momento de enviar a mantenimiento",()=>{
-        estado.enviarMantenimiento(vehiculoMock);
-        expect(vehiculoMock.setEstado).toHaveBeenCalledWith(expect.any(EnMantenimiento));
-        expect(vehiculoMock.setEstado).toHaveBeenCalledTimes(1);
+    it("Debe lanzar error al intentar enviar a mantenimiento a un vehiculo que necesita limpieza",()=>{
+        expect(() => estado.enviarMantenimiento(vehiculoMock)).toThrow("El vehiculo necesita limpieza");
+        expect(vehiculoMock.setEstado).toHaveBeenCalled();
     })
     
     it("Debe cambiar de NecesitaLimpieza a Disponible al momento de limpiar",()=>{

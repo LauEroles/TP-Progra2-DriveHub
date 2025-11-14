@@ -15,7 +15,7 @@ export class NecesitaLimpieza implements Estado {
     }
 
     public enviarMantenimiento(vehiculo:Vehiculo): void {
-        throw new Error("El vehiculo necesirta limpieza");
+        throw new Error("El vehiculo necesita limpieza");
     }
 
     public finalizarMantenimiento(vehiculo:Vehiculo): void {

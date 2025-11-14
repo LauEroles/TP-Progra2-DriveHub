@@ -43,7 +43,7 @@ describe("Test de Estado EnMantenimiento con mock de Vehiculo", ()=>{
     })
 
     it("Debe lanzar un error al intentar limpiar un vehiculo que esta en mantenimiento", ()=>{
-        expect(() => estado.limpiar(vehiculoMock)).toThrow("No se puede limpiar: el vehiculo está en mantenimiento");
+        expect(() => estado.limpiar(vehiculoMock)).toThrow("No se puede limpiar: el vehículo está en mantenimiento");
         expect(vehiculoMock.setEstado).not.toHaveBeenCalled();
     })  
 });

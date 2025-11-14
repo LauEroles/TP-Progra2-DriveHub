@@ -48,4 +48,8 @@ describe ("Test de Estado Disponible con mock de Vehiculo", ()=>{
         expect(vehiculoMock.setEstado).not.toHaveBeenCalled();
     })
 
+    it("Debe devolver false al preguntar si el vehiculo esta en alquiler",()=>{
+        expect(estado.estaEnAlquiler()).toBe(false);
+    })
+
 })

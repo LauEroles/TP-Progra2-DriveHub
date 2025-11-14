@@ -7,5 +7,8 @@ export interface Estado {
     enviarMantenimiento(vehiculo:Vehiculo): void;
     finalizarMantenimiento(vehiculo:Vehiculo): void;
     limpiar(vehiculo:Vehiculo): void;
+
+    estaEnAlquiler(): boolean;
+
     
 }

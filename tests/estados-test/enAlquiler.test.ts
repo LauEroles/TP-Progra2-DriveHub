@@ -47,6 +47,8 @@ describe("Test de Estado EnAlquiler con mock de Vehiculo", ()=>{
         expect(() => estado.limpiar(vehiculoMock)).toThrow("No se puede limpiar: el vehículo está en uso");
         expect(vehiculoMock.setEstado).not.toHaveBeenCalled();
     })
-
+    it("Debe devolver true al preguntar si el vehiculo esta en alquiler",()=>{
+        expect(estado.estaEnAlquiler()).toBe(true);
+    })
 
 });

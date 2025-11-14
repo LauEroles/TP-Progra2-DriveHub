@@ -27,4 +27,8 @@ export class Disponible implements Estado {
         vehiculo.setEstado(new NecesitaLimpieza());
     }
 
+    public estaEnAlquiler(): boolean {
+        return false;
+    }
+
 }

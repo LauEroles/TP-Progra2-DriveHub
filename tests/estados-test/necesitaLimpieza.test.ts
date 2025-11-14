@@ -36,6 +36,8 @@ describe("Test de Estado NecesitaLimpieza con mock de Vehiculo", ()=>{
         expect(vehiculoMock.setEstado).toHaveBeenCalledWith(expect.any(Disponible));
         expect(vehiculoMock.setEstado).toHaveBeenCalledTimes(1);
     })
-    
+    it("Debe devolver false al preguntar si el vehiculo esta en alquiler",()=>{
+        expect(estado.estaEnAlquiler()).toBe(false);
+    })
 
 });

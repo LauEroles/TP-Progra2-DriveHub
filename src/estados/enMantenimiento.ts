@@ -24,5 +24,8 @@ export class EnMantenimiento implements Estado {
         throw new Error("No se puede limpiar: el vehículo está en mantenimiento");
     }
 
-    
+    public estaEnAlquiler(): boolean {
+        return false;
+    }
+
 }

@@ -25,5 +25,9 @@ export class NecesitaLimpieza implements Estado {
     public limpiar(vehiculo:Vehiculo): void {
         vehiculo.setEstado(new Disponible());
     }
-    
+
+    public estaEnAlquiler(): boolean {
+        return false;
+    }
+
 }

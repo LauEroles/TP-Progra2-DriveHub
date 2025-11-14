@@ -26,4 +26,8 @@ export class EnAlquiler implements Estado {
         throw new Error("No se puede limpiar: el vehículo está en uso");
     }
 
+    public estaEnAlquiler(): boolean {
+        return true;
+    }
+
 }

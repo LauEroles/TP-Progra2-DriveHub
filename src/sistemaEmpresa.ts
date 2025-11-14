@@ -5,6 +5,7 @@ import GestorReserva from "./gestor_reserva";
 import GestorVehiculo from "./gestor_vehiculo";
 import GestorMantenimiento from "./gestorMantenimiento";
 import GestorKilometraje from "./gestorKilometraje";
+import MantenimientoVehiculo from "./mantenimientoVehiculo";
 
 export default class SistemaEmpresa {
   private vehiculos: Vehiculo[] = [];
@@ -66,7 +67,6 @@ export default class SistemaEmpresa {
       this.gestorKilometraje = gestorKilometraje;
   }
 
-
   public realizarReserva(vehiculo:Vehiculo, cliente:Cliente, fechaInicio:Date, fechaFin:Date): Reserva|null{
     
     let resultado:Reserva|null;
@@ -97,24 +97,39 @@ export default class SistemaEmpresa {
   }
 
   public actualizarKmVehiculo(reserva: Reserva): void{
-  const vehiculoReserva = reserva.getVehiculo();
-
-    // Esto lo generé para encontrar el vehículo y poder actualizar el KM.
-
-  const vehiculoSistema = this.vehiculos.find(
-    (v) => v.getMatricula() === vehiculoReserva.getMatricula()
-  );
-
-  if (!vehiculoSistema) {
-    throw new Error(
-      `El vehículo ${vehiculoReserva.getMatricula()} no está registrado en el sistema.`
-    );
+    this.getGestorKilometraje().actualizarKmVehiculo(reserva, this);
   }
 
-  const nuevoKM = reserva.getVehiculo().getKm() + reserva.getKmsRecorridos();
+  public agregarVehiculo(vehiculo: Vehiculo) {
+    this.getGestorVehiculo().agregar(vehiculo, this.getVehiculos());
+  }
 
-  vehiculoSistema.setKm(nuevoKM);
+  public eliminarVehiculo(vehiculo: Vehiculo) {
+    this.getGestorVehiculo().eliminar(vehiculo, this.getVehiculos());
+  }
 
+  public cancelarReserva(reserva: Reserva) {
+    this.getGestorReserva().eliminar(reserva, this.getReservas());
+  }
+
+  public registrarMantenimiento(vehiculo: Vehiculo, mantenimiento: MantenimientoVehiculo) {
+    this.getGestorMantenimiento().registrarMantenimiento(vehiculo, mantenimiento);
+  }
+
+  public dejarDeAlquilar(vehiculo: Vehiculo) {
+    vehiculo.devolver();
+  }
+
+  public hacerMantenimiento(vehiculo: Vehiculo): void {
+    vehiculo.enviarMantenimiento();
+  }
+
+  public finalizarMantenimiento(vehiculo: Vehiculo): void {
+    vehiculo.finalizarMantenimiento();
+  }
+
+  public limpiar(vehiculo: Vehiculo) {
+    vehiculo.limpiar();
   }
 
 }

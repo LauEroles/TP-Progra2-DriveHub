@@ -2,9 +2,9 @@ import Reserva from "./reserva";
 import SistemaEmpresa from "./sistemaEmpresa";
 import Vehiculo from "./vehiculo";
 
-export default class gestorKilometraje{
+export default class GestorKilometraje {
 
-    public actualizarKmVehiculo(reserva: Reserva, sistema: SistemaEmpresa): void{
+    public actualizarKmVehiculo(reserva: Reserva, sistema: SistemaEmpresa): void {
       
         const vehiculoReserva = reserva.getVehiculo();
     

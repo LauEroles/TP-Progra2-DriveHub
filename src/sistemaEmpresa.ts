@@ -7,23 +7,63 @@ import GestorMantenimiento from "./gestorMantenimiento";
 import GestorKilometraje from "./gestorKilometraje";
 
 export default class SistemaEmpresa {
-  private vehiculos: Vehiculo[] = [];
-  private reservas: Reserva[] = [];
+  private vehiculos: Vehiculo[];
+  private reservas: Reserva[];
   private gestorReserva: GestorReserva;
   private gestorVehiculo: GestorVehiculo;
   private gestorMantenimiento: GestorMantenimiento;
   private gestorKilometraje: GestorKilometraje;
 
   constructor(
-    gestorReserva: GestorReserva,
-    gestorVehiculo: GestorVehiculo,
-    gestorMantenimiento: GestorMantenimiento,
-    gestorKilometraje: GestorKilometraje
+  gestorReserva: GestorReserva,
+  gestorVehiculo: GestorVehiculo,
+  gestorMantenimiento: GestorMantenimiento,
+  gestorKilometraje: GestorKilometraje
   ) {
-    this.gestorReserva = gestorReserva;
-    this.gestorVehiculo = gestorVehiculo;
-    this.gestorMantenimiento = gestorMantenimiento;
-    this.gestorKilometraje = gestorKilometraje;
+  this.gestorReserva = gestorReserva;
+  this.gestorVehiculo = gestorVehiculo;
+  this.gestorMantenimiento = gestorMantenimiento;
+  this.gestorKilometraje = gestorKilometraje;
+  }
+
+  public getVehiculos(): Vehiculo[] {
+      return this.vehiculos;
+  }
+
+  public getReservas(): Reserva[] {
+      return this.reservas;
+  }
+
+  public getGestorReserva(): GestorReserva {
+      return this.gestorReserva;
+  }
+
+  public setGestorReserva(gestorReserva: GestorReserva): void {
+      this.gestorReserva = gestorReserva;
+  }
+
+  public getGestorVehiculo(): GestorVehiculo {
+      return this.gestorVehiculo;
+  }
+
+  public setGestorVehiculo(gestorVehiculo: GestorVehiculo): void {
+      this.gestorVehiculo = gestorVehiculo;
+  }
+
+  public getGestorMantenimiento(): GestorMantenimiento {
+      return this.gestorMantenimiento;
+  }
+
+  public setGestorMantenimiento(gestorMantenimiento: GestorMantenimiento): void {
+      this.gestorMantenimiento = gestorMantenimiento;
+  }
+
+  public getGestorKilometraje(): GestorKilometraje {
+      return this.gestorKilometraje;
+  }
+
+  public setGestorKilometraje(gestorKilometraje: GestorKilometraje): void {
+      this.gestorKilometraje = gestorKilometraje;
   }
 
 

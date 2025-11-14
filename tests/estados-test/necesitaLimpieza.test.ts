@@ -28,7 +28,7 @@ describe("Test de Estado NecesitaLimpieza con mock de Vehiculo", ()=>{
 
     it("Debe lanzar error al intentar enviar a mantenimiento a un vehiculo que necesita limpieza",()=>{
         expect(() => estado.enviarMantenimiento(vehiculoMock)).toThrow("El vehiculo necesita limpieza");
-        expect(vehiculoMock.setEstado).toHaveBeenCalled();
+        expect(vehiculoMock.setEstado).not.toHaveBeenCalled();
     })
     
     it("Debe cambiar de NecesitaLimpieza a Disponible al momento de limpiar",()=>{

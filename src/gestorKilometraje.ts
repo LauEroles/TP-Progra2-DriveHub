@@ -1,4 +1,3 @@
-
 import Reserva from "./reserva";
 import SistemaEmpresa from "./sistemaEmpresa";
 import Vehiculo from "./vehiculo";
@@ -9,7 +8,7 @@ export default class gestorKilometraje{
       
         const vehiculoReserva = reserva.getVehiculo();
     
-        const vehiculoSistema = sistema..find(
+        const vehiculoSistema = sistema.getVehiculos().find(
             (v) => v.getMatricula() === vehiculoReserva.getMatricula()
         );
         

@@ -7,8 +7,8 @@ import GestorMantenimiento from "./gestorMantenimiento";
 import GestorKilometraje from "./gestorKilometraje";
 
 export default class SistemaEmpresa {
-  private vehiculos: Vehiculo[];
-  private reservas: Reserva[];
+  private vehiculos: Vehiculo[] = [];
+  private reservas: Reserva[] = [];
   private gestorReserva: GestorReserva;
   private gestorVehiculo: GestorVehiculo;
   private gestorMantenimiento: GestorMantenimiento;

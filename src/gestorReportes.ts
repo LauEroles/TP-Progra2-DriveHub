@@ -67,7 +67,7 @@ export default class GestorEstadisticas {
         if (total === 0) return 0;
 
         const ocupados = vehiculos.filter(
-            v => v.getEstado().constructor.name === "EnAlquiler"
+            v => v.getEstado().estaEnAlquiler
         ).length;
 
         return ((ocupados / total) * 100);

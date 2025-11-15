@@ -35,6 +35,20 @@ describe("Test clase gestor_vehiculo", () => {
         expect(listaVehiculos[0]).toBe(mockVehiculo);
     });
 
+    it("Debe lanzar error al intentar agregar un vehículo que ya existe", ()=>{
+        const listaVehiculos: Array<Vehiculo>=[];
+        mockVehiculo.getMatricula.mockReturnValue("ABC123");
+        
+        gestorVehiculo.agregar<Vehiculo>(mockVehiculo, listaVehiculos);
+        
+        expect(() => {
+            gestorVehiculo.agregar<Vehiculo>(mockVehiculo, listaVehiculos);
+        }).toThrow("El vehiculo que quiere agregar ya existe en el sistema");
+        
+        expect(listaVehiculos).toHaveLength(1);
+    });
+
+
     it("Verifica el método eliminar", ()=>{
         const listaVehiculos: Array<Vehiculo>=[mockVehiculo];
         gestorVehiculo.eliminar<Vehiculo>(mockVehiculo, listaVehiculos);
@@ -42,7 +56,16 @@ describe("Test clase gestor_vehiculo", () => {
         expect(listaVehiculos).toHaveLength(0);
     });
 
-
+    it("Debe lanzar error al intentar eliminar un vehículo que no existe", ()=>{
+        const listaVehiculos: Array<Vehiculo>=[];
+        mockVehiculo.getMatricula.mockReturnValue("XYZ999");
+        
+        expect(() => {
+            gestorVehiculo.eliminar<Vehiculo>(mockVehiculo, listaVehiculos);
+        }).toThrow("No puede eliminar un vehiculo que no se encuentra en la lista de vehiculos de la empresa");
+        
+        expect(listaVehiculos).toHaveLength(0);
+    });
 
 
 });

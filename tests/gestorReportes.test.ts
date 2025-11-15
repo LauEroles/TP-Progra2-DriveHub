@@ -11,28 +11,29 @@ describe("GestorEstadisticas Ocupación flota", () => {
 
   const estadoDisponible: Estado = new Disponible();
   const estadoAlquiler: Estado = new EnAlquiler();
+  const gestor = new GestorEstadisticas();
 
   const v1: Vehiculo = new Compacto(1000, "AAA111", estadoAlquiler);
   const v2: Vehiculo = new Compacto(1000, "BBB222", estadoDisponible);
   const v3: Vehiculo = new Compacto(1000, "CCC333", estadoAlquiler);
 
   test("retorna 0 si no hay vehículos", () => {
-    const resultado = GestorEstadisticas.ocupacionFlota([]);
+    const resultado = gestor.ocupacionFlota([]);
     expect(resultado).toBe(0);
   });
 
   test("calcula correctamente la ocupación", () => {
-    const resultado = GestorEstadisticas.ocupacionFlota([v1, v2, v3]);
+    const resultado = gestor.ocupacionFlota([v1, v2, v3]);
     expect(resultado).toBe(66.66666666666666);
   });
 
   test("retorna 100 si todos están en alquiler", () => {
-    const resultado = GestorEstadisticas.ocupacionFlota([v1, v3]);
+    const resultado = gestor.ocupacionFlota([v1, v3]);
     expect(resultado).toBe(100);
   });
 
   test("retorna 0% si ninguno está en alquiler", () => {
-    const resultado = GestorEstadisticas.ocupacionFlota([v2]);
+    const resultado = gestor.ocupacionFlota([v2]);
     expect(resultado).toBe(0);
   });
 });
@@ -42,6 +43,8 @@ describe("GestorEstadisticas Ranking estadísticas", () => {
 
   const estado = new Disponible();
   const cliente = new Cliente("Juan", 123);
+  const gestor = new GestorEstadisticas();
+
 
   const v1: Vehiculo = new Compacto(1000, "AAA111", estado);
   const v2: Vehiculo = new Compacto(1000, "BBB222", estado);
@@ -53,14 +56,14 @@ describe("GestorEstadisticas Ranking estadísticas", () => {
 
     test("no existen reservas en el periodo seleccionado", () => {
 
-        GestorEstadisticas.getRankingAlquileres([r1,r2,r3], new Date("2025-01-01"), new Date("2025-02-02"))
+        gestor.getRankingAlquileres([r1,r2,r3], new Date("2025-01-01"), new Date("2025-02-02"))
 
         expect(console.log).toHaveBeenCalledWith("No hay reservas completadas en ese período.")
     });
 
   test("detecta correctamente el más y menos alquilado", () => {
 
-    GestorEstadisticas.getRankingAlquileres(
+    gestor.getRankingAlquileres(
       [r1, r2, r3],
       new Date("2024-01-01"),
       new Date("2024-01-31")
@@ -76,6 +79,7 @@ describe("GestorEstadisticas Rentabilidad", () => {
 
   const estado = new Disponible();
   const cliente = new Cliente("Juan", 123);
+  const gestor = new GestorEstadisticas();
 
   const v1: Vehiculo = new Compacto(1000, "AAA111", estado);
   const v2: Vehiculo = new Compacto(1000, "BBB222", estado);
@@ -99,7 +103,7 @@ describe("GestorEstadisticas Rentabilidad", () => {
 
     test("No hay vehículos registrados", () => {
 
-        GestorEstadisticas.getRentabilidad([], []);
+        gestor.getRentabilidad([], []);
 
         expect(console.log).toHaveBeenCalledWith("No hay vehículos registrados para calcular rentabilidad.")
 
@@ -107,7 +111,7 @@ describe("GestorEstadisticas Rentabilidad", () => {
 
   test("calcula correctamente mayor y menor rentabilidad", () => {
 
-    GestorEstadisticas.getRentabilidad([v1, v2, v3], [r1, r2, r3, r4]);
+    gestor.getRentabilidad([v1, v2, v3], [r1, r2, r3, r4]);
 
     expect(console.log).toHaveBeenCalledWith("Reporte: Rentabilidad por Vehículo (Histórica)");
     expect(console.log).toHaveBeenCalledWith("Mayor Rentabilidad: AAA111 ($450)");

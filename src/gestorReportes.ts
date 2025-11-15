@@ -16,7 +16,7 @@ export default class GestorEstadisticas {
      * @returns {Reserva[]} Lista de reservas procesadas que coinciden con el intervalo.
      */
 
-    private static filtrarReservasPorFecha(reservas: Reserva[], fechaInicio: Date, fechaFin: Date): Reserva[] {
+    private filtrarReservasPorFecha(reservas: Reserva[], fechaInicio: Date, fechaFin: Date): Reserva[] {
     return reservas.filter(r => {
         const inicio = r.getFechaInicio();
         const fin = r.getFechaFin();
@@ -34,7 +34,7 @@ export default class GestorEstadisticas {
      * @param {Date} fechaFin Fecha final del período a analizar.
      */
 
-    public static getRankingAlquileres(historial: Reserva[], fechaInicio: Date, fechaFin: Date): void {
+    public  getRankingAlquileres(historial: Reserva[], fechaInicio: Date, fechaFin: Date): void {
 
         const reservasPeriodo = this.filtrarReservasPorFecha(historial, fechaInicio, fechaFin);
 
@@ -65,7 +65,7 @@ export default class GestorEstadisticas {
      * @param {Reserva[]} historial Historial completo de reservas.
      */
         
-    public static getRentabilidad(vehiculos: Vehiculo[], historial: Reserva[]): void {
+    public getRentabilidad(vehiculos: Vehiculo[], historial: Reserva[]): void {
     
     const rentabilidades: { [matricula: string]: number } = {};
 
@@ -101,12 +101,12 @@ export default class GestorEstadisticas {
      */
 
 
-    public static ocupacionFlota(vehiculos: Vehiculo[]): number {
+    public ocupacionFlota(vehiculos: Vehiculo[]): number {
         const total = vehiculos.length;
         if (total === 0) return 0;
 
         const ocupados = vehiculos.filter(
-            v => v.getEstado().estaEnAlquiler
+            v => v.getEstado().estaEnAlquiler()
         ).length;
 
         return ((ocupados / total) * 100);

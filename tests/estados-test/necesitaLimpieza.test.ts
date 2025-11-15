@@ -40,4 +40,9 @@ describe("Test de Estado NecesitaLimpieza con mock de Vehiculo", ()=>{
         expect(estado.estaEnAlquiler()).toBe(false);
     })
 
+    it("Debe lanzar error al intentar finalizar mantenimiento de un vehiculo que necesita limpieza", () => {
+        expect(() => estado.finalizarMantenimiento(vehiculoMock)).toThrow("El vehiculo no se encuentra en mantenimiento");
+        expect(vehiculoMock.setEstado).not.toHaveBeenCalled();
+    });
+
 });

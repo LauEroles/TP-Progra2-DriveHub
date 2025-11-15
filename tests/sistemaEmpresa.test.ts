@@ -23,6 +23,7 @@ describe("SistemaEmpresa", () => {
     );
   });
 
+  
   // Test de actualizar KM
   
  test("actualizarKmVehiculo debe actualizar el km del vehículo correctamente", () => {

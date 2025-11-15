@@ -60,7 +60,6 @@ describe("Test de la clase Vehiculo", () => {
     });
 
 
-
     it("Deberia delegar alquilar() al estado", ()=> {
         vehiculo.alquilar();
         expect(estadoMock.alquilar).toHaveBeenCalledWith(vehiculo);
@@ -100,7 +99,7 @@ describe("Test de la clase Vehiculo", () => {
         const nuevoEstado= new EnAlquiler();
         vehiculo.setEstado(nuevoEstado);
         expect(vehiculo.getEstado()).toBe(nuevoEstado);
-    });
+});
 
 
 describe("agregar mantenimiento al vehiculo correctamente", ()=> {
@@ -110,15 +109,50 @@ describe("agregar mantenimiento al vehiculo correctamente", ()=> {
         });
 
         
-    });
+});
 
 describe("Obtener costo total de mantenimiento", ()=> {
         it("Deberia obtener el costo total de mantenimiento", ()=> {
+        vehiculo.agregarMantenimientoVehiculo(mantenimiento);
         expect(vehiculo.getCostoTotalMantenimiento()).toBe(120000);
         });
 
+});
+
+describe("Resetear kilometraje", ()=> {
+    it("Deberia resetear el kilometraje", ()=> {
+        vehiculo.resetearKm();
+        expect(vehiculo.getKm()).toBe(0);
+    });
+});
+
+describe("Requiere mantenimiento", ()=> {
+    it("Deberia devolver true si el vehiculo supera los 10000km mantenimiento", ()=> {
+        vehiculo.setKm(11000);
+        expect(vehiculo.requiereMantenimiento()).toBe(true);
     });
 
+    it("Deberia retornar true despues de las 5  devoluciones sin mantenimiento", ()=> {
+        for (let i = 0; i < 5; i++) {
+            vehiculo.devolver();
+        }
+        vehiculo.setKm(10000);
+        expect(vehiculo.requiereMantenimiento()).toBe(true);
+    });
+
+    it("Deberia devolver true si el vehiculo supera 180 dias desde el ultimo mantenimiento", ()=> {
+        const fechaAntigua=new Date();
+        fechaAntigua.setDate(fechaAntigua.getDate() - 181);
+
+        const mantenimiento=mockDeep<MantenimientoVehiculo>();
+        mantenimiento.getFecha.mockReturnValue(fechaAntigua);
+        vehiculo.agregarMantenimientoVehiculo(mantenimiento);
+
+        expect(vehiculo.requiereMantenimiento()).toBe(true);
+    });
+
+
+});
 
 
 });

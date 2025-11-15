@@ -8,10 +8,19 @@ import TempMedia from "../src/tempMedia";
 
 describe("Reserva", () => {
 
-    const mockVehiculo = {} as unknown as jest.Mocked<Vehiculo>;
+    const mockVehiculo = {
+        getTarifaBase: jest.fn(),
+        getCargoFijo: jest.fn(),
+        calcCargoVariable: jest.fn()
+    } as unknown as jest.Mocked<Vehiculo>;
+
     const mockCliente = {} as unknown as jest.Mocked<Cliente>;
     const fechaInicio: Date = new Date("2025-01-10");
     const fechaFin: Date = new Date("2025-01-12");
+
+    const mockTemporada = {
+        calcTarifaBase: jest.fn()
+    } as unknown as jest.Mocked<Temporada>;
 
     const reserva = new Reserva(mockVehiculo, mockCliente, fechaInicio, fechaFin);
 
@@ -143,7 +152,30 @@ describe("Reserva", () => {
 
     test("getTemporada devuelve la temporada correctamente", () => {
         const mockTemporada = {} as unknown as jest.Mocked<Temporada>;
+        reserva.temporada = mockTemporada;
         expect(reserva.getTemporada()).toBe(mockTemporada);
+    });
+
+
+    //calcularTotal()
+     test("calcula correctamente el total de la reserva según la fórmula", () => {
+        
+        mockTemporada.calcTarifaBase.mockReturnValue(100);
+        mockVehiculo.getTarifaBase.mockReturnValue(80);
+        mockVehiculo.getCargoFijo.mockReturnValue(20);
+        mockVehiculo.calcCargoVariable.mockReturnValue(50); 
+
+        (reserva.getDias as jest.Mock).mockReturnValue(3);
+        (reserva.getKmsRecorridos as jest.Mock).mockReturnValue(200); 
+
+        const total = reserva.calcularTotal();
+
+        expect(total).toBe(350);
+
+        expect(mockTemporada.calcTarifaBase).toHaveBeenCalledWith(80);
+        expect(mockVehiculo.getTarifaBase).toHaveBeenCalled();
+        expect(mockVehiculo.getCargoFijo).toHaveBeenCalled();
+        expect(mockVehiculo.calcCargoVariable).toHaveBeenCalledWith(200);
     });
 
 });

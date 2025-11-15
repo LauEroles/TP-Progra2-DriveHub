@@ -23,7 +23,6 @@ describe("Test de la clase Vehiculo", () => {
         vehiculo= new Suv(200,"LM234", estado);
         vehiculo.setEstado(estadoMock);
 
-
         mantenimiento= mockDeep<MantenimientoVehiculo>();
 
         mantenimiento.getCostoMantenimiento.mockReturnValue(120000);
@@ -45,12 +44,10 @@ describe("Test de la clase Vehiculo", () => {
         expect(vehiculo.getKm()).toBe(350);
     });
 
-
     it("Deberia obtener y establecer tarifa base", ()=>{
         vehiculo.setTarifaBase(80);
         expect(vehiculo.getTarifaBase()).toBe(80);
     });
-
 
     it("Deberia obtener y establecer cargo variable", ()=> {
         vehiculo.setCargoVariable(150);
@@ -93,5 +90,35 @@ describe("Test de la clase Vehiculo", () => {
         expect(estadoMock.limpiar).toHaveBeenCalledWith(vehiculo);
         expect(estadoMock.limpiar).toHaveBeenCalledTimes(1);
     });
+
+    it("Deberia obtener el estado actual", ()=> {
+        const estadoActual= vehiculo.getEstado();
+        expect(vehiculo.getEstado()).toBe(estadoMock);
+    });
+
+    it("Deberia cambiar el estado del vehiculo", ()=> {
+        const nuevoEstado= new EnAlquiler();
+        vehiculo.setEstado(nuevoEstado);
+        expect(vehiculo.getEstado()).toBe(nuevoEstado);
+    });
+
+
+describe("agregar mantenimiento al vehiculo correctamente", ()=> {
+        it("Deberia agregar el mantenimiento al vehiculo", ()=> {
+            vehiculo.agregarMantenimientoVehiculo(mantenimiento);
+            expect(vehiculo.getCostoTotalMantenimiento()).toBe(120000);
+        });
+
+        
+    });
+
+describe("Obtener costo total de mantenimiento", ()=> {
+        it("Deberia obtener el costo total de mantenimiento", ()=> {
+        expect(vehiculo.getCostoTotalMantenimiento()).toBe(120000);
+        });
+
+    });
+
+
 
 });

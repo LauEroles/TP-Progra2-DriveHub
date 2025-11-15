@@ -78,6 +78,22 @@ export default class Reserva {
         this.kmsRecorridos = kmRecorrido;
     }
 
+    public setVehiculo(vehiculo: Vehiculo): void {
+        this.vehiculo = vehiculo;
+    }
+
+    public setCliente(cliente: Cliente): void {
+        this.cliente = cliente;
+    }
+
+    public setFechaInicio(fechaInicio: Date): void {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public setFechaFin(fechaFin: Date): void {
+        this.fechaFin = fechaFin;
+    }
+
     public getDias(): number {
         const unDiaMs = 1000 * 60 * 60 * 24; 
         const diferenciaMs = this.fechaFin.getTime() - this.fechaInicio.getTime();

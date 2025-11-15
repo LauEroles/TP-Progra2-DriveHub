@@ -50,17 +50,23 @@ describe("GestorEstadisticas Ranking estadísticas", () => {
   const r2 = new Reserva(v1, cliente, new Date("2024-01-02"), new Date("2024-01-03"));
   const r3 = new Reserva(v2, cliente, new Date("2024-01-05"), new Date("2024-01-06"));
 
-  test("detecta correctamente el más y menos alquilado", () => {
 
-    const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    test("no existen reservas en el periodo seleccionado", () => {
+
+        GestorEstadisticas.getRankingAlquileres([r1,r2,r3], new Date("2025-01-01"), new Date("2025-02-02"))
+
+        expect(console.log).toHaveBeenCalledWith("No hay reservas completadas en ese período.")
+    });
+
+  test("detecta correctamente el más y menos alquilado", () => {
 
     GestorEstadisticas.getRankingAlquileres(
       [r1, r2, r3],
       new Date("2024-01-01"),
       new Date("2024-01-31")
     );
-    expect(logSpy).toHaveBeenCalledWith("Vehículo Más Alquilado: AAA111 (2 alquileres)");
-    expect(logSpy).toHaveBeenCalledWith("Vehículo Menos Alquilado: BBB222 (1 alquileres)");
+    expect(console.log).toHaveBeenCalledWith("Vehículo Más Alquilado: AAA111 (2 alquileres)");
+    expect(console.log).toHaveBeenCalledWith("Vehículo Menos Alquilado: BBB222 (1 alquileres)");
   });
 });
 
@@ -90,6 +96,14 @@ describe("GestorEstadisticas Rentabilidad", () => {
 
   const r4 = new Reserva(v3, cliente, new Date(), new Date());
   r4.calcularTotal = () => 150;
+
+    test("No hay vehículos registrados", () => {
+
+        GestorEstadisticas.getRentabilidad([], []);
+
+        expect(console.log).toHaveBeenCalledWith("No hay vehículos registrados para calcular rentabilidad.")
+
+    })
 
   test("calcula correctamente mayor y menor rentabilidad", () => {
 

@@ -1,11 +1,22 @@
 import Vehiculo from "./vehiculo";
 import Reserva from "./reserva";
-import { Estado } from "./estados/estado";
-import MantenimientoVehiculo from "./mantenimientoVehiculo";
+
+/**
+ * Clase encargada de generar estadísticas y reportes sobre el funcionamiento del sistema.
+ * Incluye reportes de alquileres, rentabilidad y ocupación de la flota.
+ * Todos sus métodos son estáticos, por lo que no requiere instanciar la clase.  
+ */
 
 export default class GestorEstadisticas {
+ /**
+     * Filtra una lista de reservas según un intervalo de fechas.
+     * @param {Reserva[]} reservas Lista completa de reservas sin procesar.
+     * @param {Date} fechaInicio Fecha inicio del intervalo a analizar.
+     * @param {Date} fechaFin Fecha fin del intervalo a analizar.
+     * @returns {Reserva[]} Lista de reservas procesadas que coinciden con el intervalo.
+     */
 
-    private static filtrarReservasPorFecha(reservas: Reserva[], fechaInicio: Date, fechaFin: Date): Reserva[] {
+    private filtrarReservasPorFecha(reservas: Reserva[], fechaInicio: Date, fechaFin: Date): Reserva[] {
     return reservas.filter(r => {
         const inicio = r.getFechaInicio();
         const fin = r.getFechaFin();
@@ -13,8 +24,20 @@ export default class GestorEstadisticas {
         return inicio <= fechaFin && fin >= fechaInicio;
     });
 }
-    public static getRankingAlquileres(historial: Reserva[], fechaInicio: Date, fechaFin: Date): void {
+
+
+    /**
+     * Genera el ranking de vehículos más y menos alquilados en un período.
+     * Muestra los resultados por consola.
+     * @param {Reserva[]} historial Historial completo de reservas.
+     * @param {Date} fechaInicio Fecha inicial del período a analizar.
+     * @param {Date} fechaFin Fecha final del período a analizar.
+     */
+
+    public  getRankingAlquileres(historial: Reserva[], fechaInicio: Date, fechaFin: Date): void {
+
         const reservasPeriodo = this.filtrarReservasPorFecha(historial, fechaInicio, fechaFin);
+
         
         if (reservasPeriodo.length === 0) {
             console.log("No hay reservas completadas en ese período.");
@@ -33,8 +56,16 @@ export default class GestorEstadisticas {
         console.log(`Vehículo Menos Alquilado: ${ranking[ranking.length - 1][0]} (${ranking[ranking.length - 1][1]} alquileres)`);
     }
 
+
+  /**
+     * Calcula la rentabilidad de cada vehículo del sistema.
+     * Considera ingresos por reservas y costos de mantenimiento.
+     * Muestra por consola el vehículo más y menos rentable.
+     * @param {Vehiculo[]} vehiculos Lista de vehículos registrados en el sistema.
+     * @param {Reserva[]} historial Historial completo de reservas.
+     */
         
-    public static getRentabilidad(vehiculos: Vehiculo[], historial: Reserva[]): void {
+    public getRentabilidad(vehiculos: Vehiculo[], historial: Reserva[]): void {
     
     const rentabilidades: { [matricula: string]: number } = {};
 
@@ -62,12 +93,20 @@ export default class GestorEstadisticas {
     console.log(`Menor Rentabilidad: ${ranking[ranking.length - 1][0]} ($${ranking[ranking.length - 1][1]})`);
 }
 
-    public static ocupacionFlota(vehiculos: Vehiculo[]): number {
+
+  /**
+     * Calcula el porcentaje de ocupación de la flota en Alquiler.
+     * @param {Vehiculo[]} vehiculos Lista total de vehículos del sistema.
+     * @returns {number} Porcentaje de flota ocupada.
+     */
+
+
+    public ocupacionFlota(vehiculos: Vehiculo[]): number {
         const total = vehiculos.length;
         if (total === 0) return 0;
 
         const ocupados = vehiculos.filter(
-            v => v.getEstado().constructor.name === "EnAlquiler"
+            v => v.getEstado().estaEnAlquiler()
         ).length;
 
         return ((ocupados / total) * 100);

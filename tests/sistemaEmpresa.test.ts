@@ -1,6 +1,8 @@
 import SistemaEmpresa from "../src/sistemaEmpresa";
 import Vehiculo from "../src/vehiculo";
 import Cliente from "../src/cliente";
+import MantenimientoVehiculo from "../src/mantenimientoVehiculo";
+import { mockDeep, MockProxy} from 'jest-mock-extended'
 
 describe("SistemaEmpresa", () => {
   let sistema: SistemaEmpresa;
@@ -9,11 +11,16 @@ describe("SistemaEmpresa", () => {
   let mockGestorMantenimiento: any;
   let mockGestorKilometraje: any;
 
+  let mockVehiculo: MockProxy<Vehiculo>;
+  let mockMantenimiento: MockProxy<MantenimientoVehiculo>;
+
   beforeEach(() => {
     mockGestorReserva = { hayDisponibilidad: jest.fn(), agregar: jest.fn(), eliminar: jest.fn() };
     mockGestorVehiculo = {};
     mockGestorMantenimiento = {};
     mockGestorKilometraje = {actualizarKmVehiculo: jest.fn()};
+    mockVehiculo = mockDeep<Vehiculo>();
+    mockMantenimiento = mockDeep<MantenimientoVehiculo>();
 
     sistema = new SistemaEmpresa(
       mockGestorReserva,
@@ -92,6 +99,57 @@ describe("SistemaEmpresa", () => {
     );
 
     expect(resultado).toBe(mockReservaCreada);
+  });
+
+  test("agregarVehiculo debe delegar al GestorVehiculo.agregar()", () => {
+    sistema.agregarVehiculo(mockVehiculo);
+    
+    expect(mockGestorVehiculo.agregar).toHaveBeenCalledTimes(1);
+    expect(mockGestorVehiculo.agregar).toHaveBeenCalledWith(mockVehiculo,sistema.getVehiculos());
+  });
+
+  test("eliminarVehiculo debe delegar al GestorVehiculo.eliminar()", () => {
+    sistema.eliminarVehiculo(mockVehiculo);
+    
+    expect(mockGestorVehiculo.eliminar).toHaveBeenCalledTimes(1);
+    expect(mockGestorVehiculo.eliminar).toHaveBeenCalledWith(mockVehiculo,sistema.getVehiculos());
+  });
+
+  test("registrarMantenimiento debe delegar al GestorMantenimiento", () => {
+    sistema.registrarMantenimiento(mockVehiculo, mockMantenimiento);
+    
+    expect(mockGestorMantenimiento.registrarMantenimiento).toHaveBeenCalledTimes(1);
+    expect(mockGestorMantenimiento.registrarMantenimiento).toHaveBeenCalledWith(mockVehiculo,mockMantenimiento);
+  });
+
+  test("alquilar debe delegar a vehiculo.alquilar() exitosamente", () => {
+    sistema.alquilar(mockVehiculo);
+    
+    expect(mockVehiculo.alquilar).toHaveBeenCalledTimes(1);
+  });
+
+  test("dejarDeAlquilar debe delegar a vehiculo.devolver()", () => {
+    sistema.dejarDeAlquilar(mockVehiculo);
+    
+    expect(mockVehiculo.devolver).toHaveBeenCalledTimes(1);
+  });
+
+  test("hacerMantenimiento debe delegar a vehiculo.enviarMantenimiento()", () => {
+    sistema.hacerMantenimiento(mockVehiculo);
+    
+    expect(mockVehiculo.enviarMantenimiento).toHaveBeenCalledTimes(1);
+  });
+
+  test("finalizarMantenimiento debe delegar a vehiculo.finalizarMantenimiento()", () => {
+    sistema.finalizarMantenimiento(mockVehiculo);
+    
+    expect(mockVehiculo.finalizarMantenimiento).toHaveBeenCalledTimes(1);
+  });
+
+  test("limpiar debe delegar a vehiculo.limpiar()", () => {
+    sistema.limpiar(mockVehiculo);
+    
+    expect(mockVehiculo.limpiar).toHaveBeenCalledTimes(1);
   });
 });
 

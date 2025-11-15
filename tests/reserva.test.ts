@@ -2,6 +2,9 @@ import Reserva from "../src/reserva";
 import Vehiculo from "../src/vehiculo";
 import Cliente from "../src/cliente";
 import Temporada from "../src/temporada";
+import TempAlta from "../src/tempAlta";
+import TempBaja from "../src/tempBaja";
+import TempMedia from "../src/tempMedia";
 
 describe("Reserva", () => {
 
@@ -61,7 +64,41 @@ describe("Reserva", () => {
 
 
     // setTemporada()
-    
+    test("asigna TempAlta para meses 12, 1, 2, 7", () => {
+        const mesesAlta = [12, 1, 2, 7];
+
+        mesesAlta.forEach(mes => {
+            reserva.fechaInicio = new Date(2025, mes - 1, 10);
+
+            reserva.setTemporada();
+
+            expect(reserva.temporada).toBeInstanceOf(TempAlta);
+        });
+    });
+
+    test("asigna TempMedia para meses 3, 4, 11", () => {
+        const mesesMedia = [3, 4, 11];
+
+        mesesMedia.forEach(mes => {
+            reserva.fechaInicio = new Date(2025, mes - 1, 10);
+
+            reserva.setTemporada();
+
+            expect(reserva.temporada).toBeInstanceOf(TempMedia);
+        });
+    });
+
+    test("asigna TempBaja para el resto de los meses", () => {
+        const mesesBaja = [5, 6, 8, 9, 10];
+
+        mesesBaja.forEach(mes => {
+            reserva.fechaInicio = new Date(2025, mes - 1, 10);
+
+            reserva.setTemporada();
+
+            expect(reserva.temporada).toBeInstanceOf(TempBaja);
+        });
+    });
 
 
     // SETTERS simples

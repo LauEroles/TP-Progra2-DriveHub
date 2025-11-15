@@ -1,9 +1,12 @@
-/*Tarifa base de $30 por día. Aplica un cargo de $0.15 por cada kilómetro
-recorrido si se superan los 100 km por día de alquiler.*/
 import Vehiculo from "./vehiculo";
 import {Estado} from "./estados/estado";
 import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO, CARGO_VARIABLE_COMPACTO } from "./constantes";
 
+/**
+* Vehículo de tipo compacto.
+* Tarifa base de $30 por día. Aplica un cargo de $0.15 por cada kilómetro
+* recorrido si se superan los 100 km por día de alquiler.
+*/
 export default class Compacto extends Vehiculo {
     
     /**
@@ -32,5 +35,5 @@ export default class Compacto extends Vehiculo {
         }
         return cargo;
     }
-    
+
 }

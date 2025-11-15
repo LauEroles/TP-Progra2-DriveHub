@@ -1,6 +1,10 @@
 import SistemaEmpresa from "./sistemaEmpresa";
 import Vehiculo from "./vehiculo";
 
+/**
+* Representa un cliente del sistema.
+* Contiene información personal y permite solicitar reservas de vehículos.
+*/
 export default class Cliente {
 
     private nombreCompleto: string;

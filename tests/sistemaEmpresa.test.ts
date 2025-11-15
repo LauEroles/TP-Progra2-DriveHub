@@ -10,6 +10,7 @@ describe("SistemaEmpresa", () => {
   let mockGestorVehiculo: any;
   let mockGestorMantenimiento: any;
   let mockGestorKilometraje: any;
+  let mockGestorReporte: any;
 
   let mockVehiculo: MockProxy<Vehiculo>;
   let mockMantenimiento: MockProxy<MantenimientoVehiculo>;
@@ -37,7 +38,8 @@ describe("SistemaEmpresa", () => {
       mockGestorReserva,
       mockGestorVehiculo,
       mockGestorMantenimiento,
-      mockGestorKilometraje
+      mockGestorKilometraje,
+      mockGestorReporte
     );
   });
 

@@ -60,9 +60,36 @@ describe("Reserva", () => {
     });
 
 
+    // setTemporada()
+    
+
+
     // SETTERS simples
+    test("setVehiculo asigna correctamente el vehículo", () => {
+        const mockVehiculo2 = {} as unknown as jest.Mocked<Vehiculo>;
+        reserva.setVehiculo(mockVehiculo2);
+        expect(reserva.vehiculo).toBe(mockVehiculo2);
+    });
+
+    test("setCliente asigna correctamente el cliente", () => {
+        const mockCliente2 = {} as unknown as jest.Mocked<Cliente>;
+        reserva.setCliente(mockCliente2);
+        expect(reserva.cliente).toBe(mockCliente2);
+    });
+
+    test("setFechaInicio asigna correctamente la fecha de inicio", () => {
+        const fecha = new Date("2025-11-15");
+        reserva.setFechaInicio(fecha);
+        expect(reserva.fechaInicio).toBe(fecha);
+    });
+
+    test("setFechaFin asigna correctamente la fecha de fin", () => {
+        const fecha = new Date("2025-11-17");
+        reserva.setFechaFin(fecha);
+        expect(reserva.fechaFin).toBe(fecha);
+    });
     
-    
+
     // GETTERS simples
     test("getVehiculo devuelve el vehículo correcto", () => {
         expect(reserva.getVehiculo()).toBe(mockVehiculo);
@@ -78,9 +105,8 @@ describe("Reserva", () => {
     });
 
     test("getTemporada devuelve la temporada correctamente", () => {
-        let mockTemporada = {} as unknown as jest.Mocked<Temporada>;
-        expect(reserva.getFechaInicio()).toBe(fechaInicio);
-        expect(reserva.getFechaFin()).toBe(fechaFin);
+        const mockTemporada = {} as unknown as jest.Mocked<Temporada>;
+        expect(reserva.getTemporada()).toBe(mockTemporada);
     });
 
 });

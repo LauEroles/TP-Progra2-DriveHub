@@ -28,9 +28,9 @@ export default class Reserva {
 
     public setTemporada(): void {
         let mes: number = this.fechaInicio.getMonth() + 1;
-        if (mes in  [12, 1, 2, 7]) {
+        if ([12, 1, 2, 7].includes(mes)) {
             this.temporada = new TempAlta();
-        } else if (mes in [3, 4, 11]) {
+        } else if ([3, 4, 11].includes(mes)) {
             this.temporada = new TempMedia();
         } else {
             this.temporada = new TempBaja();

@@ -101,22 +101,35 @@ describe("Test de la clase Vehiculo", () => {
         expect(vehiculo.getEstado()).toBe(nuevoEstado);
 });
 
-
 describe("agregar mantenimiento al vehiculo correctamente", ()=> {
-        it("Deberia agregar el mantenimiento al vehiculo", ()=> {
-            vehiculo.agregarMantenimientoVehiculo(mantenimiento);
-            expect(vehiculo.getCostoTotalMantenimiento()).toBe(120000);
-        });
-
+    it("Deberia agregar el mantenimiento al vehiculo", ()=> {
+        vehiculo.agregarMantenimientoVehiculo(mantenimiento);
+        expect(vehiculo.getCostoTotalMantenimiento()).toBe(120000);
+    });
         
 });
 
 describe("Obtener costo total de mantenimiento", ()=> {
-        it("Deberia obtener el costo total de mantenimiento", ()=> {
+    it("Deberia devolver 0 cuando no hay mantenimientos", ()=> {
+        expect(vehiculo.getCostoTotalMantenimiento()).toBe(0);
+    });
+
+
+    it("Deberia obtener el costo total de mantenimiento", ()=> {
         vehiculo.agregarMantenimientoVehiculo(mantenimiento);
         expect(vehiculo.getCostoTotalMantenimiento()).toBe(120000);
-        });
+    });
 
+
+    it("Deberia sumar el costo de multiples mantenimientos", ()=> {
+        const mantenimiento2 = mockDeep<MantenimientoVehiculo>();
+        mantenimiento2.getCostoMantenimiento.mockReturnValue(80000);
+        
+        vehiculo.agregarMantenimientoVehiculo(mantenimiento);
+        vehiculo.agregarMantenimientoVehiculo(mantenimiento2);
+        
+        expect(vehiculo.getCostoTotalMantenimiento()).toBe(200000); // 120000 + 80000
+    });
 });
 
 describe("Resetear kilometraje", ()=> {
@@ -150,7 +163,6 @@ describe("Requiere mantenimiento", ()=> {
 
         expect(vehiculo.requiereMantenimiento()).toBe(true);
     });
-
 
 });
 

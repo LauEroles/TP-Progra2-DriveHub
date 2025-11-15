@@ -15,13 +15,24 @@ describe("SistemaEmpresa", () => {
   let mockMantenimiento: MockProxy<MantenimientoVehiculo>;
 
   beforeEach(() => {
-    mockGestorReserva = { hayDisponibilidad: jest.fn(), agregar: jest.fn(), eliminar: jest.fn() };
-    mockGestorVehiculo = {};
-    mockGestorMantenimiento = {};
-    mockGestorKilometraje = {actualizarKmVehiculo: jest.fn()};
+    mockGestorReserva = { 
+      hayDisponibilidad: jest.fn(), 
+      agregar: jest.fn(), 
+      eliminar: jest.fn() 
+    };
+    mockGestorVehiculo = {
+      agregar: jest.fn(),
+      eliminar: jest.fn()
+    };
+    mockGestorMantenimiento = {
+      registrarMantenimiento: jest.fn()
+    };
+    mockGestorKilometraje = {
+      actualizarKmVehiculo: jest.fn()
+    };
     mockVehiculo = mockDeep<Vehiculo>();
     mockMantenimiento = mockDeep<MantenimientoVehiculo>();
-
+  
     sistema = new SistemaEmpresa(
       mockGestorReserva,
       mockGestorVehiculo,

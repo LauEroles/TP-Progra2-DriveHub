@@ -1,6 +1,10 @@
 import Reserva from "../src/reserva";
 import Vehiculo from "../src/vehiculo";
 import Cliente from "../src/cliente";
+import TempAlta from "../src/tempAlta";
+import TempMedia from "../src/tempMedia";
+import TempBaja from "../src/tempBaja";
+import { mockDeep, MockProxy} from 'jest-mock-extended'
 
 describe("Reserva", () => {
 
@@ -108,4 +112,5 @@ describe("Reserva", () => {
         expect(reserva.getFechaInicio()).toBe(fechaInicio);
         expect(reserva.getFechaFin()).toBe(fechaFin);
     });
+
 });

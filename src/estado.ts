@@ -1,6 +1,0 @@
-export enum Estado {
-    DISPONIBLE,
-    EN_ALQUILER,
-    EN_MANTENIMIENTO,
-    NECESITA_LIMPIEZA
-}

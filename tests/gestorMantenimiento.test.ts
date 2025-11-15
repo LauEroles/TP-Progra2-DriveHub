@@ -11,10 +11,10 @@ describe("GestorMantenimiento ", () => {
     gestor = new GestorMantenimiento();
   });
 
-  test("se llama al método agregarManteniminentoVehiculo usando mock", () => {
+  test("se llama al método agregarMantenimientoVehiculo usando mock", () => {
     
     const vehiculoMock = {
-      agregarManteniminentoVehiculo: jest.fn()
+      agregarMantenimientoVehiculo: jest.fn()
     } as unknown as import("../src/vehiculo").default;
 
     // Creamos un mock de mantenimiento
@@ -24,11 +24,11 @@ describe("GestorMantenimiento ", () => {
     gestor.registrarMantenimiento(vehiculoMock, mantenimientoMock);
 
     // Verificamos que el método existe y es una función
-    expect(vehiculoMock.agregarManteniminentoVehiculo).toBeDefined();
-    expect(typeof vehiculoMock.agregarManteniminentoVehiculo).toBe("function");
+    expect(vehiculoMock.agregarMantenimientoVehiculo).toBeDefined();
+    expect(typeof vehiculoMock.agregarMantenimientoVehiculo).toBe("function");
 
     // Verificamos que el método se llamó con el mantenimientoMock
-    expect(vehiculoMock.agregarManteniminentoVehiculo).toHaveBeenCalledWith(mantenimientoMock);
+    expect(vehiculoMock.agregarMantenimientoVehiculo).toHaveBeenCalledWith(mantenimientoMock);
   });
 });
 

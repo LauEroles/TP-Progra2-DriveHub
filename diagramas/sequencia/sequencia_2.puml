@@ -1,5 +1,7 @@
 @startuml DriveHub - Tarifas
 
+title Cálculo de Tarifas
+
 Cliente -> SistemaEmpresa: Consultar tarifa
 SistemaEmpresa -> Reserva: Consultar total
 Reserva -> Vehiculo: Calcular total

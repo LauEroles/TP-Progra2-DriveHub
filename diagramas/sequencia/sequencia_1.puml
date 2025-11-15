@@ -1,5 +1,7 @@
 @startuml DriveHub - Reservas
 
+title Solicitud de Reservas
+
 Cliente -> SistemaEmpresa: Solicitar reserva
 SistemaEmpresa -> SistemaEmpresa: Validar disponibilidad
 SistemaEmpresa -> GestorReserva: Crear reserva

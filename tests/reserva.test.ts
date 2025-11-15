@@ -138,16 +138,24 @@ describe("Reserva", () => {
 
     // GETTERS simples
     test("getVehiculo devuelve el vehículo correcto", () => {
-        expect(reserva.getVehiculo()).toBe(mockVehiculo);
+        const mockVehiculo2 = {} as unknown as jest.Mocked<Vehiculo>;
+        reserva.vehiculo = mockVehiculo2
+        expect(reserva.getVehiculo()).toBe(mockVehiculo2);
     });
 
     test("getCliente devuelve el cliente correcto", () => {
-        expect(reserva.getCliente()).toBe(mockCliente);
+        const mockCliente2 = {} as unknown as jest.Mocked<Cliente>;
+        reserva.cliente = mockCliente2;
+        expect(reserva.getCliente()).toBe(mockCliente2);
     });
 
     test("getFechaInicio y getFechaFin devuelven las fechas correctas", () => {
-        expect(reserva.getFechaInicio()).toBe(fechaInicio);
-        expect(reserva.getFechaFin()).toBe(fechaFin);
+        const fecha1 = new Date(2025, 11, 20);
+        const fecha2 = new Date(2025, 11, 22);
+        reserva.fechaInicio = fecha1;
+        reserva.fechaFin = fecha2;
+        expect(reserva.getFechaInicio()).toBe(fecha1);
+        expect(reserva.getFechaFin()).toBe(fecha2);
     });
 
     test("getTemporada devuelve la temporada correctamente", () => {
@@ -159,19 +167,23 @@ describe("Reserva", () => {
 
     //calcularTotal()
      test("calcula correctamente el total de la reserva según la fórmula", () => {
-        
-        mockTemporada.calcTarifaBase.mockReturnValue(100);
+        reserva.temporada = mockTemporada;
+        reserva.vehiculo = mockVehiculo;
+
+        mockTemporada.calcTarifaBase.mockReturnValue(80);
         mockVehiculo.getTarifaBase.mockReturnValue(80);
         mockVehiculo.getCargoFijo.mockReturnValue(20);
-        mockVehiculo.calcCargoVariable.mockReturnValue(50); 
+        mockVehiculo.calcCargoVariable.mockReturnValue(50);
+
+        reserva.getDias = jest.fn() as any;
+        reserva.getKmsRecorridos = jest.fn() as any;
 
         (reserva.getDias as jest.Mock).mockReturnValue(3);
-        (reserva.getKmsRecorridos as jest.Mock).mockReturnValue(200); 
+        (reserva.getKmsRecorridos as jest.Mock).mockReturnValue(200);
 
         const total = reserva.calcularTotal();
 
         expect(total).toBe(350);
-
         expect(mockTemporada.calcTarifaBase).toHaveBeenCalledWith(80);
         expect(mockVehiculo.getTarifaBase).toHaveBeenCalled();
         expect(mockVehiculo.getCargoFijo).toHaveBeenCalled();

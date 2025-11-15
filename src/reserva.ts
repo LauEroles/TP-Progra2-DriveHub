@@ -28,9 +28,9 @@ export default class Reserva {
 
     public setTemporada(): void {
         let mes: number = this.fechaInicio.getMonth() + 1;
-        if (mes in  [12, 1, 2, 7]) {
+        if ([12, 1, 2, 7].includes(mes)) {
             this.temporada = new TempAlta();
-        } else if (mes in [3, 4, 11]) {
+        } else if ([3, 4, 11].includes(mes)) {
             this.temporada = new TempMedia();
         } else {
             this.temporada = new TempBaja();
@@ -76,6 +76,22 @@ export default class Reserva {
             throw new Error(`El kilometro recorrido no puede ser menor a cero`);
         }
         this.kmsRecorridos = kmRecorrido;
+    }
+
+    public setVehiculo(vehiculo: Vehiculo): void {
+        this.vehiculo = vehiculo;
+    }
+
+    public setCliente(cliente: Cliente): void {
+        this.cliente = cliente;
+    }
+
+    public setFechaInicio(fechaInicio: Date): void {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public setFechaFin(fechaFin: Date): void {
+        this.fechaFin = fechaFin;
     }
 
     public getDias(): number {

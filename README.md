@@ -104,61 +104,90 @@ Interfaz ABM para operaciones CRUD:
 ## Estructura del Proyecto
 
 TP-Programacion2-DriveHub/
+
+
+├── 📂 src/                          # Código fuente del proyecto
+│   ├── 📄 abm.ts                    # Interface ABM (Alta, Baja, Modificación)
+│   ├── 📄 cliente.ts                # Clase Cliente
+│   ├── 📄 constantes.ts             # Constantes de tarifas y configuración
+│   ├── 📄 mantenimientoVehiculo.ts  # Clase MantenimientoVehiculo
+│   ├── 📄 reserva.ts                # Clase Reserva
+│   ├── 📄 sistemaEmpresa.ts         # Clase principal del sistema
+│   │
+│   ├── 📂 estados/                  # Patrón State para estados del vehículo
+│   │   ├── 📄 estado.ts             # Interface Estado
+│   │   ├── 📄 disponible.ts         # Estado Disponible
+│   │   ├── 📄 enAlquiler.ts         # Estado En Alquiler
+│   │   ├── 📄 enMantenimiento.ts    # Estado En Mantenimiento
+│   │   └── 📄 necesitaLimpieza.ts   # Estado Necesita Limpieza
+│   │
+│   ├── 📂 gestores/                 # Gestores del sistema
+│   │   ├── 📄 gestor_reserva.ts     # Gestor de reservas
+│   │   ├── 📄 gestor_vehiculo.ts    # Gestor de vehículos
+│   │   ├── 📄 gestorKilometraje.ts  # Gestor de kilometraje
+│   │   ├── 📄 gestorMantenimiento.ts# Gestor de mantenimiento
+│   │   └── 📄 gestorReportes.ts     # Gestor de reportes y estadísticas
+│   │
+│   ├── 📂 temporadas/               # Patrón Strategy para temporadas
+│   │   ├── 📄 temporada.ts          # Interface Temporada
+│   │   ├── 📄 tempAlta.ts           # Temporada Alta (+20%)
+│   │   ├── 📄 tempMedia.ts          # Temporada Media (sin cambios)
+│   │   └── 📄 tempBaja.ts           # Temporada Baja (-10%)
+│   │
+│   └── 📂 vehiculos/                # Clases de vehículos
+│       ├── 📄 vehiculo.ts           # Clase abstracta Vehiculo
+│       ├── 📄 compacto.ts           # Clase Compacto
+│       ├── 📄 sedan.ts              # Clase Sedan
+│       └── 📄 suv.ts                # Clase SUV
 │
-├── 📂 src/ # Código fuente TypeScript
-│ ├── 📂 estados/ # Patrón State
-│ │ ├── estado.ts # Interfaz Estado
-│ │ ├── disponible.ts
-│ │ ├── enAlquiler.ts
-│ │ ├── enMantenimiento.ts
-│ │ └── necesitaLimpieza.ts
-│ │
-│ ├── vehiculo.ts # Clase abstracta base
-│ ├── compacto.ts # Vehículo tipo Compacto
-│ ├── sedan.ts # Vehículo tipo Sedan
-│ ├── suv.ts # Vehículo tipo SUV
-│ │
-│ ├── reserva.ts # Gestión de reservas
-│ ├── cliente.ts # Datos del cliente
-│ │
-│ ├── temporada.ts # Interfaz Strategy
-│ ├── tempAlta.ts # Temporada Alta
-│ ├── tempMedia.ts # Temporada Media
-│ ├── tempBaja.ts # Temporada Baja
-│ │
-│ ├── abm.ts # Interfaz ABM
-│ ├── gestor_vehiculo.ts # CRUD Vehículos
-│ ├── gestor_reserva.ts # CRUD Reservas
-│ ├── gestorMantenimiento.ts # Gestión mantenimientos
-│ ├── gestorKilometraje.ts # Gestión kilometraje
-│ │
-│ ├── sistemaEmpresa.ts # Fachada del sistema
-│ ├── mantenimientoVehiculo.ts # Registro mantenimiento
-│ └── constantes.ts # Constantes del sistema
+├── 📂 tests/                        # Tests unitarios con Jest
+│   ├── 📄 cliente.test.ts
+│   ├── 📄 mantenimientoVehiculo.test.ts
+│   ├── 📄 reserva.test.ts
+│   ├── 📄 sistemaEmpresa.test.ts
+│   │
+│   ├── 📂 estados-test/             # Tests de estados
+│   │   ├── 📄 estado.test.ts
+│   │   ├── 📄 disponible.test.ts
+│   │   ├── 📄 enAlquiler.test.ts
+│   │   ├── 📄 enMantenimiento.test.ts
+│   │   └── 📄 necesitaLimpieza.test.ts
+│   │
+│   ├── 📂 gestores-test/            # Tests de gestores
+│   │   ├── 📄 gestor_reserva.test.ts
+│   │   ├── 📄 gestor_vehiculo.test.ts
+│   │   ├── 📄 gestorKilometraje.test.ts
+│   │   ├── 📄 gestorMantenimiento.test.ts
+│   │   └── 📄 gestorReportes.test.ts
+│   │
+│   ├── 📂 temporadas-test/          # Tests de temporadas
+│   │   ├── 📄 tempAlta.test.ts
+│   │   ├── 📄 tempMedia.test.ts
+│   │   └── 📄 tempBaja.test.ts
+│   │
+│   └── 📂 vehiculos-test/           # Tests de vehículos
+│       ├── 📄 vehiculo.test.ts
+│       ├── 📄 compacto.test.ts
+│       ├── 📄 sedan.test.ts
+│       └── 📄 suv.test.ts
 │
-├── 📂 tests/ # Tests unitarios (Jest)
-│ ├── vehiculo.test.ts
-│ ├── compacto.test.ts
-│ ├── sedan.test.ts
-│ ├── suv.test.ts
-│ ├── gestor_reserva.test.ts
-│ ├── gestor_vehiculo.test.ts
-│ ├── gestorMantenimiento.test.ts
-│ ├── mantenimientoVehiculo.test.ts
-│ ├── tempAlta.test.ts
-│ ├── tempBaja.test.ts
-│ └── tempMedia.test.ts
-│
-├── 📂 Diagramas/ # Diagramas UML (PlantUML)
-│ ├── diagramaClases-DriveHub.puml
-│ ├── diagramaSecuencia1.puml
-│ ├── diagramaSecuencia2.puml
-│ └── diagramaSecuencia3-PD-State.puml
-│
-├── package.json # Dependencias y scripts
-├── tsconfig.json # Configuración TypeScript
-├── jest.config.js # Configuración Jest
-└── README.md # Este archivo
+├── 📂 diagramas/                    # Diagramas UML
+│   ├── 📂 clases/
+│   │   └── 📄 clases.puml
+│   └── 📂 sequencia/
+│       ├── 📄 sequencia_1.puml
+│       ├── 📄 sequencia_2.puml
+│       └── 📄 sequencia_3.puml
+|
+|
+├── 📄 README.md
+├── 📄 package.json
+├── 📄 package-lock.json
+├── 📄 tsconfig.json
+├── 📄 jest.config.js
+├── 📄 ConsignaTp.pdf
+├── 📄 ConsignaTp2.pdf
+
 
 
 ##Tests

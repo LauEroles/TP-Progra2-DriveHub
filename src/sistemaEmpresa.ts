@@ -1,13 +1,12 @@
 import Reserva from "./reserva";
-import Vehiculo from "./vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 import Cliente from "./cliente";
-import GestorReserva from "./gestor_reserva";
-import GestorVehiculo from "./gestor_vehiculo";
-import GestorMantenimiento from "./gestorMantenimiento";
-import GestorKilometraje from "./gestorKilometraje";
+import GestorReserva from "../src/gestores/gestor_reserva";
+import GestorVehiculo from "../src/gestores/gestor_vehiculo";
+import GestorMantenimiento from "../src/gestores/gestorMantenimiento";
+import GestorKilometraje from "../src/gestores/gestorKilometraje";
 import MantenimientoVehiculo from "./mantenimientoVehiculo";
-import GestorEstadisticas from "./gestorReportes";
-
+import GestorEstadisticas from "./gestores/gestorReportes";
 /**
  * Sistema principal que gestiona los vehículos, reservas, mantenimientos,
  * alquileres y estadísticas de la empresa.

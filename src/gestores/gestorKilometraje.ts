@@ -1,6 +1,6 @@
-import Reserva from "./reserva";
-import SistemaEmpresa from "./sistemaEmpresa";
-import Vehiculo from "./vehiculo";
+import Reserva from "../reserva";
+import SistemaEmpresa from "../sistemaEmpresa";
+import Vehiculo from "../../src/vehiculos/vehiculo";
 
 /**
 * Gestor encargado de actualizar el kilometraje de los vehículos

@@ -1,22 +1,22 @@
-import GestorReserva from "../src/gestor_reserva";
-import Reserva from "../src/reserva";
-import Cliente from "../src/cliente";
-import Vehiculo from "../src/vehiculo";
-import Suv from "../src/suv";
-import Sedan from "../src/sedan";
-import Compacto from "../src/compacto";
-import { Estado } from "../src/estados/estado";
-import { Disponible } from "../src/estados/disponible";
+import GestorReserva from "../../src/gestores/gestor_reserva";
+import Reserva from "../../src/reserva";
+import Cliente from "../../src/cliente";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import Suv from "../../src/vehiculos/suv";
+import Sedan from "../../src/vehiculos/sedan";
+import Compacto from "../../src/vehiculos/compacto";
+import { Estado } from "../../src/estados/estado";
+import { Disponible } from "../../src/estados/disponible";
 import { mockDeep, MockProxy} from 'jest-mock-extended'
 
 
 
-jest.mock("../src/reserva");
-jest.mock("../src/cliente");
-jest.mock("../src/vehiculo");
-jest.mock("../src/suv");
-jest.mock("../src/estados/estado")
-jest.mock("../src/estados/disponible")
+jest.mock("../../src/reserva");
+jest.mock("../../src/cliente");
+jest.mock("../../src/vehiculos/vehiculo");
+jest.mock("../../src/vehiculos/suv");
+jest.mock("../../src/estados/estado")
+jest.mock("../../src/estados/disponible")
 
 describe("GestorReserva.hayDisponibilidad", () => {
 

@@ -1,5 +1,5 @@
 import { Disponible } from "../../src/estados/disponible";
-import Vehiculo from "../../src/vehiculo";
+import Vehiculo from "../../src/vehiculos/vehiculo";
 import { mockDeep, MockProxy } from "jest-mock-extended";
 import { Estado } from "../../src/estados/estado";
 import { EnAlquiler } from "../../src/estados/enAlquiler";

@@ -1,10 +1,10 @@
 import Reserva from "../src/reserva";
-import Vehiculo from "../src/vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 import Cliente from "../src/cliente";
-import Temporada from "../src/temporada";
-import TempAlta from "../src/tempAlta";
-import TempBaja from "../src/tempBaja";
-import TempMedia from "../src/tempMedia";
+import Temporada from "../src/temporadas/temporada";
+import TempAlta from "../src/temporadas/tempAlta";
+import TempBaja from "../src/temporadas/tempBaja";
+import TempMedia from "../src/temporadas/tempMedia";
 
 describe("Reserva", () => {
 

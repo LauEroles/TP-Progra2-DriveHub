@@ -1,6 +1,6 @@
 import Vehiculo from "./vehiculo";
-import {Estado} from "./estados/estado";
-import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO, CARGO_VARIABLE_COMPACTO } from "./constantes";
+import {Estado} from "../estados/estado";
+import { KM_MAX_COMPACTO, TARIFA_BASE_COMPACTO, CARGO_VARIABLE_COMPACTO } from "../constantes";
 
 /**
 * Vehículo de tipo compacto.

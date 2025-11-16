@@ -1,8 +1,7 @@
-
-import Sedan from "../src/sedan";
-import Vehiculo from "../src/vehiculo";
-import {Estado} from "../src/estados/estado";
-import {Disponible} from "../src/estados/disponible";
+import Sedan from "../../src/vehiculos/sedan";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import {Estado} from "../../src/estados/estado";
+import {Disponible} from "../../src/estados/disponible";
 
 describe("Clase Sedan", () => {
   const estado:Estado= new Disponible();

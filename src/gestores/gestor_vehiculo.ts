@@ -1,8 +1,8 @@
-import ABM from "./abm";
-import Vehiculo from "./vehiculo"
-import { Estado } from "./estados/estado"
-import Reserva from "./reserva"
-import GestorReserva from "./gestor_reserva"
+import ABM from "../abm";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import { Estado } from "../estados/estado"
+import Reserva from "../reserva"
+import GestorReserva from "../gestores/gestor_reserva"
 
 /**
 * Gestor de vehículos que implementa operaciones de ABM.

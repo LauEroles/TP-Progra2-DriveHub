@@ -1,10 +1,9 @@
-import Vehiculo from "./vehiculo";
-import Reserva from "./reserva";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import Reserva from "../reserva";
 
 /**
  * Clase encargada de generar estadísticas y reportes sobre el funcionamiento del sistema.
  * Incluye reportes de alquileres, rentabilidad y ocupación de la flota.
- * Todos sus métodos son estáticos, por lo que no requiere instanciar la clase.  
  */
 
 export default class GestorEstadisticas {

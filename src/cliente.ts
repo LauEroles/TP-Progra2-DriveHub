@@ -1,5 +1,5 @@
 import SistemaEmpresa from "./sistemaEmpresa";
-import Vehiculo from "./vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 
 /**
 * Representa un cliente del sistema.

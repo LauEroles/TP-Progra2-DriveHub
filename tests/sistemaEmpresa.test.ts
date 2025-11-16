@@ -1,5 +1,5 @@
 import SistemaEmpresa from "../src/sistemaEmpresa";
-import Vehiculo from "../src/vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 import Cliente from "../src/cliente";
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo";
 import { mockDeep, MockProxy} from 'jest-mock-extended'
@@ -152,5 +152,92 @@ describe("SistemaEmpresa", () => {
     
     expect(mockVehiculo.limpiar).toHaveBeenCalledTimes(1);
   });
+
+  describe("Getters y Setters de SistemaEmpresa", () => {
+    let mockNuevoGestorReserva: MockProxy<any>;
+    let mockNuevoGestorVehiculo: MockProxy<any>;
+    let mockNuevoGestorMantenimiento: MockProxy<any>;
+    let mockNuevoGestorKilometraje: MockProxy<any>;
+  
+    beforeEach(() => {
+      mockNuevoGestorReserva = mockDeep();
+      mockNuevoGestorVehiculo = mockDeep();
+      mockNuevoGestorMantenimiento = mockDeep();
+      mockNuevoGestorKilometraje = mockDeep();
+    });
+    
+    test("getVehiculos debe devolver el array de vehículos", () => {
+      const vehiculos = sistema.getVehiculos();
+      
+      expect(vehiculos).toBeDefined();
+      expect(Array.isArray(vehiculos)).toBe(true);
+      expect(vehiculos.length).toBe(0); // Inicialmente vacío
+    });
+  
+    test("getReservas debe devolver el array de reservas", () => {
+      const reservas = sistema.getReservas();
+      
+      expect(reservas).toBeDefined();
+      expect(Array.isArray(reservas)).toBe(true);
+      expect(reservas.length).toBe(0); // Inicialmente vacío
+    });
+  
+    test("getGestorReserva debe devolver el gestor de reservas mockeado", () => {
+      const gestor = sistema.getGestorReserva();
+      
+      expect(gestor).toBe(mockGestorReserva);
+      expect(gestor).toBeDefined();
+    });
+  
+    test("setGestorReserva debe actualizar el gestor de reservas con un mock", () => {
+      sistema.setGestorReserva(mockNuevoGestorReserva);
+      
+      expect(sistema.getGestorReserva()).toBe(mockNuevoGestorReserva);
+      expect(sistema.getGestorReserva()).not.toBe(mockGestorReserva);
+    });
+  
+    test("getGestorVehiculo debe devolver el gestor de vehículos mockeado", () => {
+      const gestor = sistema.getGestorVehiculo();
+      
+      expect(gestor).toBe(mockGestorVehiculo);
+      expect(gestor).toBeDefined();
+    });
+  
+    test("setGestorVehiculo debe actualizar el gestor de vehículos con un mock", () => {
+      sistema.setGestorVehiculo(mockNuevoGestorVehiculo);
+      
+      expect(sistema.getGestorVehiculo()).toBe(mockNuevoGestorVehiculo);
+      expect(sistema.getGestorVehiculo()).not.toBe(mockGestorVehiculo);
+    });
+  
+    test("getGestorMantenimiento debe devolver el gestor de mantenimiento mockeado", () => {
+      const gestor = sistema.getGestorMantenimiento();
+      
+      expect(gestor).toBe(mockGestorMantenimiento);
+      expect(gestor).toBeDefined();
+    });
+  
+    test("setGestorMantenimiento debe actualizar el gestor de mantenimiento con un mock", () => {
+      sistema.setGestorMantenimiento(mockNuevoGestorMantenimiento);
+      
+      expect(sistema.getGestorMantenimiento()).toBe(mockNuevoGestorMantenimiento);
+      expect(sistema.getGestorMantenimiento()).not.toBe(mockGestorMantenimiento);
+    });
+  
+    test("getGestorKilometraje debe devolver el gestor de kilometraje mockeado", () => {
+      const gestor = sistema.getGestorKilometraje();
+      
+      expect(gestor).toBe(mockGestorKilometraje);
+      expect(gestor).toBeDefined();
+    });
+  
+    test("setGestorKilometraje debe actualizar el gestor de kilometraje con un mock", () => {
+      sistema.setGestorKilometraje(mockNuevoGestorKilometraje);
+      
+      expect(sistema.getGestorKilometraje()).toBe(mockNuevoGestorKilometraje);
+      expect(sistema.getGestorKilometraje()).not.toBe(mockGestorKilometraje);
+    });
+  });
+
 });
 

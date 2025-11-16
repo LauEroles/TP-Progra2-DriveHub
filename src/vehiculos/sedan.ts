@@ -4,8 +4,8 @@ recorrido, sin límite diario.
 */
 
 import Vehiculo from "./vehiculo";
-import {Estado} from "./estados/estado";
-import { TARIFA_BASE_SEDAN, CARGO_VARIABLE_SEDAN } from "./constantes";
+import {Estado} from "../../src/estados/estado";
+import { TARIFA_BASE_SEDAN, CARGO_VARIABLE_SEDAN } from "../constantes";
 
 /**
  * Vehículo de tipo Sedán.

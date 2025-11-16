@@ -16,7 +16,7 @@
     "test": "npx jest tests --runInBand --detectOpenHandles",
     "prebuild": "npm run clean",
     "lint-fix": "npx eslint ./src --fix",
-"docs": "typedoc --out docs --entryPointStrategy expand ./src"
+    "docs": "typedoc --out documentacion --entryPointStrategy expand ./src"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

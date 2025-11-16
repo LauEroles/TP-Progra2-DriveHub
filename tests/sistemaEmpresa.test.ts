@@ -1,5 +1,5 @@
 import SistemaEmpresa from "../src/sistemaEmpresa";
-import Vehiculo from "../src/vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 import Cliente from "../src/cliente";
 import MantenimientoVehiculo from "../src/mantenimientoVehiculo";
 import { mockDeep, MockProxy} from 'jest-mock-extended'

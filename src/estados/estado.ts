@@ -1,4 +1,4 @@
-import  Vehiculo  from "../vehiculo.js";
+import  Vehiculo  from "../vehiculos/vehiculo";
 /**
  * Interface que define el contrato para los diferentes estados de un vehículo.
  * Implementa el patrón State para gestionar las transiciones de estado de los vehículos.

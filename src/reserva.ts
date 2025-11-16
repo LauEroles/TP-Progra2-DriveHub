@@ -1,9 +1,9 @@
-import Vehiculo from "./vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 import Cliente from "./cliente";
-import Temporada from "./temporada";
-import TempAlta from "./tempAlta";
-import TempBaja from "./tempBaja";
-import TempMedia from "./tempMedia";
+import Temporada from "../src/temporadas/temporada";
+import TempAlta from "../src/temporadas/tempAlta";
+import TempBaja from "../src/temporadas/tempBaja";
+import TempMedia from "../src/temporadas/tempMedia";
 
 
 /**

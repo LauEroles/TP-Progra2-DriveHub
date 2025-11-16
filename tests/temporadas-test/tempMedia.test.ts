@@ -1,5 +1,5 @@
-import TempMedia from "../src/tempMedia"
-import Temporada from "../src/temporada";
+import TempMedia from "../../src/temporadas/tempMedia"
+import Temporada from "../../src/temporadas/temporada";
 
 describe("TempMedia.calcTarifaBase", () => {
 

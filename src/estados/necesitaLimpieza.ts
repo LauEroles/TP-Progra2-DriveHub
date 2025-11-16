@@ -1,4 +1,4 @@
-import Vehiculo from "../vehiculo";
+import Vehiculo from "../vehiculos/vehiculo";
 import { Estado } from "./estado";
 import {Disponible} from "./disponible";
 import { EnAlquiler } from "./enAlquiler";

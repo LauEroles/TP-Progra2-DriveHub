@@ -1,5 +1,5 @@
-import MantenimientoVehiculo from "./mantenimientoVehiculo";
-import Vehiculo from "./vehiculo";
+import MantenimientoVehiculo from "../mantenimientoVehiculo";
+import Vehiculo from "../../src/vehiculos/vehiculo";
 
 /**
 * Gestor encargado de registrar mantenimientos en los vehículos.

@@ -1,14 +1,14 @@
 
-import Suv from "../src/suv"
-import Vehiculo from "../src/vehiculo"
-import sedan from "../src/sedan"
-import compacto from "../src/compacto"
-import MantenimientoVehiculo from "../src/mantenimientoVehiculo"
-import { Estado } from "../src/estados/estado"
-import { EnAlquiler } from "../src/estados/enAlquiler"
-import { EnMantenimiento } from "../src/estados/enMantenimiento"
-import { NecesitaLimpieza } from "../src/estados/necesitaLimpieza"
-import { Disponible } from "../src/estados/disponible"
+import Suv from "../../src/vehiculos/suv"
+import Vehiculo from "../../src/vehiculos/vehiculo"
+import sedan from "../../src/vehiculos/sedan"
+import compacto from "../../src/vehiculos/compacto"
+import MantenimientoVehiculo from "../../src/mantenimientoVehiculo"
+import { Estado } from "../../src/estados/estado"
+import { EnAlquiler } from "../../src/estados/enAlquiler"
+import { EnMantenimiento } from "../../src/estados/enMantenimiento";
+import { NecesitaLimpieza } from "../../src/estados/necesitaLimpieza";
+import { Disponible } from "../../src/estados/disponible";
 import { mockDeep, MockProxy} from 'jest-mock-extended'
 
 

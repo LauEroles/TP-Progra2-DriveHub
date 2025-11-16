@@ -1,4 +1,4 @@
-import Vehiculo from "../vehiculo";
+import Vehiculo from "../vehiculos/vehiculo";
 import { Estado } from "./estado";
 //import { EnMantenimiento } from "./enMantenimiento";
 import { NecesitaLimpieza } from "./necesitaLimpieza";

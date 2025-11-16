@@ -1,19 +1,18 @@
 import { mockDeep, MockProxy} from 'jest-mock-extended'
-import GestorVehiculo from "../src/gestor_vehiculo"
-import GestorReserva from "../src/gestor_reserva"
-import Vehiculo from "../src/vehiculo"
-
+import GestorVehiculo from '../../src/gestores/gestor_vehiculo';
+import GestorReserva from "../../src/gestores/gestor_reserva"
+import Vehiculo from "../../src/vehiculos/vehiculo"
 
 describe("Test clase gestor_vehiculo", () => {
     let gestorVehiculo: GestorVehiculo;
-    let mockGestorReserva: MockProxy<GestorReserva>;
     let mockVehiculo: MockProxy<Vehiculo>;
 
     beforeEach(()=>{
-        gestorVehiculo= new GestorVehiculo();
-        mockGestorReserva= mockDeep<GestorReserva>();
+        gestorVehiculo= new GestorVehiculo()
         mockVehiculo= mockDeep<Vehiculo>();
+        
     });
+
 
     afterEach(()=>{
         jest.clearAllMocks();

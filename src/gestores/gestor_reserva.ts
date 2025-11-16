@@ -1,6 +1,6 @@
-import ABM from "./abm";
-import Reserva from "./reserva";
-import Vehiculo from "./vehiculo";
+import ABM from "../abm";
+import Reserva from "../reserva";
+import Vehiculo from "../../src/vehiculos/vehiculo";
 
 /**
 * Gestor de reservas que implementa operaciones de ABM.

@@ -1,11 +1,11 @@
-import GestorEstadisticas from "../src/gestorReportes";
-import Compacto from "../src/compacto";
-import { Disponible } from "../src/estados/disponible";
-import { EnAlquiler } from "../src/estados/enAlquiler";
-import { Estado } from "../src/estados/estado";
-import Vehiculo from "../src/vehiculo";
-import Reserva from "../src/reserva";
-import Cliente from "../src/cliente";
+import GestorEstadisticas from "../../src/gestores/gestorReportes";
+import Compacto from "../../src/vehiculos/compacto";
+import { Disponible } from "../../src/estados/disponible";
+import { EnAlquiler } from "../../src/estados/enAlquiler";
+import { Estado } from "../../src/estados/estado";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import Reserva from "../../src/reserva";
+import Cliente from "../../src/cliente";
 
 describe("GestorEstadisticas Ocupación flota", () => {
 

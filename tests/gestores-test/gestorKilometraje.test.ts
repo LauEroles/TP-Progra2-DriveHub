@@ -1,7 +1,7 @@
-import GestorKilometraje from "../src/gestorKilometraje";
-import Reserva from "../src/reserva";
-import SistemaEmpresa from "../src/sistemaEmpresa";
-import Vehiculo from "../src/vehiculo";
+import GestorKilometraje from "../../src/gestores/gestorKilometraje";
+import Reserva from "../../src/reserva";
+import SistemaEmpresa from "../../src/sistemaEmpresa";
+import Vehiculo from "../../src/vehiculos/vehiculo";
 
 describe("GestorKilometraje", () => {
 

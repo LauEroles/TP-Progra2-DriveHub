@@ -1,7 +1,7 @@
-import Suv from "../src/suv";
-import Vehiculo from "../src/vehiculo";
-import {Estado} from "../src/estados/estado";
-import {Disponible} from "../src/estados/disponible";
+import Suv from "../../src/vehiculos/suv";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import {Estado} from "../../src/estados/estado";
+import {Disponible} from "../../src/estados/disponible";
 
 describe("Clase Suv con mock de Reserva", () => {
   const estado:Estado= new Disponible();

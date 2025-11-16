@@ -1,4 +1,4 @@
-import Temporada from "./temporada";
+import Temporada from "../../src/temporadas/temporada";
 
 /**
  * Clase que representa la temporada alta de alquiler.

@@ -2,9 +2,9 @@
 concepto de seguro y un cargo de $0.25 por cada kilómetro recorrido si se superan
 los 500km en total durante el período de alquiler. */
 import Vehiculo from "./vehiculo";
-import {Estado} from "./estados/estado";
+import {Estado} from "../../src/estados/estado";
 
-import { TARIFA_BASE_SUV, CARGO_FIJO_SUV, CARGO_VARIABLE_SUV, KM_MAX_SUV } from "./constantes";
+import { TARIFA_BASE_SUV, CARGO_FIJO_SUV, CARGO_VARIABLE_SUV, KM_MAX_SUV } from "../../src/constantes";
 
 /**
  * Representa un vehículo de tipo SUV dentro del sistema.

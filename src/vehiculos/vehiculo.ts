@@ -1,11 +1,11 @@
 
-import Reserva from "./reserva"
-import MantenimientoVehiculo from "./mantenimientoVehiculo";
-import { Estado } from "./estados/estado";
-import { Disponible } from "./estados/disponible";
-import {EnAlquiler} from "./estados/enAlquiler";
-import { EnMantenimiento} from "./estados/enMantenimiento";
-import {NecesitaLimpieza} from "./estados/necesitaLimpieza";    
+import Reserva from "../reserva"
+import MantenimientoVehiculo from "../mantenimientoVehiculo";
+import { Estado } from "../estados/estado";
+import { Disponible } from "../estados/disponible";
+import {EnAlquiler} from "../estados/enAlquiler";
+import { EnMantenimiento} from "../estados/enMantenimiento";
+import {NecesitaLimpieza} from "../estados/necesitaLimpieza";    
 
 
 /**

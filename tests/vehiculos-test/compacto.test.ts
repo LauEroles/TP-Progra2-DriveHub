@@ -1,7 +1,7 @@
-import Compacto from "../src/compacto";
-import Vehiculo from "../src/vehiculo";
-import { Estado } from "../src/estados/estado";
-import { Disponible } from "../src/estados/disponible";
+import Compacto from "../../src/vehiculos/compacto";
+import Vehiculo from "../../src/vehiculos/vehiculo";
+import { Estado } from "../../src/estados/estado";
+import { Disponible } from "../../src/estados/disponible";
 
 describe("Compacto.calcularTarifa", () => {
 

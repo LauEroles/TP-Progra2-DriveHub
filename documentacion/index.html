@@ -1,0 +1,264 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>cuvl_lab3</title><meta name="description" content="Documentation for cuvl_lab3"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">cuvl_lab3</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>cuvl_lab3</h2></div><div class="tsd-panel tsd-typography"><a id="md:drivehub---sistema-de-gestión-de-alquiler-de-vehículos" class="tsd-anchor"></a><h1><a href="#md:drivehub---sistema-de-gestión-de-alquiler-de-vehículos">DriveHub - Sistema de Gestión de Alquiler de Vehículos</a></h1><p>Sistema de gestión para empresa de alquiler de vehículos desarrollado en TypeScript, implementando patrones de diseño State, Strategy, Facade, Template Method y principios de POO.</p>
+<a id="md:tabla-de-contenidos" class="tsd-anchor"></a><h2><a href="#md:tabla-de-contenidos">Tabla de Contenidos</a></h2><ul>
+<li>Descripción</li>
+<li>Características</li>
+<li>Arquitectura y Patrones</li>
+<li>Estructura del Proyecto</li>
+<li>Instalación</li>
+<li>Uso</li>
+<li>Testing</li>
+<li>Diagramas</li>
+<li>Tecnologías</li>
+</ul>
+<hr>
+<a id="md:descripción" class="tsd-anchor"></a><h2><a href="#md:descripción">Descripción</a></h2><p><em>DriveHub</em> es un sistema completo para la gestión de alquiler de vehículos que permite:</p>
+<ul>
+<li>Gestionar diferentes tipos de vehículos (Compacto, Sedan, SUV)</li>
+<li>Administrar reservas con verificación de disponibilidad</li>
+<li>Controlar estados de vehículos mediante el patrón State</li>
+<li>Calcular tarifas según temporada y tipo de vehículo mediante el patrón Strategy</li>
+<li>Registrar mantenimientos y actualizar kilometraje</li>
+</ul>
+<hr>
+<a id="md:características" class="tsd-anchor"></a><h2><a href="#md:características">Características</a></h2><a id="md:gestión-de-vehículos" class="tsd-anchor"></a><h3><a href="#md:gestión-de-vehículos">Gestión de Vehículos</a></h3><ul>
+<li>Tres tipos de vehículos con tarifas diferenciadas</li>
+<li>Control de kilometraje</li>
+<li>Historial de mantenimientos</li>
+<li>Estados dinámicos del vehículo</li>
+</ul>
+<a id="md:estados-del-vehículo-patrón-state" class="tsd-anchor"></a><h3><a href="#md:estados-del-vehículo-patrón-state">Estados del Vehículo (Patrón State)</a></h3><ul>
+<li><em>Disponible</em>: Vehículo listo para alquilar</li>
+<li><em>En Alquiler</em>: Vehículo actualmente alquilado</li>
+<li><em>Necesita Limpieza</em>: Requiere limpieza antes de nuevo alquiler</li>
+<li><em>En Mantenimiento</em>: Vehículo en servicio técnico</li>
+</ul>
+<a id="md:sistema-de-reservas" class="tsd-anchor"></a><h3><a href="#md:sistema-de-reservas">Sistema de Reservas</a></h3><ul>
+<li>Verificación automática de disponibilidad por fechas</li>
+<li>Validación de conflictos de reservas</li>
+<li>Asociación de clientes y vehículos</li>
+</ul>
+<a id="md:cálculo-de-tarifas" class="tsd-anchor"></a><h3><a href="#md:cálculo-de-tarifas">Cálculo de Tarifas</a></h3><p>Tarifas variables según:</p>
+<ul>
+<li><em>Tipo de vehículo</em>: Compacto, Sedan, SUV</li>
+<li><em>Temporada</em>: Alta, Media, Baja</li>
+<li><em>Kilometraje</em>: Cargo adicional por km excedido</li>
+</ul>
+<hr>
+<a id="md:patrones" class="tsd-anchor"></a><h2><a href="#md:patrones">Patrones</a></h2><a id="md:patrones-de-diseño-implementados" class="tsd-anchor"></a><h3><a href="#md:patrones-de-diseño-implementados">Patrones de Diseño Implementados</a></h3><a id="md:1-state" class="tsd-anchor"></a><h4><a href="#md:1-state">1. <em>State</em></a></h4><p>Gestiona los estados del vehículo de forma dinámica:
+Disponible ──alquilar()──&gt; EnAlquiler
+EnAlquiler ──devolver()──&gt; NecesitaLimpieza
+NecesitaLimpieza ──limpiar()──&gt; Disponible
+Disponible ──enviarMantenimiento()──&gt; EnMantenimiento
+EnMantenimiento ──finalizarMantenimiento()──&gt; Disponible</p>
+<a id="md:2-strategy" class="tsd-anchor"></a><h4><a href="#md:2-strategy">2. <em>Strategy</em></a></h4><p>Diferentes estrategias de cálculo de tarifas según temporada:</p>
+<ul>
+<li>TempAlta: Temporada alta (verano, fin de año)</li>
+<li>TempMedia: Temporada media (otoño, primavera)</li>
+<li>TempBaja: Temporada baja (resto del año)</li>
+</ul>
+<a id="md:3-template-method" class="tsd-anchor"></a><h4><a href="#md:3-template-method">3. <em>Template Method</em></a></h4><p>Clase abstracta Vehiculo define la estructura base:</p>
+<ul>
+<li>Método abstracto: calcCargoVariable()</li>
+<li>Implementaciones concretas: Compacto, Sedan, SUV</li>
+</ul>
+<a id="md:4-gestores-abm-pattern" class="tsd-anchor"></a><h4><a href="#md:4-gestores-abm-pattern">4. <em>Gestores (ABM Pattern)</em></a></h4><p>Interfaz ABM para operaciones CRUD:</p>
+<ul>
+<li>GestorVehiculo</li>
+<li>GestorReserva</li>
+<li>GestorMantenimiento</li>
+<li>GestorKilometraje</li>
+</ul>
+<a id="md:principios-solid-aplicados" class="tsd-anchor"></a><h3><a href="#md:principios-solid-aplicados">Principios SOLID Aplicados</a></h3><ul>
+<li>Single Responsibility: Cada clase tiene una responsabilidad única</li>
+<li>Open/Closed: Estados extensibles sin modificar código existente</li>
+<li>Liskov Substitution: Subtipos de Vehiculo son intercambiables</li>
+<li>Interface Segregation: Interfaces específicas (ABM, Estado, Temporada)</li>
+<li>Dependency Inversion: Dependencias a abstracciones (interfaces)</li>
+</ul>
+<a id="md:patrones-de-diseño" class="tsd-anchor"></a><h3><a href="#md:patrones-de-diseño">Patrones de Diseño</a></h3><ul>
+<li>State Pattern</li>
+<li>Strategy Pattern</li>
+<li>Template Method</li>
+<li>Facade (SistemaEmpresa)</li>
+</ul>
+<hr>
+<a id="md:estructura-del-proyecto" class="tsd-anchor"></a><h2><a href="#md:estructura-del-proyecto">Estructura del Proyecto</a></h2><p>TP-Programacion2-DriveHub/</p>
+<p>├── 📂 src/                          # Código fuente del proyecto
+│   ├── 📄 abm.ts                    # Interface ABM (Alta, Baja, Modificación)
+│   ├── 📄 cliente.ts                # Clase Cliente
+│   ├── 📄 constantes.ts             # Constantes de tarifas y configuración
+│   ├── 📄 mantenimientoVehiculo.ts  # Clase MantenimientoVehiculo
+│   ├── 📄 reserva.ts                # Clase Reserva
+│   ├── 📄 sistemaEmpresa.ts         # Clase principal del sistema
+│   │
+│   ├── 📂 estados/                  # Patrón State para estados del vehículo
+│   │   ├── 📄 estado.ts             # Interface Estado
+│   │   ├── 📄 disponible.ts         # Estado Disponible
+│   │   ├── 📄 enAlquiler.ts         # Estado En Alquiler
+│   │   ├── 📄 enMantenimiento.ts    # Estado En Mantenimiento
+│   │   └── 📄 necesitaLimpieza.ts   # Estado Necesita Limpieza
+│   │
+│   ├── 📂 gestores/                 # Gestores del sistema
+│   │   ├── 📄 gestor_reserva.ts     # Gestor de reservas
+│   │   ├── 📄 gestor_vehiculo.ts    # Gestor de vehículos
+│   │   ├── 📄 gestorKilometraje.ts  # Gestor de kilometraje
+│   │   ├── 📄 gestorMantenimiento.ts# Gestor de mantenimiento
+│   │   └── 📄 gestorReportes.ts     # Gestor de reportes y estadísticas
+│   │
+│   ├── 📂 temporadas/               # Patrón Strategy para temporadas
+│   │   ├── 📄 temporada.ts          # Interface Temporada
+│   │   ├── 📄 tempAlta.ts           # Temporada Alta (+20%)
+│   │   ├── 📄 tempMedia.ts          # Temporada Media (sin cambios)
+│   │   └── 📄 tempBaja.ts           # Temporada Baja (-10%)
+│   │
+│   └── 📂 vehiculos/                # Clases de vehículos
+│       ├── 📄 vehiculo.ts           # Clase abstracta Vehiculo
+│       ├── 📄 compacto.ts           # Clase Compacto
+│       ├── 📄 sedan.ts              # Clase Sedan
+│       └── 📄 suv.ts                # Clase SUV
+│
+├── 📂 tests/                        # Tests unitarios con Jest
+│   ├── 📄 cliente.test.ts
+│   ├── 📄 mantenimientoVehiculo.test.ts
+│   ├── 📄 reserva.test.ts
+│   ├── 📄 sistemaEmpresa.test.ts
+│   │
+│   ├── 📂 estados-test/             # Tests de estados
+│   │   ├── 📄 estado.test.ts
+│   │   ├── 📄 disponible.test.ts
+│   │   ├── 📄 enAlquiler.test.ts
+│   │   ├── 📄 enMantenimiento.test.ts
+│   │   └── 📄 necesitaLimpieza.test.ts
+│   │
+│   ├── 📂 gestores-test/            # Tests de gestores
+│   │   ├── 📄 gestor_reserva.test.ts
+│   │   ├── 📄 gestor_vehiculo.test.ts
+│   │   ├── 📄 gestorKilometraje.test.ts
+│   │   ├── 📄 gestorMantenimiento.test.ts
+│   │   └── 📄 gestorReportes.test.ts
+│   │
+│   ├── 📂 temporadas-test/          # Tests de temporadas
+│   │   ├── 📄 tempAlta.test.ts
+│   │   ├── 📄 tempMedia.test.ts
+│   │   └── 📄 tempBaja.test.ts
+│   │
+│   └── 📂 vehiculos-test/           # Tests de vehículos
+│       ├── 📄 vehiculo.test.ts
+│       ├── 📄 compacto.test.ts
+│       ├── 📄 sedan.test.ts
+│       └── 📄 suv.test.ts
+│
+├── 📂 diagramas/                    # Diagramas UML
+│   ├── 📂 clases/
+│   │   └── 📄 clases.puml
+│   └── 📂 sequencia/
+│       ├── 📄 sequencia_1.puml
+│       ├── 📄 sequencia_2.puml
+│       └── 📄 sequencia_3.puml
+|
+|
+├── 📄 README.md
+├── 📄 package.json
+├── 📄 package-lock.json
+├── 📄 tsconfig.json
+├── 📄 jest.config.js
+├── 📄 ConsignaTp.pdf
+├── 📄 ConsignaTp2.pdf</p>
+<p>##Tests</p>
+<p>Los tests utilizan <em>Jest</em> con <em>jest-mock-extended</em> para mocking:</p>
+<a id="md:diagramas" class="tsd-anchor"></a><h2><a href="#md:diagramas">Diagramas</a></h2><p>El proyecto incluye diagramas UML en formato PlantUML ubicados en /Diagramas/:</p>
+<a id="md:diagrama-de-clases" class="tsd-anchor"></a><h3><a href="#md:diagrama-de-clases">Diagrama de Clases</a></h3><p>Muestra la estructura completa del sistema con relaciones entre clases.</p>
+<a id="md:diagramas-de-secuencia" class="tsd-anchor"></a><h3><a href="#md:diagramas-de-secuencia">Diagramas de Secuencia</a></h3><ol>
+<li><p><em>Secuencia 1</em>: Flujo de creación de reserva
+<img src="sequencia_1.puml" alt="Solicitud de Reservas"></p>
+</li>
+<li><p><em>Secuencia 2</em>: Flujo de alquiler de vehículo
+<img src="sequencia_2.puml" alt="Cálculo de Tarifas"></p>
+</li>
+<li><p><em>Secuencia 3</em>: Transiciones del patrón State
+<img src="sequencia_3.puml" alt="Gestión de Estados de Vehículos"></p>
+</li>
+</ol>
+<p>Para visualizar los diagramas, instalar la extensión PlantUML en VSCode.
+[00:01, 13/11/2025] Lau: Tarifas del Sistema</p>
+<a id="md:vehículos" class="tsd-anchor"></a><h3><a href="#md:vehículos">Vehículos</a></h3><table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Tarifa Base/día</th>
+<th>Cargo Fijo/día</th>
+<th>Cargo Variable</th>
+<th>Límite KM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>Compacto</em></td>
+<td>$30</td>
+<td></td>
+<td>$0.15/km</td>
+<td>100 km</td>
+</tr>
+<tr>
+<td><em>Sedan</em></td>
+<td>$50</td>
+<td></td>
+<td>$0.20/km</td>
+<td></td>
+</tr>
+<tr>
+<td><em>SUV</em></td>
+<td>$80</td>
+<td>$15</td>
+<td>$0.25/km</td>
+<td>500 km</td>
+</tr>
+</tbody></table>
+<a id="md:temporadas" class="tsd-anchor"></a><h3><a href="#md:temporadas">Temporadas</a></h3><table>
+<thead>
+<tr>
+<th>Temporada</th>
+<th>Multiplicador</th>
+<th>Meses</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>Alta</em></td>
+<td>1.5x</td>
+<td>Diciembre, Enero, Febrero, Julio</td>
+</tr>
+<tr>
+<td><em>Media</em></td>
+<td>1.2x</td>
+<td>Marzo, Abril, Noviembre</td>
+</tr>
+<tr>
+<td><em>Baja</em></td>
+<td>1.0x</td>
+<td>Mayo, Junio, Agosto, Sept, Octubre</td>
+</tr>
+</tbody></table>
+<hr>
+<p>Autores de equipo:</p>
+<ul>
+<li>Armani, Valentino</li>
+<li>Eroles, Laura</li>
+<li>Garcia, Verónica</li>
+<li>Kessler, Maelissa</li>
+</ul>
+<a id="md:configuración-del-entorno-de-desarrollo-para-programacion-2" class="tsd-anchor"></a><h1><a href="#md:configuración-del-entorno-de-desarrollo-para-programacion-2">Configuración del entorno de desarrollo para Programacion 2</a></h1><a id="md:instalando-todo-sobre-la-máquina-host" class="tsd-anchor"></a><h1><a href="#md:instalando-todo-sobre-la-máquina-host">Instalando todo sobre la máquina host</a></h1><a id="md:instalar-nodejs" class="tsd-anchor"></a><h2><a href="#md:instalar-nodejs">Instalar NodeJs</a></h2><ol>
+<li>Ingresar a <a href="https://nodejs.org/en/download/">NodeJs - Descargas</a> y seleccionar según la plataforma en la que nos encontremos el instalador que mejor se adapte a nuestro sistema operativo.</li>
+</ol>
+<p>👉 En el caso de Windows, seleccionar los instaladores que se encuentran en la pestaña &quot;Prebuilt Installer&quot;</p>
+<p><img src="config_env/win_1.png" alt="Instalador de Windows"></p>
+<p>👉 En el caso de MacOs o Linux, seleccionar la pestaña &quot;Package Manager&quot; y seleccionar &quot;NVM&quot; en el último combo. Luego copiar y ejecutar en una terminal los comandos que se muestran.</p>
+<p><img src="config_env/lin_1.png" alt="Instalador de Linux o MacOs"></p>
+<p>⚠️ <strong>En todos los casos seleccionar alguna versión estable (LTS)</strong></p>
+<a id="md:directorio-de-trabajo" class="tsd-anchor"></a><h2><a href="#md:directorio-de-trabajo">Directorio de trabajo</a></h2><p>Una vez instalado node, debemos crear el directorio en el cual vamos a desarrollar.
+Crear un directorio, que será el directorio del proyecto a utilizar y dentro del mismo descomprimir el archivo 📦 <em>bootstrap.zip</em>.</p>
+<a id="md:instalar-las-dependencias" class="tsd-anchor"></a><h2><a href="#md:instalar-las-dependencias">Instalar las dependencias</a></h2><p>Desde una terminal, ingresar al directorio de trabajo creado y ejecutar el siguiente comando: </p>
+<pre><code class="language-bash"><span class="hl-0"># comando que permite instalar los paquetes especificados en el archivo package.json</span><br/><span class="hl-1">user@host:~$</span><span class="hl-2"> </span><span class="hl-3">npm</span><span class="hl-2"> </span><span class="hl-3">i</span>
+</code><button>Copy</button></pre>
+<a id="md:compilar-el-proyecto" class="tsd-anchor"></a><h2><a href="#md:compilar-el-proyecto">Compilar el proyecto</a></h2><p>Desde una terminal, ingresar al directorio de trabajo creado y ejecutar el siguiente comando: </p>
+<pre><code class="language-bash"><span class="hl-0"># comando que permite compilar la solución.</span><br/><span class="hl-1">user@host:~$</span><span class="hl-2"> </span><span class="hl-3">npm</span><span class="hl-2"> </span><span class="hl-3">run</span><span class="hl-2"> </span><span class="hl-3">build</span>
+</code><button>Copy</button></pre>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:drivehub---sistema-de-gestión-de-alquiler-de-vehículos"><span>Drive<wbr/>Hub -<wbr/> <wbr/>Sistema de <wbr/>Gestión de <wbr/>Alquiler de <wbr/>Vehículos</span></a><ul><li><a href="#md:tabla-de-contenidos"><span>Tabla de <wbr/>Contenidos</span></a></li><li><a href="#md:descripción"><span>Descripción</span></a></li><li><a href="#md:características"><span>Características</span></a></li><li><ul><li><a href="#md:gestión-de-vehículos"><span>Gestión de <wbr/>Vehículos</span></a></li><li><a href="#md:estados-del-vehículo-patrón-state"><span>Estados del <wbr/>Vehículo (<wbr/>Patrón <wbr/>State)</span></a></li><li><a href="#md:sistema-de-reservas"><span>Sistema de <wbr/>Reservas</span></a></li><li><a href="#md:cálculo-de-tarifas"><span>Cálculo de <wbr/>Tarifas</span></a></li></ul></li><li><a href="#md:patrones"><span>Patrones</span></a></li><li><ul><li><a href="#md:patrones-de-diseño-implementados"><span>Patrones de <wbr/>Diseño <wbr/>Implementados</span></a></li><li><ul><li><a href="#md:1-state"><span>1. <wbr/>State</span></a></li><li><a href="#md:2-strategy"><span>2. <wbr/>Strategy</span></a></li><li><a href="#md:3-template-method"><span>3. <wbr/>Template <wbr/>Method</span></a></li><li><a href="#md:4-gestores-abm-pattern"><span>4. <wbr/>Gestores (ABM <wbr/>Pattern)</span></a></li></ul></li><li><a href="#md:principios-solid-aplicados"><span>Principios SOLID <wbr/>Aplicados</span></a></li><li><a href="#md:patrones-de-diseño"><span>Patrones de <wbr/>Diseño</span></a></li></ul></li><li><a href="#md:estructura-del-proyecto"><span>Estructura del <wbr/>Proyecto</span></a></li><li><a href="#md:diagramas"><span>Diagramas</span></a></li><li><ul><li><a href="#md:diagrama-de-clases"><span>Diagrama de <wbr/>Clases</span></a></li><li><a href="#md:diagramas-de-secuencia"><span>Diagramas de <wbr/>Secuencia</span></a></li><li><a href="#md:vehículos"><span>Vehículos</span></a></li><li><a href="#md:temporadas"><span>Temporadas</span></a></li></ul></li></ul><a href="#md:configuración-del-entorno-de-desarrollo-para-programacion-2"><span>Configuración del entorno de desarrollo para <wbr/>Programacion 2</span></a><a href="#md:instalando-todo-sobre-la-máquina-host"><span>Instalando todo sobre la máquina host</span></a><ul><li><a href="#md:instalar-nodejs"><span>Instalar <wbr/>Node<wbr/>Js</span></a></li><li><a href="#md:directorio-de-trabajo"><span>Directorio de trabajo</span></a></li><li><a href="#md:instalar-las-dependencias"><span>Instalar las dependencias</span></a></li><li><a href="#md:compilar-el-proyecto"><span>Compilar el proyecto</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>cuvl_lab3</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

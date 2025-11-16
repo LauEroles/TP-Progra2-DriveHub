@@ -1,5 +1,5 @@
-import TempAlta from "../src/tempAlta"
-import Temporada from "../src/temporada";
+import TempAlta from "../../src/temporadas/tempAlta"
+import Temporada from "../../src/temporadas/temporada";
 
 describe("TempAlta.calcTarifaBase", () => {
 

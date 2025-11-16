@@ -1,9 +1,19 @@
-import Reserva from "./reserva";
-import SistemaEmpresa from "./sistemaEmpresa";
-import Vehiculo from "./vehiculo";
+import Reserva from "../reserva";
+import SistemaEmpresa from "../sistemaEmpresa";
+import Vehiculo from "../../src/vehiculos/vehiculo";
 
+/**
+* Gestor encargado de actualizar el kilometraje de los vehículos
+* según las reservas realizadas en el sistema.
+*/
 export default class GestorKilometraje {
 
+    /**
+    * Actualiza el kilometraje de un vehículo en el sistema basado en la reserva.
+    * @param {Reserva} reserva Reserva que contiene el vehículo y los kilómetros recorridos.
+    * @param {SistemaEmpresa} sistema Sistema donde se encuentra registrado el vehículo.
+    * @throws {Error} Si el vehículo de la reserva no está registrado en el sistema.
+    */
     public actualizarKmVehiculo(reserva: Reserva, sistema: SistemaEmpresa): void {
       
         const vehiculoReserva = reserva.getVehiculo();
@@ -22,6 +32,6 @@ export default class GestorKilometraje {
         
         vehiculoSistema.setKm(nuevoKM);
         
-      }
+    }
 
 }

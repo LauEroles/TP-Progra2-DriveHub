@@ -1,6 +1,6 @@
 import Cliente from "../src/cliente";
 import SistemaEmpresa from "../src/sistemaEmpresa";
-import Vehiculo from "../src/vehiculo";
+import Vehiculo from "../src/vehiculos/vehiculo";
 
 describe("Cliente", () => {
 

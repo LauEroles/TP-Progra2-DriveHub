@@ -1,7 +1,7 @@
-import GestorMantenimiento from "../src/gestorMantenimiento";
-import MantenimientoVehiculo from "../src/mantenimientoVehiculo";
+import GestorMantenimiento from "../../src/gestores/gestorMantenimiento";
+import MantenimientoVehiculo from "../../src/mantenimientoVehiculo";
 
-jest.mock("../src/mantenimientoVehiculo");
+jest.mock("../../src/mantenimientoVehiculo");
 
 describe("GestorMantenimiento ", () => {
   let gestor: GestorMantenimiento;
@@ -15,7 +15,7 @@ describe("GestorMantenimiento ", () => {
     
     const vehiculoMock = {
       agregarMantenimientoVehiculo: jest.fn()
-    } as unknown as import("../src/vehiculo").default;
+    } as unknown as import("../../src/vehiculos/vehiculo").default;
 
     // Creamos un mock de mantenimiento
     const mantenimientoMock = new MantenimientoVehiculo(1200, new Date());

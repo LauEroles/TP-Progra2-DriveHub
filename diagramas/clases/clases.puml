@@ -10,6 +10,12 @@ class SistemaEmpresa {
     - gestorVehiculo: GestorVehiculo
     - gestorMantenimiento: GestorMantenimiento
     - gestorKilometraje: GestorKilometraje
+    - gestorEstadisticas: GestorEstadisticas
+    + realizarReserva(vehiculo: Vehiculo, cliente: Cliente, fechaInicio: Date, fechaFin: Date): Reserva | null
+    + cancelarReserva(reserva: Reserva): void
+    + agregarVehiculo(v: Vehiculo): void
+    + eliminarVehiculo(v: Vehiculo): void
+    + alquilar(vehiculo: Vehiculo): void
 }
 
 class Reserva {
@@ -21,52 +27,47 @@ class Reserva {
     - temporada: Temporada
     + calcularTotal(): number
     + validarFecha(): boolean
+    + getDias(): number
 }
 
 class Cliente {
     - nombreCompleto: string
     - id: number
-    'El cliente puede instanciarse sin reserva por parametro, 
-    'podemos setearla luego cuando se le asigna la reserva
-    - reserva: Reserva
-    + solicitarReserva(r: Reserva, s: Sistema): void  
+    + solicitarReserva(fechaInicio: Date, fechaFin: Date, vehiculo: Vehiculo, sistema: SistemaEmpresa): void  
 }
 
 'Herencia Vehiculo a sus clases hijas
 abstract class Vehiculo {
     - tarifaBase: number
-    'Podria haber una clase cargo que nos permita manejar de manera
-    'abstracta los cargos y luego en vehiculo tener una lista de cargos
-    'que pueden ser variables o fijos y el dia de mañana 
-    'para flexibilizar mas la solucion si se agregan nuevos vehiculos??
     - cargoVariable: number
     - cargoFijo: number
     - kilometraje: number
     - matricula: string
     - estado: Estado
     - mantenimientos: MantenimientoVehiculo[]
-    + agregarManteniminentoVehiculo(mantenimiento: MantenimientoVehiculo): void
-    + abstract calcularTarifa(reserva:Reserva): number
-    + Vehiculo(estadoInicial: Estado): void
-    + cambiarEstado(nuevoEstado: Estado): void
-    + alquilar (): void
+    + agregarMantenimientoVehiculo(mantenimiento: MantenimientoVehiculo): void
+    + abstract calcCargoVariable(kmsRecorridos: number): number
+    + requiereMantenimiento(): boolean
+    + resetearKm(): void
+    + alquilar(): void
     + devolver(): void
     + enviarAMantenimiento(): void
     + finalizarMantenimiento(): void
     + enviarAlimpiar(): void
     + finalizarLimpieza(): void
+    + getCostoTotalMantenimiento(): number
 }
 
 class Compacto {
-    + calcularTarifa(reserva:Reserva): number
+    + calcCargoVariable(kmsRecorridos: number): number
 }
 
 class Sedan {
-    + calcularTarifa(reserva:Reserva): number
+    + calcCargoVariable(kmsRecorridos: number): number
 }
 
 class Suv {
-    + calcularTarifa(reserva:Reserva): number
+    + calcCargoVariable(kmsRecorridos: number): number
 }
 
 'Atributo del vehiculo
@@ -89,7 +90,6 @@ interface Estado{
     + finalizarMantenimiento(): void
     + enviarAlimpiar(): void
     + finalizarLimpieza(): void
-   
 }
 
 class Disponible {
@@ -101,7 +101,6 @@ class Disponible {
     + finalizarMantenimiento(): void
     + enviarAlimpiar(): void
     + finalizarLimpieza(): void
-    
 }
 
 class EnAlquiler {   
@@ -113,7 +112,6 @@ class EnAlquiler {
     + finalizarMantenimiento(): void
     + enviarAlimpiar(): void
     + finalizarLimpieza(): void
-    
 }
 
 class EnMantenimiento {
@@ -125,7 +123,6 @@ class EnMantenimiento {
     + finalizarMantenimiento(): void
     + enviarAlimpiar(): void
     + finalizarLimpieza(): void
-    
 }
 
 class NecesitaLimpieza {
@@ -137,35 +134,32 @@ class NecesitaLimpieza {
     + finalizarMantenimiento(): void
     + enviarAlimpiar(): void
     + finalizarLimpieza(): void
-    
 }
 
 class GestorReserva {
-    + hayDisponibilidad(r: Reserva): boolean  
-    ' Valida la disponibilidad del vehículo para las fechas solicitadas
-    + calcularTotal(r: Reserva): number  
-    ' Podriamos calcular el total usando calcularCostoVariable() del vehiculo y sumar la tarifa base 
-    ' (y costo fijo) aca, para que el vehiculo solo calcule su costo variable y no el total de la reserva
+    + hayDisponibilidad(fechaInicio: Date, fechaFin: Date, vehiculo: Vehiculo, reservas: Reserva[]): boolean  
+    + agregar(reserva: Reserva, reservas: Reserva[]): void
+    + eliminar(reserva: Reserva, reservas: Reserva[]): void
 }
 
 class GestorKilometraje {
-    + calcularKmsRecorridos(reserva:Reserva): number  
-    ' Calcula los kms recorridos en una reserva (kmFinal - kmInicial)
-    ' Esto lo sacaría tal vez y haría que Reserva tenga un método kmsRecorridos() que los calcule
-    ' ya que ella misma posee kmInicial y kmFinal (seteado despues), y que calcularTotal() en GestionReserva llame a ese método
+    + actualizarKmVehiculo(reserva: Reserva, sistema: SistemaEmpresa): void
 }
 
 class GestorMantenimiento {
     + registrarMantenimiento(v: Vehiculo, m: Mantenimiento): void  
-    ' Si mas adelante nos solicita podemos ver si el auto requiere o no mantenimiento
-    ' Le agrega un mantenimiento a un vehiculo
-    ' Vehiculo podría tener un array de mantenimentos (tipo Mantenimiento) para tener registrados todos los que se le hacen
-    ' Objeto mantenimento tiene fecha y costo (simil estructura de datos)
+}
+
+class GestorEstadisticas {
+    - filtrarReservasPorFecha(reservas: Reserva[], fechaInicio: Date, fechaFin: Date): Reserva[]
+    + getRankingAlquileres(historial: Reserva[], fechaInicio: Date, fechaFin: Date): void
+    + getRentabilidad(vehiculos: Vehiculo[], historial: Reserva[]): void
+    + ocupacionFlota(vehiculos: Vehiculo[]): number
 }
 
 interface ABM {
-    agregar<T>(item: T, lista: Array<T>): void;
-    eliminar<T>(item: T, lista: Array<T>): void;
+    agregar<T>(item: T, lista: Array<T>): void
+    eliminar<T>(item: T, lista: Array<T>): void
 }
 
 interface Temporada {
@@ -173,12 +167,15 @@ interface Temporada {
 }
 
 class TempAlta {
+    + calcTarifaBase(tarifa: number): number
 }
 
 class TempMedia {
+    + calcTarifaBase(tarifa: number): number
 }
 
 class TempBaja {  
+    + calcTarifaBase(tarifa: number): number
 }
 
 'Relaciones:
@@ -196,20 +193,22 @@ Vehiculo *-r- Estado
 Reserva *-r- Cliente
 Reserva *-- Vehiculo
 Reserva *-- Temporada
+
 SistemaEmpresa *-- Vehiculo
 SistemaEmpresa *-- Reserva
 SistemaEmpresa *-- GestorReserva
 SistemaEmpresa *-r- GestorKilometraje
 SistemaEmpresa *-u- GestorMantenimiento
 SistemaEmpresa *-l- GestorVehiculo
+SistemaEmpresa *-- GestorEstadisticas
 
 'Implementacion interfaces:
 ABM <|.u. GestorReserva
 ABM <|.u. GestorVehiculo
+
 Temporada <|.. TempAlta
 Temporada <|.. TempMedia
 Temporada <|.. TempBaja
-
 
 Disponible .d.|> Estado
 EnAlquiler ..|> Estado
